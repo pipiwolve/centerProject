@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import app.bailian_application as bailian_module
 from app.bailian_application import BailianApplicationService
+from app.chat_service import LeatherChatService
 from app.config import AppConfig
 from app.server import create_app
 from dashscope.app.application_response import ApplicationOutput
@@ -265,3 +266,21 @@ def test_chat_route_returns_source_hint_when_bailian_omits_references() -> None:
     assert payload["retrieval_trace"]["source_status"] == "no_source_metadata"
     assert "展示回答来源" in payload["retrieval_trace"]["source_hint"]
     assert "展示回答来源" in payload["sections"]["参考来源"]
+
+
+def test_reference_section_compacts_signed_urls() -> None:
+    config = build_config()
+    service = LeatherChatService(config)
+    section = service._build_reference_section(
+        [
+            {
+                "citation_label": "切片 2",
+                "title": "日常清洁补脂与回软关键风险",
+                "source_uri": "https://dashscope-file-datacenter-prod-01.oss-cn-beijing.aliyuncs.com/1310371658063768/14494621/conn_file_default_14494621/baa88540412f4d42b1c9181b4e91c50e.1776407532281.md?Expires=1776666963&OSSAccessKeyId=LTAI5tFEd57BcgTFgxpSL5J&Signature=n8Rt%2FlP7YSXKsSptbBTQKih27k%3D",
+            }
+        ]
+    )
+    assert "OSSAccessKeyId" not in section
+    assert "Signature" not in section
+    assert "baa88540412f4d42b1c9" in section
+    assert "1776407532281.md" in section

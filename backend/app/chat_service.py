@@ -6,6 +6,7 @@ import time
 import uuid
 from dataclasses import dataclass
 from typing import Any
+from urllib.parse import urlparse
 
 from .bailian_application import BailianApplicationResult, BailianApplicationService
 from .config import AppConfig
@@ -301,6 +302,41 @@ class LeatherChatService:
         for source in sources:
             label = source.get("citation_label") or source.get("reference_id") or "引用"
             title = source.get("title") or source.get("doc_name") or "未命名资料"
-            uri = source.get("source_uri") or source.get("source_path") or ""
-            references.append(f"- {label} · {title}" + (f" / {uri}" if uri else ""))
+            locator = self._compact_source_locator(source)
+            references.append(f"- {label} · {title}" + (f"（来源：{locator}）" if locator else ""))
         return "\n".join(references)
+
+    def _compact_source_locator(self, source: dict[str, Any]) -> str:
+        doc_name = str(source.get("doc_name") or "").strip()
+        if doc_name:
+            return self._truncate_middle(doc_name, 42)
+
+        source_path = str(source.get("source_path") or "").strip()
+        if source_path:
+            basename = source_path.rsplit("/", 1)[-1].strip() or source_path
+            if basename and basename != source.get("title"):
+                return self._truncate_middle(basename, 42)
+
+        raw_uri = str(source.get("source_uri") or "").strip()
+        if not raw_uri:
+            return ""
+
+        try:
+            parsed = urlparse(raw_uri)
+            path_parts = [part for part in parsed.path.split("/") if part]
+            filename = path_parts[-1] if path_parts else ""
+            if filename:
+                return self._truncate_middle(filename, 42)
+            if parsed.netloc:
+                return self._truncate_middle(parsed.netloc, 42)
+        except Exception:
+            pass
+
+        return self._truncate_middle(raw_uri.split("?", 1)[0], 42)
+
+    def _truncate_middle(self, value: str, limit: int = 42) -> str:
+        text = str(value or "").strip()
+        if len(text) <= limit:
+            return text
+        keep = max((limit - 1) // 2, 8)
+        return text[:keep] + "…" + text[-keep:]

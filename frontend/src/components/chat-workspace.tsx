@@ -112,6 +112,60 @@ function sanitizeInlineText(value: string) {
   return value.replace(/\*\*/g, "").replace(/`/g, "").trim();
 }
 
+function truncateMiddle(value: string, limit = 40) {
+  if (!value) {
+    return "";
+  }
+  if (value.length <= limit) {
+    return value;
+  }
+  const keep = Math.max(Math.floor((limit - 1) / 2), 8);
+  return `${value.slice(0, keep)}…${value.slice(-keep)}`;
+}
+
+function getCompactLocator(source: ChatSource) {
+  if (source.doc_name) {
+    return truncateMiddle(source.doc_name, 40);
+  }
+
+  if (source.source_path && source.source_path !== source.title) {
+    const file = source.source_path.split("/").filter(Boolean).pop() || source.source_path;
+    return truncateMiddle(file, 40);
+  }
+
+  if (!source.source_uri) {
+    return "";
+  }
+
+  try {
+    const url = new URL(source.source_uri);
+    const file = url.pathname.split("/").filter(Boolean).pop();
+    if (file) {
+      return truncateMiddle(file, 40);
+    }
+    return truncateMiddle(url.hostname, 32);
+  } catch {
+    return truncateMiddle(source.source_uri.split("?")[0], 40);
+  }
+}
+
+function getCompactHost(sourceUri?: string) {
+  if (!sourceUri) {
+    return "";
+  }
+
+  try {
+    return new URL(sourceUri).hostname;
+  } catch {
+    return "";
+  }
+}
+
+function getBadgeLabel(source: ChatSource) {
+  const raw = source.hit_type === "chunk" ? "真实切片" : source.doc_name || source.materials?.[0] || "护理依据";
+  return truncateMiddle(raw, 18);
+}
+
 function parseRichText(content: string): RichNode[] {
   const lines = content.replace(/\r/g, "").split("\n");
   const nodes: RichNode[] = [];
@@ -289,6 +343,8 @@ function SourceCard({
   const preview = source.preview || source.excerpt;
   const content = source.content || preview;
   const retrievalChunks = (source.retrieval_chunks || []).filter(Boolean);
+  const compactLocator = getCompactLocator(source);
+  const compactHost = getCompactHost(source.source_uri);
   const hasExpandableContent =
     retrievalChunks.length > 0 ||
     (content.length > preview.length + 24 && normalizeComparableText(content) !== normalizeComparableText(preview));
@@ -305,8 +361,11 @@ function SourceCard({
             {(source.citation_label ? `${source.citation_label} · ` : "") + formatSourceType(source.source_type)}
           </p>
         </div>
-        <span className="max-w-[11rem] shrink-0 break-words [overflow-wrap:anywhere] rounded-full border border-[color:var(--border-soft)] px-2 py-1 text-xs text-[color:var(--ink-soft)]">
-          {source.hit_type === "chunk" ? "真实切片" : source.doc_name || source.materials?.[0] || "护理依据"}
+        <span
+          className="max-w-[11rem] shrink-0 break-words [overflow-wrap:anywhere] rounded-full border border-[color:var(--border-soft)] px-2 py-1 text-xs text-[color:var(--ink-soft)]"
+          title={source.hit_type === "chunk" ? "真实切片" : source.doc_name || source.materials?.[0] || "护理依据"}
+        >
+          {getBadgeLabel(source)}
         </span>
       </div>
 
@@ -314,10 +373,22 @@ function SourceCard({
         {preview}
       </p>
 
-      {source.source_uri ? (
-        <p className="mt-3 break-all text-xs leading-6 text-[color:var(--ink-soft)]">
-          来源标识 · {source.source_uri}
-        </p>
+      {compactLocator || compactHost ? (
+        <div className="mt-4 rounded-[1rem] border border-[color:var(--border-soft)] bg-white/60 px-3 py-2">
+          {compactLocator ? (
+            <p
+              className="break-words [overflow-wrap:anywhere] text-xs leading-6 text-[color:var(--ink-soft)]"
+              title={source.source_uri || source.source_path || source.doc_name || ""}
+            >
+              来源文件 · {compactLocator}
+            </p>
+          ) : null}
+          {compactHost && compactHost !== compactLocator ? (
+            <p className="break-words [overflow-wrap:anywhere] text-xs leading-6 text-[color:var(--ink-soft)]">
+              来源域名 · {compactHost}
+            </p>
+          ) : null}
+        </div>
       ) : null}
 
       {source.page_numbers?.length ? (
@@ -611,7 +682,7 @@ export function ChatWorkspace() {
               messages.map((message) => (
                 <article
                   key={message.id}
-                  className={`rounded-[1.75rem] border p-5 shadow-[0_18px_40px_rgba(17,37,78,0.04)] ${
+                  className={`min-w-0 overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_18px_40px_rgba(17,37,78,0.04)] ${
                     message.role === "user"
                       ? "border-[color:var(--border-soft)] bg-[color:var(--ink-strong)] text-white"
                       : "border-[color:var(--border-soft)] bg-[color:var(--surface)] text-[color:var(--ink-strong)]"
@@ -644,7 +715,7 @@ export function ChatWorkspace() {
                       正在整理问题并生成护理建议...
                     </div>
                   ) : message.response ? (
-                    <div className="mt-4 grid gap-3">
+                    <div className="mt-4 min-w-0 grid gap-3">
                       {sectionOrder.map((section) => {
                         const content = message.response?.sections?.[section];
                         if (!content) {
@@ -656,7 +727,7 @@ export function ChatWorkspace() {
                         return (
                           <div
                             key={section}
-                            className={`rounded-[1.4rem] border border-[color:var(--border-soft)] p-4 ${
+                            className={`min-w-0 overflow-hidden rounded-[1.4rem] border border-[color:var(--border-soft)] p-4 ${
                               section === "操作步骤"
                                 ? "bg-[linear-gradient(180deg,rgba(181,122,51,0.08),rgba(255,255,255,0.92))]"
                                 : "bg-[color:var(--surface-elevated)]"
@@ -669,11 +740,13 @@ export function ChatWorkspace() {
                               {section === "操作步骤" && orderedItems.length > 0 ? (
                                 <ol className="space-y-3">
                                   {orderedItems.map((item, index) => (
-                                    <li key={`${item}-${index}`} className="flex gap-3 rounded-[1.1rem] bg-white/70 p-3">
+                                    <li key={`${item}-${index}`} className="flex min-w-0 gap-3 rounded-[1.1rem] bg-white/70 p-3">
                                       <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgba(181,122,51,0.16)] text-xs font-semibold text-[color:var(--accent)]">
                                         {index + 1}
                                       </span>
-                                      <span className="text-sm leading-7 text-[color:var(--ink-soft)]">{item}</span>
+                                      <span className="min-w-0 break-words [overflow-wrap:anywhere] text-sm leading-7 text-[color:var(--ink-soft)]">
+                                        {item}
+                                      </span>
                                     </li>
                                   ))}
                                 </ol>

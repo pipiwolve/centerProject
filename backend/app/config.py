@@ -14,6 +14,67 @@ def _env_flag(name: str, default: bool = False) -> bool:
     return raw.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def _dedupe_paths(paths: list[Path]) -> list[Path]:
+    unique_paths: list[Path] = []
+    seen: set[str] = set()
+    for path in paths:
+        resolved = str(path.resolve(strict=False))
+        if resolved in seen:
+            continue
+        seen.add(resolved)
+        unique_paths.append(path)
+    return unique_paths
+
+
+def _knowledge_root_score(root: Path) -> int:
+    manifest_dir = root / "generated" / "manifests"
+    tracked_paths = [
+        root / "raw",
+        manifest_dir / "chunks.jsonl",
+        manifest_dir / "faq.jsonl",
+        manifest_dir / "eval.jsonl",
+        manifest_dir / "ingest-report.json",
+    ]
+    return sum(path.exists() for path in tracked_paths)
+
+
+def _resolve_knowledge_root(project_root: Path, backend_root: Path) -> Path:
+    default_root = project_root / "knowledge"
+    base_candidates = _dedupe_paths(
+        [
+            project_root,
+            backend_root,
+            backend_root.parent,
+            Path.cwd(),
+            Path.cwd().parent,
+        ]
+    )
+    direct_candidates = _dedupe_paths([base / "knowledge" for base in base_candidates] + [default_root])
+
+    best_root = default_root
+    best_score = _knowledge_root_score(default_root)
+    for candidate in direct_candidates:
+        score = _knowledge_root_score(candidate)
+        if score > best_score:
+            best_root = candidate
+            best_score = score
+
+    if best_score > 0:
+        return best_root
+
+    for search_root in base_candidates:
+        if not search_root.exists():
+            continue
+        for manifest_dir in search_root.rglob("knowledge/generated/manifests"):
+            candidate = manifest_dir.parent.parent
+            score = _knowledge_root_score(candidate)
+            if score > best_score:
+                best_root = candidate
+                best_score = score
+
+    return best_root
+
+
 @dataclass(slots=True)
 class AppConfig:
     project_root: Path
@@ -114,7 +175,7 @@ class AppConfig:
         project_root = resolved_backend_root.parent
         load_dotenv(project_root / ".env")
 
-        knowledge_root = project_root / "knowledge"
+        knowledge_root = _resolve_knowledge_root(project_root, resolved_backend_root)
         generated_root = knowledge_root / "generated"
         processed_root = knowledge_root / "processed"
         manifest_root = generated_root / "manifests"

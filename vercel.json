@@ -11,6 +11,7 @@
       "routePrefix": "/api",
       "maxDuration": 300,
       "includeFiles": [
+        "../knowledge/generated/manifests/**",
         "knowledge/generated/manifests/**"
       ]
     }

@@ -17,3 +17,5 @@ knowledge/generated/**
 !knowledge/generated/
 !knowledge/generated/manifests/
 !knowledge/generated/manifests/**
+.vercel
+backend/knowledge/generated/

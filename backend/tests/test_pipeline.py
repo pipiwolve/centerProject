@@ -72,6 +72,24 @@ def test_pipeline_generates_manifests() -> None:
     assert "source_path:" not in generated_faq["answer"]
 
 
+def test_app_config_falls_back_to_service_local_knowledge_manifests(tmp_path: Path, monkeypatch) -> None:
+    backend_root = tmp_path / "backend"
+    (backend_root / "app").mkdir(parents=True)
+
+    manifest_dir = backend_root / "knowledge" / "generated" / "manifests"
+    manifest_dir.mkdir(parents=True)
+    (manifest_dir / "chunks.jsonl").write_text("{}\n", encoding="utf-8")
+    (manifest_dir / "faq.jsonl").write_text("{}\n", encoding="utf-8")
+    (manifest_dir / "eval.jsonl").write_text("{}\n", encoding="utf-8")
+    (manifest_dir / "ingest-report.json").write_text("{}", encoding="utf-8")
+
+    monkeypatch.chdir(tmp_path)
+    config = AppConfig.load(backend_root)
+
+    assert config.manifest_dir == manifest_dir
+    assert config.ingest_artifacts_ready is True
+
+
 def test_backend_routes_support_local_and_vercel_service_prefixes() -> None:
     config = AppConfig.load(Path(__file__).resolve().parents[1])
     KnowledgePipeline(config).ingest(sync_cloud=False)

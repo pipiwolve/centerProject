@@ -33,6 +33,7 @@ def create_app(config: AppConfig | None = None) -> Flask:
             payload["detail"] = str(exc)
         return jsonify(payload), status_code
 
+    @app.get("/health")
     @app.get("/api/health")
     def health() -> Any:
         return jsonify(
@@ -53,11 +54,13 @@ def create_app(config: AppConfig | None = None) -> Flask:
             }
         )
 
+    @app.get("/sources")
     @app.get("/api/sources")
     def sources() -> Any:
         summary = index.sources_summary()
         return jsonify(summary)
 
+    @app.post("/ingest/run")
     @app.post("/api/ingest/run")
     def ingest_run() -> Any:
         if not app_config.ingest_enabled:
@@ -73,11 +76,13 @@ def create_app(config: AppConfig | None = None) -> Flask:
             return json_error("重新 ingest 失败，请检查资料格式或后端日志。", exc=exc)
         return jsonify(report)
 
+    @app.get("/ingest/status")
     @app.get("/api/ingest/status")
     def ingest_status() -> Any:
         summary = index.sources_summary()
         return jsonify(summary.get("report", {}))
 
+    @app.post("/chat")
     @app.post("/api/chat")
     def chat() -> Any:
         payload = request.get_json(silent=True) or {}
@@ -95,6 +100,7 @@ def create_app(config: AppConfig | None = None) -> Flask:
             return json_error("问答生成失败，请检查 DashScope 配置或稍后重试。", exc=exc)
         return jsonify(response)
 
+    @app.post("/eval/run")
     @app.post("/api/eval/run")
     def eval_run() -> Any:
         try:

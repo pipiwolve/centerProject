@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "experimentalServices": {
+    "frontend": {
+      "entrypoint": "frontend",
+      "framework": "nextjs",
+      "routePrefix": "/"
+    },
+    "backend": {
+      "entrypoint": "backend/server.py",
+      "routePrefix": "/api",
+      "maxDuration": 300,
+      "includeFiles": [
+        "knowledge/generated/manifests/**"
+      ]
+    }
+  }
+}

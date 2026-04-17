@@ -11,7 +11,9 @@ frontend/node_modules/
 backend/.pytest_cache/
 backend/__pycache__/
 
-knowledge/processed/
-knowledge/generated/
-!knowledge/generated/.gitkeep
-!knowledge/processed/.gitkeep
+knowledge/processed/**
+knowledge/generated/**
+!knowledge/processed/
+!knowledge/generated/
+!knowledge/generated/manifests/
+!knowledge/generated/manifests/**

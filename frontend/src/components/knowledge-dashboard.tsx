@@ -19,7 +19,7 @@ export function KnowledgeDashboard() {
         setError("");
       });
     } catch {
-      setError("无法连接本地后端，请先启动 Flask 服务。");
+      setError("无法连接后端，请先启动本地 Flask 或检查 Vercel API 服务。");
     }
   }
 
@@ -28,12 +28,16 @@ export function KnowledgeDashboard() {
   }, []);
 
   async function handleIngest() {
+    if (health && !health.ingest_enabled) {
+      setError("当前部署运行在 Vercel 只读环境，请先在本地执行 ./scripts/ingest.sh 后再重新部署。");
+      return;
+    }
     setBusy(true);
     try {
       await runIngest(false);
       await refresh();
-    } catch {
-      setError("重新 ingest 失败，请检查后端日志。");
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : "重新 ingest 失败，请检查后端日志。");
     } finally {
       setBusy(false);
     }
@@ -41,6 +45,7 @@ export function KnowledgeDashboard() {
 
   const report = summary?.report;
   const manualImport = report?.manual_import;
+  const ingestEnabled = health?.ingest_enabled ?? true;
 
   return (
     <section className="mx-auto grid w-[min(96%,1280px)] gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -61,10 +66,10 @@ export function KnowledgeDashboard() {
             <button
               type="button"
               onClick={() => void handleIngest()}
-              disabled={busy}
+              disabled={busy || !ingestEnabled}
               className="cursor-pointer rounded-full bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {busy ? "正在重建..." : "重新运行 ingest"}
+              {!ingestEnabled ? "Vercel 运行时只读" : busy ? "正在重建..." : "重新运行 ingest"}
             </button>
             <button
               type="button"
@@ -74,6 +79,17 @@ export function KnowledgeDashboard() {
               刷新状态
             </button>
           </div>
+          {!ingestEnabled ? (
+            <p className="mt-4 text-sm leading-7 text-[color:var(--ink-soft)]">
+              当前服务运行在 Vercel，只读模式下不会重写知识库产物。请先在本地执行
+              <span className="mx-1 font-semibold text-[color:var(--ink-strong)]">./scripts/ingest.sh</span>
+              ，再把
+              <span className="mx-1 font-semibold text-[color:var(--ink-strong)]">
+                knowledge/generated/manifests
+              </span>
+              推送到仓库后重新部署。
+            </p>
+          ) : null}
           {error ? <p className="mt-4 text-sm text-[#9c2a1e]">{error}</p> : null}
         </section>
 
@@ -148,6 +164,10 @@ export function KnowledgeDashboard() {
             </p>
             <p className="mt-3 text-xs uppercase tracking-[0.22em] text-[color:var(--ink-soft)]">
               sync status · {report?.sync?.status || "idle"}
+            </p>
+            <p className="mt-2 text-xs uppercase tracking-[0.22em] text-[color:var(--ink-soft)]">
+              runtime · {health?.deployment_target || "local"} · artifacts ·{" "}
+              {health?.ingest_artifacts_ready ? "ready" : "missing"}
             </p>
           </div>
         </section>

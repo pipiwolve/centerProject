@@ -27,6 +27,12 @@ def create_app(config: AppConfig | None = None) -> Flask:
     chat_service = LeatherChatService(app_config, index)
     eval_service = EvalService(app_config, chat_service)
 
+    def json_error(message: str, status_code: int = 500, exc: Exception | None = None) -> tuple[Any, int]:
+        payload: dict[str, Any] = {"error": message}
+        if exc is not None and not app_config.read_only_runtime:
+            payload["detail"] = str(exc)
+        return jsonify(payload), status_code
+
     @app.get("/api/health")
     def health() -> Any:
         return jsonify(
@@ -40,6 +46,10 @@ def create_app(config: AppConfig | None = None) -> Flask:
                 "retrieval_mode": "local_langchain",
                 "target_docs_kb_id": app_config.docs_kb_id,
                 "target_faq_kb_id": app_config.faq_kb_id,
+                "deployment_target": app_config.deployment_target,
+                "read_only_runtime": app_config.read_only_runtime,
+                "ingest_enabled": app_config.ingest_enabled,
+                "ingest_artifacts_ready": app_config.ingest_artifacts_ready,
             }
         )
 
@@ -50,9 +60,17 @@ def create_app(config: AppConfig | None = None) -> Flask:
 
     @app.post("/api/ingest/run")
     def ingest_run() -> Any:
+        if not app_config.ingest_enabled:
+            return json_error(
+                "当前 Vercel 运行时为只读模式，请先在本地执行 ./scripts/ingest.sh 并提交 knowledge/generated/manifests 后再重新部署。",
+                status_code=409,
+            )
         payload = request.get_json(silent=True) or {}
-        sync_cloud = bool(payload.get("sync_cloud", True))
-        report = pipeline.ingest(sync_cloud=sync_cloud)
+        sync_cloud = bool(payload.get("sync_cloud", False))
+        try:
+            report = pipeline.ingest(sync_cloud=sync_cloud)
+        except Exception as exc:
+            return json_error("重新 ingest 失败，请检查资料格式或后端日志。", exc=exc)
         return jsonify(report)
 
     @app.get("/api/ingest/status")
@@ -67,16 +85,22 @@ def create_app(config: AppConfig | None = None) -> Flask:
         if not query:
             return jsonify({"error": "query is required"}), 400
         session_id = payload.get("session_id") or str(uuid.uuid4())
-        response = chat_service.chat(
-            query=query,
-            session_id=session_id,
-            debug=bool(payload.get("debug", False)),
-        )
+        try:
+            response = chat_service.chat(
+                query=query,
+                session_id=session_id,
+                debug=bool(payload.get("debug", False)),
+            )
+        except Exception as exc:
+            return json_error("问答生成失败，请检查 DashScope 配置或稍后重试。", exc=exc)
         return jsonify(response)
 
     @app.post("/api/eval/run")
     def eval_run() -> Any:
-        return jsonify(eval_service.run())
+        try:
+            return jsonify(eval_service.run())
+        except Exception as exc:
+            return json_error("评测运行失败，请确认知识库产物已生成。", exc=exc)
 
     return app
 

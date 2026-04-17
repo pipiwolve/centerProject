@@ -1,12 +1,16 @@
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") ||
-  "http://127.0.0.1:8000";
+const explicitApiBase = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "");
+const serviceApiBase = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "");
+const defaultApiBase = process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000" : "/api";
+
+export const API_BASE_URL = explicitApiBase || serviceApiBase || defaultApiBase;
 
 export type ChatSource = {
   title: string;
   source_type: string;
   source_path: string;
   score: number;
+  preview: string;
+  content: string;
   excerpt: string;
   materials?: string[];
   damage_types?: string[];
@@ -93,10 +97,28 @@ export type HealthResponse = {
   retrieval_mode: string;
   target_docs_kb_id?: string;
   target_faq_kb_id?: string;
+  deployment_target: string;
+  read_only_runtime: boolean;
+  ingest_enabled: boolean;
+  ingest_artifacts_ready: boolean;
 };
 
+function buildApiUrl(path: string) {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  if (!API_BASE_URL) {
+    return normalizedPath;
+  }
+  if (API_BASE_URL.endsWith("/api") && normalizedPath.startsWith("/api/")) {
+    return `${API_BASE_URL}${normalizedPath.slice(4)}`;
+  }
+  if (API_BASE_URL.endsWith("/api") && normalizedPath === "/api") {
+    return API_BASE_URL;
+  }
+  return `${API_BASE_URL}${normalizedPath}`;
+}
+
 async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
+  const response = await fetch(buildApiUrl(path), {
     ...init,
     headers: {
       "Content-Type": "application/json",
@@ -107,7 +129,14 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(text || `Request failed: ${response.status}`);
+    let message = text || `Request failed: ${response.status}`;
+
+    try {
+      const payload = JSON.parse(text) as { error?: string; detail?: string };
+      message = payload.error || payload.detail || message;
+    } catch {}
+
+    throw new Error(message);
   }
 
   return (await response.json()) as T;

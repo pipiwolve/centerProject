@@ -77,6 +77,28 @@ class AppConfig:
     def bailian_import_checklist_path(self) -> Path:
         return self.manifest_dir / "bailian-import-checklist.md"
 
+    @property
+    def deployment_target(self) -> str:
+        return "vercel" if os.getenv("VERCEL_ENV", "").strip() in {"preview", "production"} else "local"
+
+    @property
+    def read_only_runtime(self) -> bool:
+        return self.deployment_target == "vercel"
+
+    @property
+    def ingest_enabled(self) -> bool:
+        return not self.read_only_runtime
+
+    @property
+    def ingest_artifacts_ready(self) -> bool:
+        tracked_paths = [
+            self.chunk_manifest_path,
+            self.faq_manifest_path,
+            self.eval_manifest_path,
+            self.ingest_report_path,
+        ]
+        return all(path.exists() for path in tracked_paths)
+
     @classmethod
     def load(cls, backend_root: Path | None = None) -> "AppConfig":
         resolved_backend_root = backend_root or Path(__file__).resolve().parents[1]

@@ -17,8 +17,8 @@ export function EvalDashboard() {
         setReport(result);
         setError("");
       });
-    } catch {
-      setError("评测运行失败，请确认本地后端已完成 ingest。");
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : "评测运行失败，请确认知识库产物已生成。");
     } finally {
       setBusy(false);
     }

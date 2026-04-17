@@ -7,7 +7,7 @@ import uuid
 from dataclasses import dataclass
 from typing import Any
 
-from .bailian_application import BailianApplicationService
+from .bailian_application import BailianApplicationResult, BailianApplicationService
 from .config import AppConfig
 from .utils import build_step_markdown, clean_runtime_markdown
 
@@ -53,8 +53,17 @@ class LeatherChatService:
         analysis = self._analyze_query(query)
         requested_session_id = session_id or str(uuid.uuid4())
         app_result = self.bailian_app.call(query=query, session_id=requested_session_id)
-        answer_text = self._normalize_answer_block(app_result.text, app_result.sources)
-        sections = self._extract_sections(answer_text, app_result.sources)
+        source_diagnostics = self._build_source_diagnostics(app_result)
+        answer_text = self._normalize_answer_block(
+            app_result.text,
+            app_result.sources,
+            source_hint=source_diagnostics["source_hint"],
+        )
+        sections = self._extract_sections(
+            answer_text,
+            app_result.sources,
+            source_hint=source_diagnostics["source_hint"],
+        )
         latency_ms = round((time.perf_counter() - started_at) * 1000, 2)
 
         return {
@@ -72,9 +81,55 @@ class LeatherChatService:
                     "risk_level": analysis.risk_level,
                     "notes": analysis.notes,
                 },
-                "source_count": len(app_result.sources),
+                **source_diagnostics,
             },
             "debug": debug,
+        }
+
+    def _build_source_diagnostics(self, app_result: BailianApplicationResult) -> dict[str, Any]:
+        raw_doc_reference_count = len(app_result.raw_doc_references)
+        raw_thought_count = len(app_result.raw_thoughts)
+        workflow_message_present = bool(app_result.raw_workflow_message)
+        source_count = len(app_result.sources)
+        source_status = "available"
+        source_hint = ""
+
+        if source_count > 0:
+            source_hint = "已返回百炼可展示引用与召回切片。"
+        elif raw_doc_reference_count > 0:
+            source_status = "reference_parse_miss"
+            source_hint = (
+                "百炼本次返回了 doc_references，但当前服务没有成功解析成可展示来源。"
+                " 请检查百炼返回字段结构是否发生变化。"
+            )
+        elif raw_thought_count > 0:
+            source_status = "thoughts_without_sources"
+            source_hint = (
+                "百炼本次返回了 thoughts，但没有解析出可展示切片。"
+                " 若这是智能体应用，请确认已开启“展示回答来源”并重新发布；"
+                " 若这是工作流应用，则需要按节点实际输出结构补充引用解析。"
+            )
+        elif workflow_message_present:
+            source_status = "workflow_without_sources"
+            source_hint = (
+                "百炼本次返回了工作流节点消息，但没有返回可展示的 doc_references / thoughts。"
+                " 如果希望前端展示命中来源，需要在应用侧输出可追溯引用，或改用开启“展示回答来源”的智能体检索配置。"
+            )
+        else:
+            source_status = "no_source_metadata"
+            source_hint = (
+                "百炼应用本次没有返回可展示引用。"
+                " 若正文已明显使用知识库内容，通常表示回答用了 RAG，但应用侧没有返回 doc_references。"
+                " 可在百炼控制台开启“展示回答来源”并重新发布应用。"
+            )
+
+        return {
+            "source_count": source_count,
+            "raw_doc_reference_count": raw_doc_reference_count,
+            "raw_thought_count": raw_thought_count,
+            "workflow_message_present": workflow_message_present,
+            "source_status": source_status,
+            "source_hint": source_hint,
         }
 
     def _analyze_query(self, query: str) -> QueryAnalysis:
@@ -132,11 +187,24 @@ class LeatherChatService:
             notes="；".join(note_parts),
         )
 
-    def _normalize_answer_block(self, answer: str, sources: list[dict[str, Any]]) -> str:
+    def _normalize_answer_block(
+        self,
+        answer: str,
+        sources: list[dict[str, Any]],
+        source_hint: str = "",
+    ) -> str:
         cleaned_answer = clean_runtime_markdown(answer)
         if "### 适用判断" in cleaned_answer:
-            if "### 参考来源" not in cleaned_answer:
-                cleaned_answer = cleaned_answer.rstrip() + "\n\n### 参考来源\n" + self._build_reference_section(sources)
+            reference_section = self._build_reference_section(sources, source_hint)
+            if "### 参考来源" in cleaned_answer:
+                cleaned_answer = re.sub(
+                    r"###\s*参考来源\s*\n(.*?)(?=\n###|\Z)",
+                    "### 参考来源\n" + reference_section + "\n",
+                    cleaned_answer,
+                    flags=re.S,
+                ).strip()
+            else:
+                cleaned_answer = cleaned_answer.rstrip() + "\n\n### 参考来源\n" + reference_section
             return cleaned_answer
 
         tools = ""
@@ -171,11 +239,16 @@ class LeatherChatService:
                 "若处理后掉色加重、皮面起壳、结构松散或反复发霉，应停止继续操作并送修。",
                 "",
                 "### 参考来源",
-                self._build_reference_section(sources),
+                self._build_reference_section(sources, source_hint),
             ]
         )
 
-    def _extract_sections(self, answer: str, sources: list[dict[str, Any]]) -> dict[str, str]:
+    def _extract_sections(
+        self,
+        answer: str,
+        sources: list[dict[str, Any]],
+        source_hint: str = "",
+    ) -> dict[str, str]:
         sections = {name: "" for name in SECTION_ORDER}
         pattern = re.compile(r"###\s*(.+?)\n(.*?)(?=\n###|\Z)", re.S)
         for title, body in pattern.findall(answer):
@@ -191,13 +264,13 @@ class LeatherChatService:
         if not any(sections.values()):
             sections["适用判断"] = "请结合百炼命中的资料判断材质和受损范围，再执行护理步骤。"
             sections["操作步骤"] = self._build_step_section(sources)
-            sections["参考来源"] = self._build_reference_section(sources)
+            sections["参考来源"] = self._build_reference_section(sources, source_hint)
 
         if not sections["操作步骤"]:
             sections["操作步骤"] = self._build_step_section(sources)
 
         if not sections["参考来源"]:
-            sections["参考来源"] = self._build_reference_section(sources)
+            sections["参考来源"] = self._build_reference_section(sources, source_hint)
 
         if not sections["何时送修"]:
             sections["何时送修"] = "若出现大面积掉色、结构损坏、反复霉变或处理后明显加重，应尽快送修。"
@@ -220,9 +293,9 @@ class LeatherChatService:
                     return step_markdown
         return "1. 先确认材质、受损范围和是否需要送修。\n2. 在不显眼处小范围测试后，再逐步处理。"
 
-    def _build_reference_section(self, sources: list[dict[str, Any]]) -> str:
+    def _build_reference_section(self, sources: list[dict[str, Any]], source_hint: str = "") -> str:
         if not sources:
-            return "- 本次回答未返回可展示引用。"
+            return source_hint or "本次回答未返回可展示引用。"
 
         references = []
         for source in sources:

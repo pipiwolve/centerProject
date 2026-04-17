@@ -408,6 +408,7 @@ export function ChatWorkspace() {
   const [busy, setBusy] = useState(false);
 
   const riskLevel = trace?.analysis.risk_level || "待判断";
+  const sourceHint = trace?.source_hint || "";
 
   function resetConversation() {
     setMessages([]);
@@ -786,7 +787,16 @@ export function ChatWorkspace() {
           <div className="mt-5 space-y-3">
             {activeSources.length === 0 ? (
               <div className="rounded-[1.5rem] border border-dashed border-[color:var(--border-soft)] bg-[color:var(--surface)] p-5 text-sm leading-7 text-[color:var(--ink-soft)]">
-                本次回答还没有返回可展示的百炼引用或召回切片。完成一次问答后，这里会展示百炼应用真实命中的引用与片段。
+                <p>
+                  {sourceHint || "本次回答还没有返回可展示的百炼引用或召回切片。完成一次问答后，这里会展示百炼应用真实命中的引用与片段。"}
+                </p>
+                {trace ? (
+                  <div className="mt-4 rounded-[1rem] border border-[color:var(--border-soft)] bg-white/70 p-3 text-xs leading-6 text-[color:var(--ink-soft)]">
+                    原始返回统计：doc_references {trace.raw_doc_reference_count ?? 0} 条，thoughts{" "}
+                    {trace.raw_thought_count ?? 0} 条
+                    {trace.workflow_message_present ? "，包含 workflow_message" : ""}
+                  </div>
+                ) : null}
               </div>
             ) : (
               activeSources.map((source, index) => {

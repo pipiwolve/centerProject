@@ -41,6 +41,11 @@ export type ChatResponse = {
       notes: string;
     };
     source_count: number;
+    raw_doc_reference_count?: number;
+    raw_thought_count?: number;
+    workflow_message_present?: boolean;
+    source_status?: string;
+    source_hint?: string;
   };
 };
 

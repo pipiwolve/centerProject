@@ -37,6 +37,7 @@ class BailianApplicationResult:
     sources: list[dict[str, Any]]
     raw_doc_references: list[dict[str, Any]]
     raw_thoughts: list[dict[str, Any]]
+    raw_workflow_message: dict[str, Any]
 
 
 class BailianApplicationService:
@@ -75,6 +76,7 @@ class BailianApplicationService:
         doc_references = [
             self._to_dict(reference) for reference in (getattr(output, "doc_references", None) or [])
         ]
+        workflow_message = self._to_dict(getattr(output, "workflow_message", None))
 
         if not text:
             text = self._extract_text_from_thoughts(thoughts)
@@ -86,6 +88,7 @@ class BailianApplicationService:
             sources=sources,
             raw_doc_references=doc_references,
             raw_thoughts=thoughts,
+            raw_workflow_message=workflow_message,
         )
 
     def _build_sources(
@@ -356,25 +359,29 @@ class BailianApplicationService:
         return []
 
     def _to_dict(self, value: Any) -> dict[str, Any]:
+        if hasattr(value, "items"):
+            items = dict(value.items())
+            if items:
+                return {key: self._serialize_nested(item) for key, item in items.items()}
         if hasattr(value, "__dict__"):
             return {
                 key: self._serialize_nested(item)
                 for key, item in vars(value).items()
                 if not key.startswith("_")
             }
-        if hasattr(value, "items"):
-            return {key: self._serialize_nested(item) for key, item in dict(value).items()}
         return {}
 
     def _serialize_nested(self, value: Any) -> Any:
         if isinstance(value, list):
             return [self._serialize_nested(item) for item in value]
+        if hasattr(value, "items"):
+            items = dict(value.items())
+            if items:
+                return {key: self._serialize_nested(item) for key, item in items.items()}
         if hasattr(value, "__dict__"):
             return {
                 key: self._serialize_nested(item)
                 for key, item in vars(value).items()
                 if not key.startswith("_")
             }
-        if hasattr(value, "items"):
-            return {key: self._serialize_nested(item) for key, item in dict(value).items()}
         return value

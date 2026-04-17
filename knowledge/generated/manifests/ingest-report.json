@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-17T05:30:12.999751+00:00",
-  "source_count": 39,
-  "normalized_count": 39,
-  "chunk_count": 103,
-  "faq_count": 30,
+  "generated_at": "2026-04-17T06:24:51.339224+00:00",
+  "source_count": 60,
+  "normalized_count": 60,
+  "chunk_count": 164,
+  "faq_count": 38,
   "eval_count": 12,
   "sources": [
     {
@@ -781,6 +781,111 @@
       }
     },
     {
+      "source_id": "36-hardware-contact-darkening-routing",
+      "source_path": "knowledge/raw/36-hardware-contact-darkening-routing.md",
+      "title": "五金接触位附近发黑、发暗与局部异色：高风险分流卡",
+      "content": "# 五金接触位附近发黑、发暗与局部异色：高风险分流卡\n\n## 资料定位\n\n这是一张解决“皮面问题看起来像脏污，但位置总贴着五金、铆钉、链条、拉头或锁扣”的分流卡。目标不是教用户自行化学清除，而是先判断这类问题为什么要按高风险处理。\n\n## 检索标签\n\n- 部位：五金附近、铆钉周围、链条接触位、锁扣底部、拉头旁边、金属贴皮处\n- 症状：发黑、发灰、变暗、局部异色、金属边缘脏印、压痕伴随变色\n- 典型问法：`五金旁边皮子变黑`、`铆钉周围发黑怎么办`、`链条接触位变暗`\n- 风险等级：高\n\n## 适用判断\n\n适用于以下情况：\n\n- 变色位置和五金轮廓、铆钉底座、链条压迫路径高度重合。\n- 问题不一定只像“脏”，还伴随压痕、失光、局部 finish 变化或金属表面异常。\n- 用户已经考虑对五金或邻近皮面使用清洁膏、抛光剂或化学产品。\n\n不适用于以下情况：\n\n- 单纯远离五金位置的表面灰尘或汗油包浆。\n- 纯 canvas 区域且没有任何金属接触路径。\n\n## 判别要点\n\n1. 五金附近的变色，不能默认按普通皮面污渍处理。\n2. Hermès 官方明确说明硬件是独立精密部件，必要时应由品牌工匠处理更换；CHANEL 官方明确说明 cleaning products 可能损伤 hardware finish。\n3. 因此，只要问题同时牵涉金属与邻近皮面，就应优先考虑“部件边界问题”，而不是直接进入普通清洁逻辑。\n\n以下判断为基于官方硬件护理边界作出的工程性推断：\n\n- 如果变色紧贴五金边缘，且用户还想处理金属表面，那么真实风险不只是“皮面脏了”，还包括五金 finish、邻近皮面 finish、以及两者交界处的二次损伤。\n\n## 处理目标\n\n- 先把五金问题和皮面问题从操作层面分开。\n- 避免金属抛光、化学擦洗或错误布料把邻近皮面一起带坏。\n\n## 推荐工具\n\n- 干净软布\n- 独立用于五金的单独布料\n- 拍照记录\n\n## 操作步骤\n\n1. 先定位边界：确认异色是不是沿着五金轮廓或接触路径出现。\n2. 先停用化学品：不要在未确认 finish 安全前使用金属清洁剂或抛光膏。\n3. 分离布料：皮面和五金不共用同一块布。\n4. 只做干式轻拭：在未明确材质和 finish 安全之前，仅做低风险除尘。\n5. 判断升级：如果用户已经想“把五金擦亮、同时把皮面颜色擦回来”，应直接转入专业评估。\n\n## 不建议的做法\n\n- 不要把五金清洁膏直接当作邻近皮面的去污工具。\n- 不要在金属与皮面交界处来回猛擦。\n- 不要把五金异常和皮面异常混成一次家庭处理。\n\n## 直接送修 / 升级处理\n\n- 五金 finish 失去原有光泽或怀疑被擦伤。\n- 变色路径和五金接触位高度重合。\n- 邻近皮面同时出现发暗、发白、失光、发黏或压痕。\n- 用户希望恢复五金外观并统一周边皮面状态。\n\n## 参考依据\n\n- Hermès, Leather Care\n https://www.hermes.com/us/en/content/151446-leather-care/\n 要点：官方把 hardware 单独说明，并明确“changing hardware”适合交给 Hermès artisans；不建议自行使用不适合产品。\n\n- CHANEL, Care Instructions for Bags PDF\n https://services.chanel.com/media/files/en_US_Care_instructions_for_Bags.pdf\n 要点：官方明确提示 chemical-based cleaning products risks altering the finish of metal parts。\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n 要点：Coach repair workshop 可处理 hardware replacement，说明硬件问题应优先进入维修分流。",
+      "kind": "md",
+      "hash_value": "4c5eec0e4b4da4579336a96110324a38",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "发黑污渍"
+        ],
+        "risk_level": "low",
+        "source_name": "五金接触位附近发黑、发暗与局部异色：高风险分流卡",
+        "source_file": "36-hardware-contact-darkening-routing.md"
+      }
+    },
+    {
+      "source_id": "37-opening-sagging-base-panel-routing",
+      "source_path": "knowledge/raw/37-opening-sagging-base-panel-routing.md",
+      "title": "包口塌陷、底部支撑异常与轮廓外扩：形态维护 vs 结构异常分流",
+      "content": "# 包口塌陷、底部支撑异常与轮廓外扩：形态维护 vs 结构异常分流\n\n## 资料定位\n\n这是一张给“包看起来变软、包口趴了、底板好像不对劲、轮廓越来越外扩”的问题做分流的场景卡。重点是区分可通过轻撑和收纳调整缓解的形态问题，与已经进入结构层级的异常。\n\n## 检索标签\n\n- 症状：包口塌陷、底部塌、底板异常、包型外扩、轮廓走样、撑不起来、站不住\n- 典型问法：`包口塌了怎么办`、`底板好像坏了`、`包越来越软撑不住`\n- 风险等级：中高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题主要表现为外形走样，而不是局部污渍。\n- 用户担心是否只是装太满、收纳不当，还是已经伤到内部支撑。\n\n## 判别要点\n\n1. Hermès、CHANEL、Louis Vuitton 都明确强调不要过度装填，并建议使用原有纸张或防尘袋维持形态。\n2. 只要长期过载、折压、湿态收纳或链条压迫持续存在，包口和底部轮廓都可能先出现“可逆的软塌”。\n3. 如果轻撑、减负、静置后仍明显歪斜、包口异常、站不住，问题更偏向结构异常。\n\n## 处理目标\n\n- 先排除过载和收纳姿势造成的形态问题。\n- 识别是否已经超出家庭维护边界。\n\n## 推荐工具\n\n- 雪梨纸 / 无酸纸\n- 防尘袋\n- 柔软隔离物，用于链条和五金\n\n## 操作步骤\n\n1. 先减负：清空不必要重物，恢复包体到轻载状态。\n2. 先看姿态：确认是否长期被过度装填、折放或单侧受力。\n3. 轻撑轮廓：用柔软纸张把包型恢复到自然状态，不做过度顶撑。\n4. 整理链条和肩带：避免继续压包口、勒侧壁或压底部。\n5. 静置观察：在常温、避光、干燥环境中观察一段时间，再判断是否恢复。\n\n## 不建议的做法\n\n- 不要用硬支撑物强行顶回形状。\n- 不要在包体仍潮湿时做定型。\n- 不要把“变软”直接当成需要上油或补脂的信号。\n\n## 直接送修 / 升级处理\n\n- 包口长期塌陷，轻撑后仍不稳定。\n- 底部、侧壁或提手根部疑似有内部支撑问题。\n- 轮廓持续一侧外扩或歪斜。\n- 伴随缝线异常、连接位变形或提手受力问题。\n\n## 参考依据\n\n- Hermès, Leather Care\n https://www.hermes.com/us/en/content/151446-leather-care/\n 要点：官方强调避免装入过于 bulky 的内容，收纳时使用原有纸张维持形态。\n\n- CHANEL, Bags Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/bags//\n 要点：官方强调不要 overfill，并建议 upright storage 与纸张包裹链条。\n\n- Louis Vuitton, Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n 要点：官方明确指出产品不应 over-packed；不用时应在通风环境保存。\n\n- Longchamp, Repairs\n https://www.longchamp.com/us/en/after-sales-repairs-and-services/repairs/\n 要点：一旦问题进入 handles/straps/zipper 等结构件层面，应直接进入 Repair Center 分流。",
+      "kind": "md",
+      "hash_value": "7da1291fed722a4c251c232c04040d28",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "发黑污渍",
+          "变形塌陷"
+        ],
+        "risk_level": "low",
+        "source_name": "包口塌陷、底部支撑异常与轮廓外扩：形态维护 vs 结构异常分流",
+        "source_file": "37-opening-sagging-base-panel-routing.md"
+      }
+    },
+    {
+      "source_id": "38-lining-odor-vs-mold-routing",
+      "source_path": "knowledge/raw/38-lining-odor-vs-mold-routing.md",
+      "title": "内衬异味、闷味与霉点分流：先区分受潮残留还是疑似霉变",
+      "content": "# 内衬异味、闷味与霉点分流：先区分受潮残留还是疑似霉变\n\n## 资料定位\n\n这是一张针对 `内衬有味道 / 长期收纳后闷味 / 局部小点不确定是不是霉` 的分流卡。重点是让系统先判断用户还处在“正确风干观察”阶段，还是已经进入疑似霉变阶段。\n\n## 检索标签\n\n- 症状：内衬异味、闷味、潮味、霉味、内衬小点、包里味道散不掉\n- 典型问法：`包里有闷味怎么办`、`内衬是不是发霉了`、`放久了有味道`\n- 风险等级：高\n\n## 适用判断\n\n适用于以下情况：\n\n- 包袋长期收纳后有异味。\n- 曾受潮、淋雨、放在潮湿环境或未干透就入袋。\n- 用户不确定是单纯潮味，还是已经出现霉变。\n\n## 判别要点\n\n1. 只有气味、没有反复出现的斑点和材质异常时，仍可先按“受潮后风干观察”路径处理。\n2. 如果出现反复回来的点状/绒状斑点、持续霉味、局部更冷更潮、材质手感异常，应升级为疑似霉变。\n3. 官方品牌护理资料一致强调：包袋受潮后必须先完全风干，再继续使用或收纳。\n\n## 处理目标\n\n- 先降低残余潮气。\n- 避免把湿气封存在包内。\n- 识别何时需要停止家庭观察并转入专业处理。\n\n## 推荐工具\n\n- 浅色无绒布\n- 纸张轻撑物\n- 通风、干燥、避光的放置环境\n\n## 操作步骤\n\n1. 清空包内：取出全部物品和附属小袋。\n2. 打开结构：让内衬、口袋、翻盖、拉链区域充分通风。\n3. 轻撑包型：防止湿态内里塌陷贴合。\n4. 室温风干：不加热、不喷香、不封袋。\n5. 观察变化：记录味道是否逐步消退，是否出现或反复出现斑点、材质异常。\n\n## 不建议的做法\n\n- 不要用香水、除味喷雾去掩盖气味。\n- 不要在还没完全干透时收入防尘袋、盒子或柜子。\n- 不要把所有问题都直接当成“霉”而先上大量化学品。\n\n## 直接送修 / 升级处理\n\n- 完整风干周期后仍持续有霉味或潮味。\n- 斑点反复出现，或出现绒状/粉状可疑点。\n- 内衬或邻近皮面手感异常，出现发硬、发黏、发泡或局部潮冷。\n- 用户已多次自行除味但问题反复。\n\n## 参考依据\n\n- CHANEL, Bags Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/bags//\n 要点：官方强调避免湿气；若接触到水，应以吸水、无起毛布 carefully dry。\n\n- Hermès, Leather Care\n https://www.hermes.com/us/en/content/151446-leather-care/\n 要点：官方强调皮革怕 excess humidity；不建议在收纳时直接使用 moisture-absorbing sachets 紧贴皮面。\n\n- LOEWE, Care Guide\n https://www.loewe.com/usa/en/care-guide-page\n 要点：若包袋打湿，应以 soft cloth 吸走多余水分，并在 room temperature 下自然干燥。\n\n- Cuyana, Storage FAQ\n https://support.cuyana.com/hc/en-us/articles/6328032848916-How-should-I-store-my-items\n 要点：潮湿后的包袋必须完全风干，再使用或收纳。",
+      "kind": "md",
+      "hash_value": "287f9f7028d8ebd4af05c37167f47550",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "干裂发硬",
+          "变形塌陷",
+          "霉变"
+        ],
+        "risk_level": "medium",
+        "source_name": "内衬异味、闷味与霉点分流：先区分受潮残留还是疑似霉变",
+        "source_file": "38-lining-odor-vs-mold-routing.md"
+      }
+    },
+    {
+      "source_id": "39-luxury-brand-material-term-map",
+      "source_path": "knowledge/raw/39-luxury-brand-material-term-map.md",
+      "title": "奢侈品牌材质术语映射卡：官方命名到基础材质的归类",
+      "content": "# 奢侈品牌材质术语映射卡：官方命名到基础材质的归类\n\n## 资料定位\n\n这是一份为云 RAG 准备的术语映射卡，用来把品牌自己的材质命名路由到更通用的护理类别，减少“看得懂产品页，但接不上护理逻辑”的断层。\n\n## Louis Vuitton\n\n### Natural Leather / Natural Cowhide / Vegetable-Tanned Cowhide\n\n- 路由到：植鞣革 / 本色皮 / vachetta\n- 典型问题：包浆、遇水变深、水痕、易刮伤\n- 关联知识：\n - `15-vegetable-tanned-handle-darkening-patina.md`\n - `16-vegetable-tanned-water-stain-wet-darkening.md`\n\n### Vernis Leather\n\n- 路由到：漆皮 / patent leather\n- 典型问题：染色、黄变、失去镜面感\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Monogram Canvas / Damier Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 典型问题：表层脏污、靠近皮边清洁、印花保护\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n\n## Coach\n\n### Glovetanned / Glovetanned Pebble\n\n- 路由到：柔软光面或压纹成革\n- 典型问题：表面痕、失光、需要正确 cleaner / moisturizer 兼容\n- 说明：Coach 官方把 glovetanned 列入其 leather cleaner 可用范围。\n\n### Natural Calf\n\n- 路由到：浅色天然皮 / natural calf\n- 典型问题：更接近天然浅色成革，需要保守处理\n- 关联知识：\n - `17-smooth-light-leather-color-transfer.md`\n - `41-send-repair-threshold-natural-light-leather.md`\n\n### Signature Coated Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 典型问题：表面脏污与边皮分区清洁\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n\n### Refined Calf / Smooth Calf / Soft Calf / Polished Pebble\n\n- 路由到：光面或轻压纹成革\n- 典型问题：表层染色、轻污、失光、finish 边界\n- 关联知识：\n - `17-smooth-light-leather-color-transfer.md`\n - `32-cleaner-conditioner-compatibility-matrix.md`\n\n## CHANEL\n\n### Lambskin\n\n- 路由到：小羊皮\n- 典型问题：轻痕、链条压痕、色迁移、表面极敏感\n- 关联知识：\n - `18-lambskin-surface-marks.md`\n - `25-chain-pressure-marks-delicate-leather.md`\n\n### Patent Leather\n\n- 路由到：漆皮\n- 典型问题：色迁移、finish 高风险\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Suede / Nubuck\n\n- 路由到：翻毛皮 / nubuck\n- 典型问题：液体敏感、链条压痕敏感、颜色迁移\n- 关联知识：\n - `20-suede-watermark-oil-routing.md`\n - `25-chain-pressure-marks-delicate-leather.md`\n\n## LOEWE\n\n### Classic Calfskin\n\n- 路由到：光面牛皮 / classic calf\n- 常见风险：表层轻污、色迁移、finish 管理\n\n### Soft Grained Calfskin / Supple Grained Calfskin / Fine Grained Calfskin\n\n- 路由到：颗粒或软粒面牛皮\n- 常见风险：形态软化、边角磨损、轻污与失光\n\n### Suede\n\n- 路由到：翻毛皮 / 绒面革\n- 常见风险：液体、油污、链条压痕\n\n## 使用规则\n\n1. 品牌术语优先映射到“基础材质类别”，再进入场景卡。\n2. 一旦映射到 patent / suede / natural leather，就自动提高风险等级。\n3. 如果一个产品同时写了 `canvas + leather trim` 或 `calfskin and suede`，检索时要保留复合材质信息，不能只抓第一项。\n\n## 参考依据\n\n- Louis Vuitton, Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n\n- Coach, Product Care Set\n https://www.coach.com/products/coach-product-care-set/225.html\n\n- Coach, Product Care\n https://www.coach.com/support/product-care\n\n- CHANEL, Bags Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/bags//\n\n- LOEWE official product pages\n https://www.loewe.com/usa/en/women/amazona-31-cropped-bag-in-classic-calfskin/A039N31X05-0120.html\n https://www.loewe.com/usa/en/women/bags/amazona/amazona-23-bag-in-soft-grained-calfskin/A039N07X02-9567.html\n https://www.loewe.com/usa/en/women/bags/small-puzzle-bag-in-classic-calfskin-and-suede/A510S21XCF-1100.html",
+      "kind": "md",
+      "hash_value": "247a52854c3c95f3815232af05c31208",
+      "metadata": {
+        "materials": [
+          "植鞣革",
+          "小羊皮",
+          "头层牛皮",
+          "翻毛皮",
+          "漆皮",
+          "涂层帆布"
+        ],
+        "damage_types": [
+          "染色",
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "奢侈品牌材质术语映射卡：官方命名到基础材质的归类",
+        "source_file": "39-luxury-brand-material-term-map.md"
+      }
+    },
+    {
+      "source_id": "40-hardware-finish-cleaning-boundary",
+      "source_path": "knowledge/raw/40-hardware-finish-cleaning-boundary.md",
+      "title": "五金 finish 清洁边界卡：能做什么、不能做什么、何时只剩维修路径",
+      "content": "# 五金 finish 清洁边界卡：能做什么、不能做什么、何时只剩维修路径\n\n## 资料定位\n\n这是一张专门约束“金属件清洁冲动”的边界卡。适合在用户问 `五金发黑能不能擦亮`、`锁扣能不能用抛光膏`、`链条掉色怎么办` 时优先召回。\n\n## 检索标签\n\n- 症状：五金发黑、金属失光、锁扣黯淡、链条发乌、五金清洁\n- 典型问法：`五金能不能抛光`、`锁扣发黑怎么办`、`链条能擦吗`\n- 风险等级：高\n\n## 官方边界\n\n1. CHANEL 官方只建议用随包附带的 CHANEL glove 或干燥、柔软、无起毛布轻拭 metal parts，并明确指出 chemical-based cleaning products risks altering the finish of any metal。\n2. Hermès 官方把 hardware 视为高规格独立部件，并把 `changing hardware` 明确放进 artisans 维护路径。\n3. Coach 官方把 hardware replacement 放在 repairs 范围内，而不是把五金翻新当成普通家庭护理操作。\n\n## 处理目标\n\n- 只在低风险范围内做表层灰尘和指纹清理。\n- 不把“让五金更亮”误解成普通家庭可随意完成的项目。\n\n## 推荐工具\n\n- 干燥软布\n- 品牌随附手套或指定拭布\n\n## 操作步骤\n\n1. 干式轻拭：先带走指纹和表面浮尘。\n2. 分离区域：避免五金布碰到邻近皮面，避免皮面布碰到金属氧化污物。\n3. 停在低风险层级：如果轻拭后仍达不到用户想要的“恢复发亮”，不要继续上化学品。\n\n## 不建议的做法\n\n- 不要使用化学型金属清洁剂、抛光膏、去污剂直接处理奢侈品包袋五金。\n- 不要把珠宝、银器或家居金属的清洁经验套用到包袋五金。\n- 不要在五金和邻近皮面交界处做大力摩擦。\n\n## 直接送修 / 升级处理\n\n- 五金已经失去原有 finish。\n- 邻近皮面同时出现变色、失光或被污染。\n- 用户的目标是“恢复原厂光泽、统一表面状态”。\n- 涉及锁扣、转锁、链节、铆钉等精密或高接触部件。\n\n## 参考依据\n\n- CHANEL, Care Instructions for Bags PDF\n https://services.chanel.com/media/files/en_US_Care_instructions_for_Bags.pdf\n 要点：官方建议可用 CHANEL glove 或 dry, soft, lint-free cloth 轻拭五金；chemical-based cleaning products 可能改变金属 finish。\n\n- Hermès, Leather Care\n https://www.hermes.com/us/en/content/151446-leather-care/\n 要点：官方将 hardware 单独说明，并把更换五金列为 artisans 维护内容。\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n 要点：hardware replacement 属 repair workshop 范围，说明五金问题更接近维修而非普通家庭护理。",
+      "kind": "md",
+      "hash_value": "003a9487803cacf7d489f9c943355018",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "发黑污渍",
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "五金 finish 清洁边界卡：能做什么、不能做什么、何时只剩维修路径",
+        "source_file": "40-hardware-finish-cleaning-boundary.md"
+      }
+    },
+    {
       "source_id": "41-send-repair-threshold-natural-light-leather",
       "source_path": "knowledge/raw/41-send-repair-threshold-natural-light-leather.md",
       "title": "送修阈值卡：天然浅色皮、植鞣革与本色皮什么时候不要再自己处理",
@@ -864,6 +969,294 @@
         "source_name": "送修阈值卡：潮湿、异味、霉变与反复返潮",
         "source_file": "44-send-repair-threshold-moisture-mold-odor.md"
       }
+    },
+    {
+      "source_id": "45-locks-snaps-turnlock-routing",
+      "source_path": "knowledge/raw/45-locks-snaps-turnlock-routing.md",
+      "title": "转锁、磁扣、按扣与闭合件异常：清洁问题还是功能件维修问题",
+      "content": "# 转锁、磁扣、按扣与闭合件异常：清洁问题还是功能件维修问题\n\n## 资料定位\n\n这是一张针对 `turn lock / snap / magnetic closure / clasp / closure hardware` 的功能件分流卡。适合用户问“扣不上了、磁吸没力了、转锁卡住了、按扣松了”时优先召回。\n\n## 检索标签\n\n- 部位：转锁、磁扣、按扣、锁扣、扣件、闭合件、clasp、closure\n- 症状：扣不上、松了、卡住、吸不住、转不动、闭合异常\n- 典型问法：`转锁卡住了怎么办`、`磁扣吸不住`、`按扣松了`\n- 风险等级：高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题影响正常开合。\n- 异常发生在五金闭合件，而不是单纯皮面脏污。\n- 用户准备使用抛光膏、润滑剂、胶水或大力掰动硬件。\n\n## 判别要点\n\n1. 闭合件异常优先按“功能件”而不是“清洁点位”处理。\n2. Coach 官方把 hardware replacement 放入 Repairs；Hermès 官方把 changing hardware 视为 artisans 维护内容；LOEWE ReCraft 也把 eyelet/rivet replacement 单列为维修项目。\n3. 因此，只要问题已影响闭合功能，家庭护理就不应继续以“擦一擦看能不能好”为主线。\n\n以下判断为基于官方维修能力边界作出的工程性推断：\n\n- `转锁卡滞`、`磁扣松脱`、`按扣失效` 更接近硬件维修分流，而不是普通护理。\n\n## 处理目标\n\n- 先避免暴力开合造成二次损伤。\n- 识别是否已进入五金维修路径。\n\n## 推荐工具\n\n- 干燥软布\n- 拍照记录\n\n## 操作步骤\n\n1. 先停用暴力开合：不要硬拧、硬掰、硬扯。\n2. 干式除尘：仅清掉表面灰尘和指纹，不上化学品。\n3. 观察联动：确认是否同时伴随皮面压痕、锁座歪斜、五金松动或相邻缝线受力异常。\n4. 功能优先：如果已经影响正常闭合，直接进入维修分流。\n\n## 不建议的做法\n\n- 不要往闭合件里加家用油、胶水、清洁剂或强力润滑产品。\n- 不要自行拆装按扣、转锁或磁扣结构。\n- 不要在锁座与皮面交界处来回高压摩擦。\n\n## 直接送修 / 升级处理\n\n- 闭合件无法正常使用。\n- 转锁卡滞、磁扣失效或按扣明显松脱。\n- 同时伴随皮面受力异常、锁座歪斜或缝线问题。\n- 用户目标是恢复原有使用手感和品牌一致外观。\n\n## 参考依据\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n 要点：官方明确将 hardware replacement 纳入 Coach Repairs Workshop。\n\n- Hermès, Leather Care\n https://www.hermes.com/us/en/content/151446-leather-care/\n 要点：官方将 changing hardware 作为由 Hermès artisans 处理的维护内容。\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html\n 要点：官方维修菜单包含 eyelet/rivet replacement，说明闭合相关五金件应进入维修分流。",
+      "kind": "md",
+      "hash_value": "4bf1b98fa62807f8007463ae943b7e46",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "转锁、磁扣、按扣与闭合件异常：清洁问题还是功能件维修问题",
+        "source_file": "45-locks-snaps-turnlock-routing.md"
+      }
+    },
+    {
+      "source_id": "46-handle-root-anchor-cracking",
+      "source_path": "knowledge/raw/46-handle-root-anchor-cracking.md",
+      "title": "手柄根部、肩带挂点与受力连接位开裂：高优先级维修分流卡",
+      "content": "# 手柄根部、肩带挂点与受力连接位开裂：高优先级维修分流卡\n\n## 资料定位\n\n这是一张针对 `handle root / strap anchor / attachment point / 提手根部 / 肩带挂点` 的结构风险卡。适合看起来“只是边缘裂一点”，但位置处于承重点的问题。\n\n## 检索标签\n\n- 部位：手柄根部、肩带挂点、连接位、包耳、attachment point、anchor point\n- 症状：开裂、变形、扯开、受力处松了、连接位裂开\n- 典型问法：`提手根部裂了怎么办`、`肩带连接处开裂`、`挂点松了`\n- 风险等级：高\n\n## 适用判断\n\n适用于以下情况：\n\n- 裂纹发生在手柄根部、肩带孔位、包耳、挂点、铆钉位等承重点。\n- 用户仍在正常背负或打算继续装重物。\n\n## 判别要点\n\n1. 这类位置的破损不是普通表层问题，而是承重安全问题。\n2. Longchamp 官方将 handles/straps damage 直接路由到 Repair Center；LOEWE ReCraft 把 handle replacement 单列；Coach Repairs 也将 stitching / hardware replacement 列为维修服务。\n3. 因此，只要裂纹出现在连接位，就不该按单纯补边油、补色或表面清洁处理。\n\n## 处理目标\n\n- 立即降低受力。\n- 阻止小裂纹扩成断裂、脱落或硬件牵连损伤。\n\n## 推荐工具\n\n- 干布\n- 拍照记录\n- 防尘袋\n\n## 操作步骤\n\n1. 立即减重或停用：不要继续装电脑、书、本体重物。\n2. 检查受力路径：看是否同时牵连缝线、铆钉、边缘收口或相邻五金。\n3. 记录裂口走向：判断是边缘表层、层间开口，还是已经进入本体。\n4. 维持自然形态：收纳时避免让该连接位继续扭曲或悬吊。\n\n## 不建议的做法\n\n- 不要用家用胶水、热熔胶、皮贴或针线自行做承重修补。\n- 不要因为“还能拎”就继续照常使用。\n- 不要只补边缘涂层，忽视内部结构层已经开裂。\n\n## 直接送修 / 升级处理\n\n- 裂纹位于承重点。\n- 伴随缝线、五金、孔位、铆钉或包耳一起异常。\n- 裂纹在继续扩大或已影响使用信心。\n- 用户希望保持原有提手/肩带长度、比例和品牌工艺。\n\n## 参考依据\n\n- Longchamp, Repairs\n https://www.longchamp.com/us/en/after-sales-repairs-and-services/repairs/\n 要点：handles/straps damage 应送 Repair Center。\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html\n 要点：官方维修菜单包含 handle replacement、re-stitching、eyelet/rivet replacement。\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n 要点：quality-related repairs including stitching or hardware replacement 可由 Repairs Workshop 处理。",
+      "kind": "md",
+      "hash_value": "32ed8ebf90eda4f8c9acbf0abdc9257a",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "变形塌陷",
+          "边油开裂"
+        ],
+        "risk_level": "medium",
+        "source_name": "手柄根部、肩带挂点与受力连接位开裂：高优先级维修分流卡",
+        "source_file": "46-handle-root-anchor-cracking.md"
+      }
+    },
+    {
+      "source_id": "47-canvas-trim-cross-contamination",
+      "source_path": "knowledge/raw/47-canvas-trim-cross-contamination.md",
+      "title": "帆布区与皮边区交叉误清洁：复合材质包袋的分区处理卡",
+      "content": "# 帆布区与皮边区交叉误清洁：复合材质包袋的分区处理卡\n\n## 资料定位\n\n这是一张针对 `canvas + leather trim / coated canvas + natural leather handles / fabric + leather details` 的复合材质分区卡，用来解决“帆布能擦，但一擦就带到皮边”的高频问题。\n\n## 检索标签\n\n- 材质：canvas with leather trim、老花拼皮、涂层帆布拼本色皮、尼龙拼皮\n- 症状：帆布能擦吗、皮边一起变色、线边吃水、手柄被带湿\n- 典型问法：`老花旁边的皮边不敢擦`、`帆布和皮边怎么分开处理`\n- 风险等级：高\n\n## 适用判断\n\n适用于以下情况：\n\n- 包体有明显“主材 + 皮边/手柄/滚边”的复合结构。\n- 用户准备对帆布区使用湿布、皂液或 cleaner。\n\n## 判别要点\n\n1. 复合材质包最大风险往往不是主材，而是分区边界。\n2. Louis Vuitton 官方对 Monogram / Damier canvas 与 natural leather 的护理明确走不同路径；Cuyana 官方对 canvas 也强调 spot clean 时应避免接触 leather area。\n3. 因此，生产端要先做“区域分流”，不能给整包一个统一清洁方案。\n\n## 处理目标\n\n- 保证帆布区和皮边区按不同材质处理。\n- 避免液体、泡沫和脏污在交界处串移。\n\n## 推荐工具\n\n- 软布\n- 少量清水\n- 干布\n\n## 操作步骤\n\n1. 先画分区：明确哪些位置是帆布、哪些位置是皮边、走线、包耳、手柄。\n2. 先干式除尘：让边界处没有灰尘堆积。\n3. 帆布区小范围轻湿：只让布带微量湿度，不让液体自由流动。\n4. 立刻回收边界残液：干布跟进吸附，避免水分扩散到皮边与线边。\n5. 皮边区单独判断：若皮边是 natural leather / vachetta，不自动进入帆布清洁逻辑。\n\n## 不建议的做法\n\n- 不要把皂液、清洁剂或湿布一路擦过帆布和皮边。\n- 不要让泡沫和水分停留在缝线、胶边和皮边交界处。\n- 不要把“主材可湿擦”理解成“全包可湿擦”。\n\n## 直接送修 / 升级处理\n\n- 交界处已出现吃水、变深、色迁移或胶边异常。\n- 帆布本体和皮边问题已经同时存在。\n- 用户需要同时处理 canvas 污渍和 natural leather 手柄变色。\n\n## 参考依据\n\n- Louis Vuitton, Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n 要点：Monogram / Damier canvas 与 natural leather / vachetta 的护理边界完全不同。\n\n- Cuyana, Canvas Care\n https://cuyana.com/pages/canvas\n 要点：Canvas only spot clean and avoid getting the leather areas wet。\n\n- Coach, Product Care\n https://www.coach.com/support/product-care\n 要点：canvas / fabric / woven 与 leather 需分材质处理。",
+      "kind": "md",
+      "hash_value": "4c7c4f85df1cef8e61f9b10d1cc76fbe",
+      "metadata": {
+        "materials": [
+          "植鞣革",
+          "涂层帆布"
+        ],
+        "damage_types": [
+          "发黑污渍"
+        ],
+        "risk_level": "low",
+        "source_name": "帆布区与皮边区交叉误清洁：复合材质包袋的分区处理卡",
+        "source_file": "47-canvas-trim-cross-contamination.md"
+      }
+    },
+    {
+      "source_id": "48-small-leather-goods-edge-puller-routing",
+      "source_path": "knowledge/raw/48-small-leather-goods-edge-puller-routing.md",
+      "title": "小皮件边缘、卡槽口与拉片损伤：钱包、卡包、拉链小件维修路由卡",
+      "content": "# 小皮件边缘、卡槽口与拉片损伤：钱包、卡包、拉链小件维修路由卡\n\n## 资料定位\n\n这是一张针对 `small leather goods` 的部件级分流卡，覆盖钱包、卡包、证件夹、零钱包等小皮件的边缘、卡槽口、拉片与局部缝线问题。\n\n## 检索标签\n\n- 品类：钱包、卡包、证件夹、零钱包、小皮件、小件皮具\n- 部位：卡槽边缘、折边、拉片、puller、边缘收口、拉链小件\n- 症状：边缘裂、拉片坏了、卡槽口磨损、缝线开了\n- 典型问法：`卡包边缘裂了怎么办`、`零钱包拉片掉了`、`钱包口边磨损`\n- 风险等级：中高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题出现在 small leather goods 的高频摩擦点。\n- 用户在考虑是继续用、自己粘，还是走品牌维修。\n\n## 判别要点\n\n1. 小皮件虽然体积小，但边缘和拉片仍属于高摩擦部件，不适合无限试错。\n2. LOEWE ReCraft 官方维修菜单明确把 `Leather Goods & Small Leather Goods` 的 re-stitching、edge painting、puller replacement 分开列出。\n3. Coach Repairs 也把 small leather goods 纳入维修范围。\n\n## 处理目标\n\n- 先判断问题是边缘 cosmetic 级别，还是已影响功能件。\n- 避免把小件问题拖成拉链、卡槽或折边结构问题。\n\n## 推荐工具\n\n- 干布\n- 拍照记录\n\n## 操作步骤\n\n1. 先看层级：只是边缘涂层磨损，还是已经进入缝线、折边、拉片连接位。\n2. 先看功能：如果拉片、卡槽、开合受影响，优先按维修件处理。\n3. 控制继续摩擦：减少继续装卡过满、硬拉拉片或频繁折叠。\n4. 根据层级分流：edge painting / re-stitching / puller replacement。\n\n## 不建议的做法\n\n- 不要用胶水粘拉片或折边承重点。\n- 不要把卡槽口裂开继续靠强行塞卡使用。\n- 不要把功能件问题当成单纯外观瑕疵处理。\n\n## 直接送修 / 升级处理\n\n- 拉片损坏或缺失。\n- 边缘磨损已经影响开合或插卡手感。\n- 卡槽口、折边、局部缝线开始开裂。\n- 用户希望维持原有比例、边缘形态和拉片工艺。\n\n## 参考依据\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html\n 要点：官方维修菜单明确覆盖 Leather Goods & Small Leather Goods 的 re-stitching、edge painting、puller replacement。\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n 要点：Coach Repairs Workshop 服务范围包括 small leather goods。",
+      "kind": "md",
+      "hash_value": "a58e596f53be44b5f4ee3cef16b479d9",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "磨损破洞",
+          "边油开裂"
+        ],
+        "risk_level": "low",
+        "source_name": "小皮件边缘、卡槽口与拉片损伤：钱包、卡包、拉链小件维修路由卡",
+        "source_file": "48-small-leather-goods-edge-puller-routing.md"
+      }
+    },
+    {
+      "source_id": "49-zipper-symptom-routing",
+      "source_path": "knowledge/raw/49-zipper-symptom-routing.md",
+      "title": "拉链问题分流卡：只是脏、需要润滑，还是已经进入换件维修",
+      "content": "# 拉链问题分流卡：只是脏、需要润滑，还是已经进入换件维修\n\n## 资料定位\n\n这是一张针对 `zipper / slider / teeth / tape / puller` 的问题分流卡，解决“拉链不顺”和“拉链坏了”之间的常见误判。\n\n## 检索标签\n\n- 部位：拉链、拉头、拉齿、滑块、布带、puller\n- 症状：不顺滑、卡住、错齿、拉不上、拉链布带坏了、拉片掉了\n- 典型问法：`拉链卡住怎么办`、`拉链坏了要换吗`、`拉片掉了`\n- 风险等级：中高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题发生在包袋、小皮件或旅行箱的拉链系统。\n- 用户不确定是灰尘堆积、轻度卡顿，还是已经坏到需要更换。\n\n## 判别要点\n\n1. 轻度卡顿与“结构损坏”不是一回事。\n2. Longchamp 官方明确表示 zipper is a frequently used feature and may need replacing；LOEWE ReCraft 也把 puller replacement 单列。\n3. 因此，生产端要先区分 `表层积灰/轻卡` 与 `slider / teeth / tape / puller` 级别损伤。\n\n## 路由规则\n\n### 低风险观察层\n\n- 表现：只是偶发不顺、没有错齿、没有明显变形、没有布带破损。\n- 可做：先除尘、轻度观察、停止暴力拉扯。\n\n### 维修层\n\n- 表现：错齿、滑块功能异常、拉片断裂、布带破损、拉链无法正常闭合。\n- 结论：进入 repair / replacement 路由。\n\n## 推荐工具\n\n- 干布\n- 软刷\n- 拍照记录\n\n## 操作步骤\n\n1. 先观察结构：有无错齿、变形、布带起毛、拉片缺失。\n2. 先轻除尘：只处理表层灰尘和纤维，不暴力回拉。\n3. 停止强拉：如果拉链已经功能异常，不再反复测试。\n4. 升级维修：拉片、齿位、布带、滑块任一损伤时直接转入 repair。\n\n## 不建议的做法\n\n- 不要在功能异常状态下继续硬拉。\n- 不要用家用胶水、钳子或暴力掰正方式修拉链。\n- 不要把 zipper replacement 能解决的问题拖到牵连周边皮料和布带。\n\n## 直接送修 / 升级处理\n\n- 拉链无法正常开合。\n- 齿位错位、滑块失灵、布带破损。\n- 拉片断裂、缺失或连接位损坏。\n- 用户希望恢复原有手感和开合稳定性。\n\n## 参考依据\n\n- Longchamp, Repairs\n https://www.longchamp.com/us/en/after-sales-repairs-and-services/repairs/\n 要点：官方明确表示拉链可由 Repair Center 更换。\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html\n 要点：官方维修菜单包含 puller replacement。\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n 要点：Coach Repairs Workshop 可处理结构类维修，含 stitching / hardware replacement，适合作为拉链系统异常的升级路径。",
+      "kind": "md",
+      "hash_value": "e0138b2a6541158159f03ddda553f9e0",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "变形塌陷",
+          "锈蚀卡顿"
+        ],
+        "risk_level": "low",
+        "source_name": "拉链问题分流卡：只是脏、需要润滑，还是已经进入换件维修",
+        "source_file": "49-zipper-symptom-routing.md"
+      }
+    },
+    {
+      "source_id": "50-repair-intake-checklist",
+      "source_path": "knowledge/raw/50-repair-intake-checklist.md",
+      "title": "送修前检查清单：拍什么、带什么、如何描述问题",
+      "content": "# 送修前检查清单：拍什么、带什么、如何描述问题\n\n## 资料定位\n\n这是一张面向生产端的“送修前动作卡”，适合在用户已经明显超出家庭护理边界、准备进品牌售后或专业修复时召回。\n\n## 检索标签\n\n- 场景：准备送修、怎么报修、送修前要做什么、需要拍什么、需要带什么\n- 典型问法：`送修前要准备什么`、`去店里怎么描述问题`、`repair request 怎么提`\n- 风险等级：中\n\n## 核心目标\n\n- 让用户在不继续试错的前提下，提供清晰、可评估的信息。\n- 减少因描述模糊、损伤扩大或缺少资料而造成的沟通成本。\n\n## 送修前清单\n\n1. 停止继续处理：不要在预约前再试新的 cleaner、油、抛光剂、胶水。\n2. 拍照记录：\n - 正面整体\n - 问题局部近景\n - 侧面或背面结构\n - 若是功能件，拍开合状态和异常位置\n3. 记录时间线：\n - 什么时候发现\n - 是否曾受潮、染色、受压或高频使用\n - 是否已经尝试过任何处理\n4. 减少继续损耗：\n - 结构件问题先减重或停用\n - 潮湿问题先按正确流程风干\n - 不再暴力开合、拉扯或摩擦\n\n## 到店 / 提交 repair request 时建议描述\n\n- 材质或系列名称\n- 具体部位\n- 功能是否受影响\n- 是否已自行处理过\n- 用户目标是“安全恢复使用”还是“外观恢复”\n\n## 品牌级流程提示\n\n### Louis Vuitton\n\n- 可在线或门店提交 repair\n- 门店 Client Advisor 可评估并给出建议\n\n### Coach\n\n- 可门店或邮寄送至 Coach Repairs Workshop\n- 维修前会评估是否能 repair without compromising integrity\n\n### Longchamp\n\n- 可联系门店或 Repair Center\n- 对 corners / zipper / handles 有明确 repair 路由\n\n## 不建议的做法\n\n- 不要在送修前为了“看起来干净一点”再做一次风险清洁。\n- 不要隐瞒已经使用过的清洁剂、胶水或护理品。\n- 不要让结构件问题继续高频使用到断裂。\n\n## 参考依据\n\n- Louis Vuitton Repairs\n https://us.louisvuitton.com/eng-us/stories/louis-vuitton-repairs\n\n- Where can I get my Louis Vuitton item repaired?\n https://us.louisvuitton.com/eng-us/faq/services/where-can-i-get-my-louis-vuitton-item-repaired\n\n- Coach, Repairs\n https://www.coach.com/support/repairs\n\n- Longchamp, Repairs\n https://www.longchamp.com/us/en/after-sales-repairs-and-services/repairs/\n\n来源提炼：以上官方来源都强调 repair 会先经过评估，且用户可通过门店、App 或 Repair Center 提交，因此送修前最重要的是停止试错并保留清晰证据。",
+      "kind": "md",
+      "hash_value": "e756b6b35b8bd81c5432777604f01860",
+      "metadata": {
+        "materials": [],
+        "damage_types": [
+          "染色"
+        ],
+        "risk_level": "low",
+        "source_name": "送修前检查清单：拍什么、带什么、如何描述问题",
+        "source_file": "50-repair-intake-checklist.md"
+      }
+    },
+    {
+      "source_id": "51-louis-vuitton-core-material-map",
+      "source_path": "knowledge/raw/51-louis-vuitton-core-material-map.md",
+      "title": "Louis Vuitton 核心材质映射卡：从官方材质名到护理路线",
+      "content": "# Louis Vuitton 核心材质映射卡：从官方材质名到护理路线\n\n## 资料定位\n\n这是一张面向 Louis Vuitton 用户问法的材质翻译卡。目标是把官方材质名直接路由到正确护理路线，而不是把所有 LV 皮具都混成同一种“真皮包”。\n\n## 使用规则\n\n- 先识别 LV 官方材质名。\n- 再映射到基础护理族群。\n- 一旦命中 `natural leather / vernis / canvas + trim`，优先提高风险分流精度。\n\n## 核心材质映射\n\n### Natural Leather / Natural Cowhide / Vegetable-Tanned Cowhide\n\n- 路由到：植鞣革 / 本色皮 / vachetta\n- 常见场景：手柄变深、包浆、水痕、遇水变色\n- 关联文件：\n - `15-vegetable-tanned-handle-darkening-patina.md`\n - `16-vegetable-tanned-water-stain-wet-darkening.md`\n - `41-send-repair-threshold-natural-light-leather.md`\n\n### Monogram Canvas / Damier Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 常见场景：表层脏污、印花保护、与皮边交界误清洁\n- 关联文件：\n - `21-coated-canvas-cleaning-near-trim.md`\n - `47-canvas-trim-cross-contamination.md`\n\n### Monogram Empreinte Leather / Bicolor Monogram Empreinte Leather\n\n- 路由到：压纹成革 / embossed finished leather\n- 常见场景：表层色迁移、轻污、失光、避免重溶剂\n- 关联文件：\n - `17-smooth-light-leather-color-transfer.md`\n - `32-cleaner-conditioner-compatibility-matrix.md`\n - `42-send-repair-threshold-color-transfer-finish.md`\n\n### Vernis Leather\n\n- 路由到：漆皮 / patent leather\n- 常见场景：深色材料迁移、发黄、finish 高风险\n- 关联文件：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Epi Leather\n\n- 路由到：压纹成革 / embossed finished leather\n- 常见场景：表层轻污、色迁移、finish 保持\n- 关联文件：\n - `17-smooth-light-leather-color-transfer.md`\n - `32-cleaner-conditioner-compatibility-matrix.md`\n\n## 判断重点\n\n1. 同样是 LV，`Natural Cowhide` 和 `Monogram Empreinte` 的清洁边界完全不同。\n2. `Monogram Canvas` 不是皮革，不应该被错误路由到补脂或皮革 cleaner。\n3. `Vernis` 必须和普通压纹成革分开。\n\n## 参考依据\n\n- Louis Vuitton, Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n\n- Victorine Wallet, Monogram Empreinte Leather\n https://us.louisvuitton.com/eng-us/products/victorine-wallet-monogram-empreinte-nvprod530012v/M11988\n\n- Pocket Organizer, Epi Leather\n https://us.louisvuitton.com/eng-us/products/pocket-organizer-epi-008210/M60642\n\n来源提炼：LV 官方护理页和官方产品页都明确区分了 natural leather、canvas、vernis、empreinte、Epi 等材质族群，适合直接作为 RAG 的第一层路由依据。",
+      "kind": "md",
+      "hash_value": "2f2d2a3eb4557edc647480e2488dee94",
+      "metadata": {
+        "materials": [
+          "植鞣革",
+          "漆皮",
+          "涂层帆布"
+        ],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "Louis Vuitton 核心材质映射卡：从官方材质名到护理路线",
+        "source_file": "51-louis-vuitton-core-material-map.md"
+      }
+    },
+    {
+      "source_id": "52-louis-vuitton-men-leather-family-map",
+      "source_path": "knowledge/raw/52-louis-vuitton-men-leather-family-map.md",
+      "title": "Louis Vuitton 男士常见皮革族群映射卡：Taiga、Taigarama、Monogram Shadow、Taurillon、Aerogram",
+      "content": "# Louis Vuitton 男士常见皮革族群映射卡：Taiga、Taigarama、Monogram Shadow、Taurillon、Aerogram\n\n## 资料定位\n\n这是一张专门解决 LV 男士包袋和 small leather goods 材质命名的问题。许多用户会直接问 `Taiga 怎么养`、`Monogram Shadow 怕不怕刮`、`Taigarama 算皮还是帆布`，这类问题需要先完成材质拆解。\n\n## 材质族群\n\n### Taiga Leather\n\n- 路由到：压纹成革 / textured finished leather\n- 特征：官方单独列为材质，通常用于男士 wallet、bag、small leather goods\n- 常见场景：表层轻污、色迁移、部位磨损\n\n### Taigarama\n\n- 路由到：复合材质\n- 构成：Monogram coated canvas + Taiga cowhide leather\n- 常见场景：主材与皮边分区处理、磁扣/链条等五金件共存\n- 关联文件：\n - `47-canvas-trim-cross-contamination.md`\n - `45-locks-snaps-turnlock-routing.md`\n\n### Monogram Shadow\n\n- 路由到：embossed cowhide / calfskin family\n- 特征：Monogram embossed cowhide / calfskin leather\n- 常见场景：轻污、色迁移、press-stud 附近功能件、finish 保护\n\n### Monogram Taurillon Leather / Taurillon Monogram\n\n- 路由到：grain leather / taurillon family\n- 特征：用于包袋和 small leather goods，通常搭配 embossed or Monogram effect\n- 常见场景：表层轻污、磨擦失光、结构件磨损\n\n### LV Aerogram\n\n- 路由到：成革 family，需按 LV 官方产品页材质名单独识别\n- 常见场景：small leather goods、男士件、轻污与结构磨损\n\n## 路由重点\n\n1. `Taigarama` 不是单一皮革，必须走复合材质逻辑。\n2. `Monogram Shadow` 和 `Monogram Taurillon` 虽然都有 Monogram 元素，但都不应被误判成 `Monogram Canvas`。\n3. 男士件里 press-stud、磁扣、拉链和卡位问题很常见，因此材质路由后还要继续分到功能件卡。\n\n## 关联文件\n\n- `17-smooth-light-leather-color-transfer.md`\n- `32-cleaner-conditioner-compatibility-matrix.md`\n- `45-locks-snaps-turnlock-routing.md`\n- `49-zipper-symptom-routing.md`\n\n## 参考依据\n\n- Multiple Wallet, Taiga Leather\n https://us.louisvuitton.com/eng-us/products/multiple-wallet-taiga-000287/M30531\n\n- Multiple Wallet, Taigarama\n https://us.louisvuitton.com/eng-us/products/multiple-wallet-taigarama-nvprod7260165v/M27649\n\n- Multiple Wallet / Pocket Organizer, Monogram Shadow\n https://us.louisvuitton.com/eng-us/products/multiple-wallet-monogram-shadow-nvprod7540288v/M29136\n https://us.louisvuitton.com/eng-us/products/pocket-organizer-monogram-shadow-nvprod7540296v/M29135\n\n- Multiple Wallet, Monogram Taurillon Leather\n https://us.louisvuitton.com/eng-us/products/multiple-wallet-monogram-taurillon-leather-lg-g90-nvprod5060017v/M13890\n\n- Pilot Wallet, LV Aerogram\n https://us.louisvuitton.com/eng-us/products/slender-pilot-lv-aerogram-nvprod3880071v/M81740",
+      "kind": "md",
+      "hash_value": "3e62c7484ae4f92270dde57c75ca3245",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "Louis Vuitton 男士常见皮革族群映射卡：Taiga、Taigarama、Monogram Shadow、Taurillon、Aerogram",
+        "source_file": "52-louis-vuitton-men-leather-family-map.md"
+      }
+    },
+    {
+      "source_id": "53-coach-material-and-product-eligibility-map",
+      "source_path": "knowledge/raw/53-coach-material-and-product-eligibility-map.md",
+      "title": "Coach 材质与产品适配映射卡：哪些 leather 可以用 Cleaner，哪些不能",
+      "content": "# Coach 材质与产品适配映射卡：哪些 leather 可以用 Cleaner，哪些不能\n\n## 资料定位\n\n这是一张高价值的品牌规则卡。Coach 官方对 cleaner、moisturizer、fabric cleaner、suede protector 的适用范围写得比很多品牌都细，适合直接做 RAG 规则资料。\n\n## 一级原则\n\n- 先识别 Coach 官方材质名。\n- 再决定能否路由到 Leather Cleaner、Moisturizer、Fabric Cleaner 或 Suede Protector。\n- 不把 `Coach 有官方 cleaner` 误解成 `所有 Coach 材质都能用同一套产品`。\n\n## Leather Cleaner 可用族群\n\nCoach 官方列出可用材质包括：\n\n- Crossgrain\n- Glovetanned\n- Metallic Pebble\n- Natural Calf\n- Pebble\n- Polished Pebble\n- Refined Pebble\n- Signature Calf\n- Smooth Calf\n- Soft Calf\n- 部分 stamped exotic finish\n\n## Leather Cleaner 不应直接用的族群\n\n- Sport Calf Leather\n- Calf Suede\n- Haircalf\n\n## Moisturizer 边界\n\n- Coach 官方对 Leather Moisturizer 的限制更严。\n- 不用于：buffalo、calfskin、suede、haircalf\n- 编辑说明里重点提到更适合：Glove Tanned、Polished Calf、English Bridle\n\n## Fabric Cleaner 边界\n\n- 仅用于：Coated Canvas、fabric / jacquard\n- 不用于：\n - 所有 leather bags/trims\n - suede / treated suede\n - haircalf\n - metallic finish fabrics\n - twill、straw、nylon、denim、satin/polysatin、wool、laminated finishes\n\n## Suede Protector\n\n- 仅用于：suede、nubuck\n- 使用前提：clean, dry surface + inconspicuous test\n\n## 路由重点\n\n1. `Natural Calf` 虽然在 Cleaner 适用名单里，但仍属于更敏感的浅色天然皮，生产端应保守处理。\n2. `Signature coated canvas` 应优先走 Fabric Cleaner / coated canvas 逻辑，而不是皮革 cleaner。\n3. `Glovetanned`、`Pebble`、`Smooth Calf` 等可以进入 smooth leather family，但仍需先测色。\n\n## 关联文件\n\n- `17-smooth-light-leather-color-transfer.md`\n- `20-suede-watermark-oil-routing.md`\n- `21-coated-canvas-cleaning-near-trim.md`\n- `32-cleaner-conditioner-compatibility-matrix.md`\n\n## 参考依据\n\n- Coach Leather Care Set\n https://www.coach.com/coach-leather-care-set/24991.html\n\n- Coach Leather Cleaner\n https://www.coach.com/products/coach-leather-cleaner/223.html\n\n- Coach Leather Moisturizer\n https://www.coach.com/products/coach-leather-moisturizer/65602.html\n\n- Coach Fabric Cleaner\n https://www.coach.com/products/coach-fabric-cleaner/CH555-MTI.html\n\n- Coach Suede Protector\n https://www.coach.com/products/coach-suede-protector/C1457.html",
+      "kind": "md",
+      "hash_value": "eb6d39d13ca663046d1b8ffdda4111df",
+      "metadata": {
+        "materials": [],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "Coach 材质与产品适配映射卡：哪些 leather 可以用 Cleaner，哪些不能",
+        "source_file": "53-coach-material-and-product-eligibility-map.md"
+      }
+    },
+    {
+      "source_id": "54-chanel-material-and-care-map",
+      "source_path": "knowledge/raw/54-chanel-material-and-care-map.md",
+      "title": "CHANEL 材质与护理边界映射卡：手袋与小皮件共用规则",
+      "content": "# CHANEL 材质与护理边界映射卡：手袋与小皮件共用规则\n\n## 资料定位\n\n这是一张把 CHANEL 官方护理页里的材质和风险重点抽成 RAG 路由规则的资料卡，适合同时服务 bag 与 small leather goods 场景。\n\n## 核心规则\n\n- CHANEL 的官方基调是：soft cloth first，avoid care products that may alter the finish。\n- 轻痕不等于需要清洁剂；很多 delicate materials 更适合保守处理。\n- 链条、肩带、浅深色接触、过量装填和湿气，都是高频风险源。\n\n## 材质映射\n\n### Lambskin\n\n- 路由到：小羊皮\n- 官方要点：treated as little as possible；可尝试轻柔 circular motion 减轻表面 marks\n- 常见场景：\n - 轻痕\n - 色迁移\n - 链条压痕\n\n### Patent Leather\n\n- 路由到：漆皮\n- 官方要点：属于 delicate material；浅色和深色接触要谨慎\n- 常见场景：\n - 深色材料迁移\n - 发黄或外观变化\n\n### Nubuck / Suede\n\n- 路由到：翻毛皮 / nubuck\n- 官方要点：链条压痕和色迁移风险高，需特别小心\n\n### Embroidery / Sequins / Rhinestones\n\n- 路由到：装饰性复合材质\n- 官方要点：避免与 wool、silk、tweed 等 delicate fabrics 长时间摩擦\n\n## 共用护理边界\n\n- 不要 overfill\n- 避免 prolonged exposure to sunlight, artificial light and humidity\n- 若接触到水，用 absorbent non-pilling cloth carefully dry\n- straps 或 chains 应以 tissue paper 包裹后收纳\n\n## 关联文件\n\n- `18-lambskin-surface-marks.md`\n- `19-patent-leather-color-transfer.md`\n- `20-suede-watermark-oil-routing.md`\n- `25-chain-pressure-marks-delicate-leather.md`\n- `56-chanel-small-leather-goods-routing.md`\n\n## 参考依据\n\n- CHANEL, Bags Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/bags//\n\n- CHANEL, Small Leather Goods Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/small-leather-goods/\n\n- CHANEL, Care Instructions for Bags PDF\n https://services.chanel.com/media/files/en_US_Care_instructions_for_Bags.pdf",
+      "kind": "md",
+      "hash_value": "4cb9f4c79072078d24f9da5ead49452c",
+      "metadata": {
+        "materials": [
+          "小羊皮",
+          "翻毛皮",
+          "漆皮"
+        ],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "CHANEL 材质与护理边界映射卡：手袋与小皮件共用规则",
+        "source_file": "54-chanel-material-and-care-map.md"
+      }
+    },
+    {
+      "source_id": "55-loewe-material-and-aftercare-map",
+      "source_path": "knowledge/raw/55-loewe-material-and-aftercare-map.md",
+      "title": "LOEWE 材质与售后映射卡：从产品页材质名到护理与 after-sales",
+      "content": "# LOEWE 材质与售后映射卡：从产品页材质名到护理与 after-sales\n\n## 资料定位\n\n这是一张把 LOEWE 官方产品页常见材质名与官方 care guide 连接起来的资料卡，适合处理 `classic calfskin`、`soft grained calfskin`、`nappa lambskin`、`suede` 这类问法。\n\n## 核心规则\n\n- LOEWE 官方强调：avoid excessive contact with water, oils, perfumes or cosmetics。\n- 所有 leather 在 humid environments 下都可能有 slight transfer of colour，尤其 suede 或 suede-like leather。\n- 包袋与 small leather goods 还可走 LOEWE 的 care and cleaning service / after-sales 路线。\n\n## 材质映射\n\n### Classic Calfskin / Smooth Calfskin\n\n- 路由到：光面牛皮\n- 常见场景：轻污、色迁移、finish 管理\n\n### Soft Grained Calfskin / Fine Grained Calfskin / Supple Grained Calfskin\n\n- 路由到：颗粒或软粒面牛皮\n- 常见场景：轻污、形态维护、边角磨损\n\n### Nappa Lambskin / Calf Nappa\n\n- 路由到：柔软细腻皮革 family\n- 常见场景：轻痕、压痕、色迁移、finish 高敏感\n\n### Suede\n\n- 路由到：翻毛皮\n- 官方要点：light-coloured garments + humidity + rubbing 会增加色迁移风险\n\n### Canvas and Suede / Raffia and Calfskin 等复合材质\n\n- 路由到：复合材质\n- 常见场景：分区清洁、材质交界边界管理\n\n## After-sales 路由\n\n- 一般护理与清洁问题：先看 Care Guide\n- 需要更深层服务：官方明确表示 bags and small leather goods 提供 care and cleaning service\n- 部件级维修：可结合 ReCraft 菜单理解为 re-stitching / edge painting / puller replacement / handle replacement 等层级\n\n## 关联文件\n\n- `17-smooth-light-leather-color-transfer.md`\n- `18-lambskin-surface-marks.md`\n- `20-suede-watermark-oil-routing.md`\n- `47-canvas-trim-cross-contamination.md`\n\n## 参考依据\n\n- LOEWE Care Guide\n https://www.loewe.com/usa/en/care-guide-page\n\n- Amazona 23 bag in soft grained calfskin\n https://www.loewe.com/usa/en/women/bags/amazona/amazona-23-bag-in-soft-grained-calfskin/A039N07X02-9567.html\n\n- Medium Flamenco clutch in nappa calfskin\n https://www.loewe.com/usa/en/women/bags/flamenco/medium-flamenco-clutch-in-nappa-calfskin/A411FC1XD4-2150.html\n\n- Large Amazona 180 bag in suede\n https://www.loewe.com/usa/en/women/bags/amazona/large-amazona-180-bag-in-suede/A039ASRX03-0018.html\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html",
+      "kind": "md",
+      "hash_value": "fe2361b5944b51292f8b8552005081cf",
+      "metadata": {
+        "materials": [
+          "头层牛皮",
+          "翻毛皮"
+        ],
+        "damage_types": [
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "LOEWE 材质与售后映射卡：从产品页材质名到护理与 after-sales",
+        "source_file": "55-loewe-material-and-aftercare-map.md"
+      }
+    },
+    {
+      "source_id": "56-longchamp-line-material-map",
+      "source_path": "knowledge/raw/56-longchamp-line-material-map.md",
+      "title": "Longchamp 系列材质映射卡：Le Pliage Original 与 Energy 的护理差异",
+      "content": "# Longchamp 系列材质映射卡：Le Pliage Original 与 Energy 的护理差异\n\n## 资料定位\n\n这是一张面向 Longchamp 高频系列的资料卡，重点是把 `Le Pliage Original`、`Le Pliage Energy` 这类系列名，直接翻译成具体材质结构和护理边界。\n\n## Le Pliage Original\n\n- 主材：recycled polyamide canvas with inside coating\n- 包边 / 手柄 / flap：Russian leather (cowhide)\n- 闭合：zipped and snap closure\n\n### 护理重点\n\n- 这是典型 `canvas + leather trim` 复合材质。\n- 皮边、提手和 flap 不能直接按 canvas 路线整体湿擦。\n- 官方产品页还提到：\n - leather areas 可定期使用 Longchamp colorless cream\n - lining / canvas dirt 可用 cloth or soft brush + water and neutral soap\n\n## Le Pliage Energy\n\n- 主材：100% polyamide canvas / recycled fibers\n- 包边：cowhide leather\n- 常见细节：zipper closure、可调肩带、silver-toned hardware\n\n### 护理重点\n\n- 仍属于复合材质，但皮边与 Original 的 Russian leather 命名不同。\n- 官方产品页对部分款写明可使用 waterproofing agent，但仍应遵循 manufacturer recommendations。\n- 清洁 lining 或 canvas 时仍需避免 water spilling over leather parts。\n\n## 路由重点\n\n1. 用户只说“Le Pliage”，仍要继续问是 Original 还是 Energy。\n2. `Original` 与 `Energy` 都不是“全包可一套方案处理”的单材质。\n3. 拉链、snap closure、提手、皮边都应单独进入功能件或皮边判断逻辑。\n\n## 关联文件\n\n- `24-longchamp-le-pliage-corner-zipper-handle-repair.md`\n- `47-canvas-trim-cross-contamination.md`\n- `49-zipper-symptom-routing.md`\n\n## 参考依据\n\n- Le Pliage Original L Tote bag\n https://www.longchamp.com/us/en/products/tote-bag-l-L1899089001.html\n\n- Le Pliage Original Pouch with handle\n https://www.longchamp.com/us/en/products/pouch-with-handle-34175089001.html\n\n- Le Pliage Energy XS Handbag\n https://www.longchamp.com/us/en/products/handbag-xs-L1500HSR299.html\n\n- Le Pliage Energy M Belt bag\n https://www.longchamp.com/us/en/products/belt-bag-m-10256HSR892.html",
+      "kind": "md",
+      "hash_value": "6c94af1a4c05a4fa8b36934b3b79316d",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "Longchamp 系列材质映射卡：Le Pliage Original 与 Energy 的护理差异",
+        "source_file": "56-longchamp-line-material-map.md"
+      }
+    },
+    {
+      "source_id": "57-chanel-small-leather-goods-routing",
+      "source_path": "knowledge/raw/57-chanel-small-leather-goods-routing.md",
+      "title": "CHANEL 小皮件护理路由卡：wallet、card holder、SLG 的高频边界",
+      "content": "# CHANEL 小皮件护理路由卡：wallet、card holder、SLG 的高频边界\n\n## 资料定位\n\n这是一张专门服务 CHANEL small leather goods 的路由卡，适合处理钱包、卡包、链条小件、零钱包等问法。\n\n## 检索标签\n\n- 品类：wallet、card holder、small leather goods、coin purse、SLG\n- 典型问法：`香奈儿卡包有印子`、`小皮件链条压痕`、`钱包别塞太满`\n\n## 官方共用规则\n\n- 不要 overfill\n- 避免浅深色长期接触\n- 避免 sunlight、artificial light、humidity\n- 若接触到水，用 absorbent, non-pilling cloth carefully dry\n- 用 soft cloth；avoid care products that may alter the finish\n- chains / straps 用 tissue paper 包裹后，立着放回原始 pouch\n\n## 材质重点\n\n### Lambskin SLG\n\n- treated as little as possible\n- 轻痕可尝试 circular motion\n- 高风险：marks、色迁移、链条压痕\n\n### Patent leather SLG\n\n- delicate\n- 高风险：深色迁移、外观变化\n\n## 路由重点\n\n1. 小皮件也要单独做 `wear / protect / care / storage` 处理，不应比手袋更随意。\n2. 链条和 strap 如果附着在 small leather goods 上，同样可能压出 marks。\n3. 轻痕和功能件损坏要分开：轻痕走 surface logic，链条/按扣/拉片异常走部件维修逻辑。\n\n## 关联文件\n\n- `18-lambskin-surface-marks.md`\n- `25-chain-pressure-marks-delicate-leather.md`\n- `45-locks-snaps-turnlock-routing.md`\n- `48-small-leather-goods-edge-puller-routing.md`\n\n## 参考依据\n\n- CHANEL Small Leather Goods Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/small-leather-goods/\n\n- CHANEL Small Leather Goods PDF\n https://services.chanel.com/media/files/en_AU_Care_instuctions_for_Small_Leather_Goods.pdf\n\n- CHANEL & moi\n https://www.chanel.com/hu/fashion/services/chanel-et-moi/",
+      "kind": "md",
+      "hash_value": "8be1f1fc58fdef001af3159dff104cc3",
+      "metadata": {
+        "materials": [],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "CHANEL 小皮件护理路由卡：wallet、card holder、SLG 的高频边界",
+        "source_file": "57-chanel-small-leather-goods-routing.md"
+      }
+    },
+    {
+      "source_id": "58-coach-fabric-cleaner-boundary-card",
+      "source_path": "knowledge/raw/58-coach-fabric-cleaner-boundary-card.md",
+      "title": "Coach Fabric Cleaner 边界卡：什么能用，什么绝对不能用",
+      "content": "# Coach Fabric Cleaner 边界卡：什么能用，什么绝对不能用\n\n## 资料定位\n\n这是一张专门约束 `Coach Fabric Cleaner` 使用场景的规则卡。非常适合生产端，因为用户看到“官方 fabric cleaner”后，很容易误解成一切织物拼皮包都能直接上。\n\n## 可用范围\n\n- Coated Canvas\n- fabric / jacquard\n\n## 明确不可用范围\n\n- leather bags / trims\n- suede or treated suede bags / trims\n- haircalf\n- metallic finish fabrics\n- twill\n- straw\n- nylon\n- denim\n- satin / polysatin\n- wool\n- laminated finishes\n\n## 路由重点\n\n1. 只要包体有 leather trim，就不能把 Fabric Cleaner 一路擦过去。\n2. `nylon` 被官方明确排除，不能因为“它也是布”就套用。\n3. `Coated Canvas` 可用，并不等于所有 canvas-like 材质都可用。\n\n## 操作逻辑\n\n1. 先识别材质和 trim。\n2. 只在确认是 Coated Canvas 或 fabric / jacquard 时进入 Fabric Cleaner 路线。\n3. 只用 soft white cloth，小范围 gentle circular motions。\n4. 后续用 clean white dampened cloth 擦掉 excess，并 blot dry。\n\n## 不建议的做法\n\n- 不要对 leather trim 使用 Fabric Cleaner。\n- 不要把它拿去清 suede、haircalf 或 nylon。\n- 不要因为是“官方产品”就跳过材质确认。\n\n## 关联文件\n\n- `21-coated-canvas-cleaning-near-trim.md`\n- `47-canvas-trim-cross-contamination.md`\n- `53-coach-material-and-product-eligibility-map.md`\n\n## 参考依据\n\n- Coach Fabric Cleaner\n https://www.coach.com/products/coach-fabric-cleaner/CH555-MTI.html\n\n- Coach Fabric Cleaner archive page\n https://www.coach.com/products/coach-fabric-cleaner/57328.html",
+      "kind": "md",
+      "hash_value": "3f6bf4f51a9ca158751963e9cfd3b18e",
+      "metadata": {
+        "materials": [],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "Coach Fabric Cleaner 边界卡：什么能用，什么绝对不能用",
+        "source_file": "58-coach-fabric-cleaner-boundary-card.md"
+      }
+    },
+    {
+      "source_id": "59-louis-vuitton-material-choice-routing",
+      "source_path": "knowledge/raw/59-louis-vuitton-material-choice-routing.md",
+      "title": "Louis Vuitton 材质选择分流卡：同样是钱包或包袋，不同材质怎么先判风险",
+      "content": "# Louis Vuitton 材质选择分流卡：同样是钱包或包袋，不同材质怎么先判风险\n\n## 资料定位\n\n这是一张面向 Louis Vuitton 产品问法的快速分流卡。用户常常只说“这个 LV 钱包/包是什么路子”，系统需要把材质和风险等级迅速区分出来。\n\n## 快速分流\n\n### 如果是 Natural Leather / Natural Cowhide\n\n- 风险最高\n- 先按植鞣革和本色皮处理\n- 避免强清洁、酒精、皂类偏方\n\n### 如果是 Monogram / Damier Canvas\n\n- 先按 coated canvas 路由\n- 再看是否带 natural leather handles / trim\n\n### 如果是 Monogram Empreinte / Epi\n\n- 按 embossed finished leather 路由\n- 警惕色迁移与 finish 边界\n\n### 如果是 Vernis\n\n- 单独路由到 patent leather\n- 不与 smooth leather 合并\n\n### 如果是 Taigarama\n\n- 先拆成 `coated canvas + Taiga cowhide`\n- 必须按复合材质处理\n\n## 使用场景\n\n- 问“这个材质怕不怕水”\n- 问“能不能上 cleaner”\n- 问“和牛仔接触会不会染”\n- 问“这个包边和主体是不是一套清洁方法”\n\n## 关联文件\n\n- `51-louis-vuitton-core-material-map.md`\n- `52-louis-vuitton-men-leather-family-map.md`\n- `47-canvas-trim-cross-contamination.md`\n\n## 参考依据\n\n- Louis Vuitton Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n\n- Victorine Wallet, Monogram Empreinte Leather\n https://us.louisvuitton.com/eng-us/products/victorine-wallet-monogram-empreinte-nvprod530012v/M11988\n\n- Multiple Wallet, Taigarama\n https://us.louisvuitton.com/eng-us/products/multiple-wallet-taigarama-nvprod7260165v/M27649\n\n- Pocket Organizer, Epi Leather\n https://us.louisvuitton.com/eng-us/products/pocket-organizer-epi-008210/M60642",
+      "kind": "md",
+      "hash_value": "1abec8983b1c7fe5dff320a82342ca11",
+      "metadata": {
+        "materials": [
+          "植鞣革"
+        ],
+        "damage_types": [],
+        "risk_level": "high",
+        "source_name": "Louis Vuitton 材质选择分流卡：同样是钱包或包袋，不同材质怎么先判风险",
+        "source_file": "59-louis-vuitton-material-choice-routing.md"
+      }
+    },
+    {
+      "source_id": "60-brand-material-routing-index",
+      "source_path": "knowledge/raw/60-brand-material-routing-index.md",
+      "title": "品牌材质路由索引卡：生产端问答的第一层入口",
+      "content": "# 品牌材质路由索引卡：生产端问答的第一层入口\n\n## 资料定位\n\n这是一张总索引卡，不直接提供护理步骤，而是把品牌和材质命名先路由到正确知识族群。适合当云 RAG 的第一层召回桥梁。\n\n## Louis Vuitton\n\n- core material families -> `51-louis-vuitton-core-material-map.md`\n- mens leather families -> `52-louis-vuitton-men-leather-family-map.md`\n- quick routing -> `59-louis-vuitton-material-choice-routing.md`\n\n## Coach\n\n- material + product eligibility -> `53-coach-material-and-product-eligibility-map.md`\n- fabric cleaner boundary -> `58-coach-fabric-cleaner-boundary-card.md`\n\n## CHANEL\n\n- bags + SLG materials -> `54-chanel-material-and-care-map.md`\n- small leather goods routing -> `57-chanel-small-leather-goods-routing.md`\n\n## LOEWE\n\n- material + after-sales map -> `55-loewe-material-and-aftercare-map.md`\n\n## Longchamp\n\n- line + material structure -> `56-longchamp-line-material-map.md`\n\n## 什么时候优先召回这张索引卡\n\n- 用户提到的是品牌官方材质名，而不是通用材质词。\n- 用户只说系列名、产品线名、或混合材质名。\n- 系统需要先判断是 `植鞣革 / 漆皮 / 压纹成革 / coated canvas / 复合材质` 中的哪一类。\n\n## 什么时候不要停在这张卡\n\n- 用户已经描述了清晰症状时，索引卡只做第一层路由。\n- 一旦完成材质映射，应继续进入场景卡、工具矩阵或送修阈值卡。\n\n## 推荐下一跳\n\n- 材质不明 -> `35-query-synonym-map.md`\n- 产品名/材质名已知 -> 本索引卡\n- 症状清晰 -> 对应场景卡\n- 功能件异常 -> `43` `45` `49`\n- 准备送修 -> `50`",
+      "kind": "md",
+      "hash_value": "af6b7ad2c89d364d4a2149237a215c67",
+      "metadata": {
+        "materials": [
+          "植鞣革",
+          "漆皮"
+        ],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "品牌材质路由索引卡：生产端问答的第一层入口",
+        "source_file": "60-brand-material-routing-index.md"
+      }
     }
   ],
   "sync": {
@@ -873,7 +1266,7 @@
   "manual_import": {
     "strategy": "manual_upload",
     "target_docs_kb_id": "zwb68dlfs9",
-    "recommended_file_count": 39,
+    "recommended_file_count": 60,
     "recommended_files": [
       "knowledge/raw/01-vegetable-tanned-care.md",
       "knowledge/raw/02-suede-and-patent.md",
@@ -910,10 +1303,31 @@
       "knowledge/raw/33-protector-repellent-matrix.md",
       "knowledge/raw/34-banned-household-chemicals.md",
       "knowledge/raw/35-query-synonym-map.md",
+      "knowledge/raw/36-hardware-contact-darkening-routing.md",
+      "knowledge/raw/37-opening-sagging-base-panel-routing.md",
+      "knowledge/raw/38-lining-odor-vs-mold-routing.md",
+      "knowledge/raw/39-luxury-brand-material-term-map.md",
+      "knowledge/raw/40-hardware-finish-cleaning-boundary.md",
       "knowledge/raw/41-send-repair-threshold-natural-light-leather.md",
       "knowledge/raw/42-send-repair-threshold-color-transfer-finish.md",
       "knowledge/raw/43-send-repair-threshold-structure-hardware.md",
-      "knowledge/raw/44-send-repair-threshold-moisture-mold-odor.md"
+      "knowledge/raw/44-send-repair-threshold-moisture-mold-odor.md",
+      "knowledge/raw/45-locks-snaps-turnlock-routing.md",
+      "knowledge/raw/46-handle-root-anchor-cracking.md",
+      "knowledge/raw/47-canvas-trim-cross-contamination.md",
+      "knowledge/raw/48-small-leather-goods-edge-puller-routing.md",
+      "knowledge/raw/49-zipper-symptom-routing.md",
+      "knowledge/raw/50-repair-intake-checklist.md",
+      "knowledge/raw/51-louis-vuitton-core-material-map.md",
+      "knowledge/raw/52-louis-vuitton-men-leather-family-map.md",
+      "knowledge/raw/53-coach-material-and-product-eligibility-map.md",
+      "knowledge/raw/54-chanel-material-and-care-map.md",
+      "knowledge/raw/55-loewe-material-and-aftercare-map.md",
+      "knowledge/raw/56-longchamp-line-material-map.md",
+      "knowledge/raw/57-chanel-small-leather-goods-routing.md",
+      "knowledge/raw/58-coach-fabric-cleaner-boundary-card.md",
+      "knowledge/raw/59-louis-vuitton-material-choice-routing.md",
+      "knowledge/raw/60-brand-material-routing-index.md"
     ],
     "checklist_path": "knowledge/generated/manifests/bailian-import-checklist.md",
     "avoid_bundle_path": "knowledge/generated/docs_kb_bundle.md",

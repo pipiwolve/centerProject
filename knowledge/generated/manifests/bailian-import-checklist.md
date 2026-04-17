@@ -4,7 +4,7 @@
 - 运行时检索模式: 本地 LangChain 检索
 - 百炼角色: 云端知识库归档与答辩展示
 - 上传策略: 手动上传独立 Markdown 文件
-- 建议上传数量: 39
+- 建议上传数量: 60
 - 不建议上传的合并包: knowledge/generated/docs_kb_bundle.md
 
 ## 上传步骤
@@ -51,10 +51,31 @@
 - knowledge/raw/33-protector-repellent-matrix.md | 防护喷雾与防水剂矩阵：哪些材质可以考虑，哪些材质不应默认上
 - knowledge/raw/34-banned-household-chemicals.md | 高风险家用化学品黑名单：云 RAG 不应轻易推荐的东西
 - knowledge/raw/35-query-synonym-map.md | 检索同义词与品牌材质映射：面向云 RAG 的问法扩展卡
+- knowledge/raw/36-hardware-contact-darkening-routing.md | 五金接触位附近发黑、发暗与局部异色：高风险分流卡
+- knowledge/raw/37-opening-sagging-base-panel-routing.md | 包口塌陷、底部支撑异常与轮廓外扩：形态维护 vs 结构异常分流
+- knowledge/raw/38-lining-odor-vs-mold-routing.md | 内衬异味、闷味与霉点分流：先区分受潮残留还是疑似霉变
+- knowledge/raw/39-luxury-brand-material-term-map.md | 奢侈品牌材质术语映射卡：官方命名到基础材质的归类
+- knowledge/raw/40-hardware-finish-cleaning-boundary.md | 五金 finish 清洁边界卡：能做什么、不能做什么、何时只剩维修路径
 - knowledge/raw/41-send-repair-threshold-natural-light-leather.md | 送修阈值卡：天然浅色皮、植鞣革与本色皮什么时候不要再自己处理
 - knowledge/raw/42-send-repair-threshold-color-transfer-finish.md | 送修阈值卡：染色、串色、finish 改变后什么时候必须停手
 - knowledge/raw/43-send-repair-threshold-structure-hardware.md | 送修阈值卡：结构、五金、拉链、手柄与角位问题
 - knowledge/raw/44-send-repair-threshold-moisture-mold-odor.md | 送修阈值卡：潮湿、异味、霉变与反复返潮
+- knowledge/raw/45-locks-snaps-turnlock-routing.md | 转锁、磁扣、按扣与闭合件异常：清洁问题还是功能件维修问题
+- knowledge/raw/46-handle-root-anchor-cracking.md | 手柄根部、肩带挂点与受力连接位开裂：高优先级维修分流卡
+- knowledge/raw/47-canvas-trim-cross-contamination.md | 帆布区与皮边区交叉误清洁：复合材质包袋的分区处理卡
+- knowledge/raw/48-small-leather-goods-edge-puller-routing.md | 小皮件边缘、卡槽口与拉片损伤：钱包、卡包、拉链小件维修路由卡
+- knowledge/raw/49-zipper-symptom-routing.md | 拉链问题分流卡：只是脏、需要润滑，还是已经进入换件维修
+- knowledge/raw/50-repair-intake-checklist.md | 送修前检查清单：拍什么、带什么、如何描述问题
+- knowledge/raw/51-louis-vuitton-core-material-map.md | Louis Vuitton 核心材质映射卡：从官方材质名到护理路线
+- knowledge/raw/52-louis-vuitton-men-leather-family-map.md | Louis Vuitton 男士常见皮革族群映射卡：Taiga、Taigarama、Monogram Shadow、Taurillon、Aerogram
+- knowledge/raw/53-coach-material-and-product-eligibility-map.md | Coach 材质与产品适配映射卡：哪些 leather 可以用 Cleaner，哪些不能
+- knowledge/raw/54-chanel-material-and-care-map.md | CHANEL 材质与护理边界映射卡：手袋与小皮件共用规则
+- knowledge/raw/55-loewe-material-and-aftercare-map.md | LOEWE 材质与售后映射卡：从产品页材质名到护理与 after-sales
+- knowledge/raw/56-longchamp-line-material-map.md | Longchamp 系列材质映射卡：Le Pliage Original 与 Energy 的护理差异
+- knowledge/raw/57-chanel-small-leather-goods-routing.md | CHANEL 小皮件护理路由卡：wallet、card holder、SLG 的高频边界
+- knowledge/raw/58-coach-fabric-cleaner-boundary-card.md | Coach Fabric Cleaner 边界卡：什么能用，什么绝对不能用
+- knowledge/raw/59-louis-vuitton-material-choice-routing.md | Louis Vuitton 材质选择分流卡：同样是钱包或包袋，不同材质怎么先判风险
+- knowledge/raw/60-brand-material-routing-index.md | 品牌材质路由索引卡：生产端问答的第一层入口
 
 ## 说明
 

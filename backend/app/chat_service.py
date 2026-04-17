@@ -18,7 +18,7 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 
 from .config import AppConfig
 from .retriever import LocalKnowledgeIndex
-from .utils import excerpt_text
+from .utils import build_step_markdown, clean_runtime_markdown, excerpt_text
 
 try:  # pragma: no cover - depends on optional cloud credentials
     from langchain_community.chat_models import ChatTongyi
@@ -237,9 +237,7 @@ class LeatherChatService:
         if faq_doc:
             return self._normalize_answer_block(faq_doc.page_content, docs)
 
-        merged_context = "\n".join(f"- {doc.metadata.get('title', '')}: {excerpt_text(doc.page_content, 220)}" for doc in docs[:3])
-        if not merged_context:
-            merged_context = "当前本地知识库中未找到足够资料，建议补充更具体的材质、颜色和受损情况。"
+        steps = self._build_step_section(docs)
 
         return "\n".join(
             [
@@ -250,7 +248,7 @@ class LeatherChatService:
                 "建议准备软布、中性清洁用品、对应材质护理剂，以及用于测试的小面积试擦区域。",
                 "",
                 "### 操作步骤",
-                merged_context,
+                steps,
                 "",
                 "### 注意事项",
                 "先做小范围测试，避免暴晒、强溶剂和高温加热；若材质无法确认，不要直接上油或补色。",
@@ -297,13 +295,13 @@ class LeatherChatService:
                 "以下方案适用于当前命中的典型场景，如皮面已经破损见底、染色扩散或霉变严重，请优先送修。",
                 "",
                 "### 所需工具",
-                tools or "请准备软布、对应材质专用护理用品和小范围测试工具。",
+                clean_runtime_markdown(tools) or "请准备软布、对应材质专用护理用品和小范围测试工具。",
                 "",
                 "### 操作步骤",
-                steps,
+                build_step_markdown(steps),
                 "",
                 "### 注意事项",
-                warnings,
+                clean_runtime_markdown(warnings),
                 "",
                 "### 何时送修",
                 "若处理后掉色加重、皮面起壳、结构松散或反复发霉，应停止继续操作并送修。",
@@ -319,24 +317,50 @@ class LeatherChatService:
         for title, body in pattern.findall(answer):
             normalized_title = title.strip()
             if normalized_title in sections:
-                sections[normalized_title] = body.strip()
+                cleaned_body = clean_runtime_markdown(body)
+                sections[normalized_title] = (
+                    build_step_markdown(cleaned_body)
+                    if normalized_title == "操作步骤"
+                    else cleaned_body
+                )
 
         if not any(sections.values()):
             sections["适用判断"] = "请结合命中的资料判断材质和受损范围，再执行护理步骤。"
-            sections["操作步骤"] = answer.strip()
+            sections["操作步骤"] = self._build_step_section(docs)
+            sections["参考来源"] = "\n".join(
+                f"- {doc.metadata.get('title', '')} / {doc.metadata.get('source_path', '')}"
+                for doc in docs[:3]
+            )
+
+        if not sections["操作步骤"]:
+            sections["操作步骤"] = self._build_step_section(docs)
+
+        if not sections["参考来源"]:
             sections["参考来源"] = "\n".join(
                 f"- {doc.metadata.get('title', '')} / {doc.metadata.get('source_path', '')}"
                 for doc in docs[:3]
             )
         return sections
 
+    def _build_step_section(self, docs: list[Document]) -> str:
+        for doc in docs:
+            step_markdown = build_step_markdown(doc.page_content)
+            if step_markdown:
+                return step_markdown
+        return "1. 先确认材质、受损范围和是否需要送修。\n2. 在不显眼处小范围测试后，再逐步处理。"
+
     def _document_to_source(self, document: Document) -> dict[str, Any]:
+        title = document.metadata.get("title", "未命名资料")
+        content = clean_runtime_markdown(document.page_content, title=title, strip_title=True)
+        preview = excerpt_text(content, 180)
         return {
-            "title": document.metadata.get("title", "未命名资料"),
+            "title": title,
             "source_type": document.metadata.get("source_type", "docs"),
             "source_path": document.metadata.get("source_path", ""),
             "score": document.metadata.get("score", 0.0),
-            "excerpt": excerpt_text(document.page_content, 180),
+            "preview": preview,
+            "content": content,
+            "excerpt": preview,
             "materials": document.metadata.get("materials", []),
             "damage_types": document.metadata.get("damage_types", []),
         }

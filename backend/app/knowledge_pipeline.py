@@ -12,8 +12,10 @@ from .bailian import BailianSyncClient
 from .config import AppConfig
 from .types import EvalCase, FaqEntry, IngestReport, KnowledgeChunk, SourceDocument
 from .utils import (
+    build_step_markdown,
     chunked_paragraphs,
     clean_text,
+    clean_runtime_markdown,
     excerpt_text,
     md5_file,
     sha256_text,
@@ -142,18 +144,7 @@ class KnowledgePipeline:
         return path.stem.replace("-", " ").replace("_", " ")
 
     def _normalize_source(self, source: SourceDocument) -> SourceDocument:
-        frontmatter_lines = [
-            f"# {source.title}",
-            "",
-            f"- source_path: {source.source_path}",
-            f"- material: {', '.join(source.metadata.get('materials', [])) or '未标注'}",
-            f"- damage_type: {', '.join(source.metadata.get('damage_types', [])) or '未标注'}",
-            f"- risk_level: {source.metadata.get('risk_level', 'low')}",
-            "",
-            source.content,
-            "",
-        ]
-        normalized_content = "\n".join(frontmatter_lines)
+        normalized_content = clean_runtime_markdown(source.content)
         normalized_source = SourceDocument(
             source_id=source.source_id,
             source_path=source.source_path,
@@ -183,7 +174,7 @@ class KnowledgePipeline:
                     source_id=source.source_id,
                     title=source.title,
                     content=paragraph_block,
-                    excerpt=excerpt_text(paragraph_block),
+                    excerpt=excerpt_text(paragraph_block, title=source.title, strip_title=True),
                     metadata=chunk_metadata,
                 )
                 chunk_path = self.config.chunks_dir / f"{chunk_id}.md"
@@ -336,6 +327,7 @@ class KnowledgePipeline:
     def _chunk_to_answer(self, chunk: KnowledgeChunk) -> str:
         materials = ", ".join(chunk.metadata.get("materials", []) or ["皮具"])
         damages = ", ".join(chunk.metadata.get("damage_types", []) or ["常见问题"])
+        step_content = build_step_markdown(chunk.content)
         return "\n".join(
             [
                 "### 适用判断",
@@ -345,7 +337,7 @@ class KnowledgePipeline:
                 "请根据材料准备软布、中性清洁用品、护理油或专用喷剂，并避免强溶剂。",
                 "",
                 "### 操作步骤",
-                chunk.excerpt,
+                step_content,
                 "",
                 "### 注意事项",
                 f"风险等级：{chunk.metadata.get('risk_level', 'low')}。先在不显眼处测试，再小范围处理。",

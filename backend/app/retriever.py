@@ -6,7 +6,7 @@ from typing import Any
 from langchain_core.documents import Document
 
 from .config import AppConfig
-from .utils import excerpt_text, read_jsonl, tokenize_search_text
+from .utils import clean_runtime_markdown, excerpt_text, read_jsonl, tokenize_search_text
 
 
 class LocalKnowledgeIndex:
@@ -20,15 +20,17 @@ class LocalKnowledgeIndex:
         scored: list[tuple[float, dict[str, Any]]] = []
 
         for faq in self._cache["faq"]:
-            text = f"{faq['question']} {faq['answer']}"
+            answer_text = clean_runtime_markdown(faq.get("answer", ""))
+            text = f"{faq['question']} {answer_text}"
             score = self._score_text(text, query_tokens)
             if score > 0:
-                scored.append((score + 0.25, {**faq, "source_type": "faq"}))
+                scored.append((score + 0.25, {**faq, "answer": answer_text, "source_type": "faq"}))
 
         for chunk in self._cache["chunks"]:
-            score = self._score_text(chunk["content"], query_tokens)
+            runtime_content = clean_runtime_markdown(chunk.get("content", ""))
+            score = self._score_text(runtime_content, query_tokens)
             if score > 0:
-                scored.append((score, {**chunk, "source_type": "docs"}))
+                scored.append((score, {**chunk, "content": runtime_content, "source_type": "docs"}))
 
         scored.sort(key=lambda item: item[0], reverse=True)
         documents: list[Document] = []
@@ -39,7 +41,7 @@ class LocalKnowledgeIndex:
                 "title": item.get("title", ""),
                 "source_id": item.get("source_id", ""),
                 "source_type": item.get("source_type", "docs"),
-                "excerpt": excerpt_text(page_content),
+                "excerpt": excerpt_text(page_content, title=item.get("title", ""), strip_title=True),
                 **item.get("metadata", {}),
             }
             documents.append(Document(page_content=page_content, metadata=metadata))

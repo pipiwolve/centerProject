@@ -28,6 +28,30 @@
 
 - line + material structure -> `56-longchamp-line-material-map.md`
 
+## Dior
+
+- material + care service map -> `61-dior-material-and-care-service-map.md`
+- line-name routing -> `62-dior-line-name-routing.md`
+
+## Saint Laurent
+
+- material + care map -> `63-saint-laurent-material-and-care-map.md`
+- line-name routing -> `64-saint-laurent-line-name-routing.md`
+
+## Prada
+
+- material + maintenance map -> `65-prada-material-and-maintenance-map.md`
+- line-name routing -> `66-prada-line-name-routing.md`
+
+## Goyard
+
+- material + care map -> `67-goyard-material-and-care-map.md`
+- line-name routing -> `68-goyard-line-name-routing.md`
+
+## 产品线名索引
+
+- cross-brand line-name routing -> `72-product-line-name-routing-index.md`
+
 ## 什么时候优先召回这张索引卡
 
 - 用户提到的是品牌官方材质名，而不是通用材质词。
@@ -43,6 +67,7 @@
 
 - 材质不明 -> `35-query-synonym-map.md`
 - 产品名/材质名已知 -> 本索引卡
+- 只给系列名 / line name -> `72-product-line-name-routing-index.md`
 - 症状清晰 -> 对应场景卡
 - 功能件异常 -> `43` `45` `49`
 - 准备送修 -> `50`

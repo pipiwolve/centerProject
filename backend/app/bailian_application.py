@@ -290,6 +290,12 @@ class BailianApplicationService:
                     break
 
             if content:
+                embedded_payload = self._try_parse_payload_blob(content)
+                if embedded_payload is not None:
+                    walk(embedded_payload)
+                    content = ""
+
+            if content:
                 score_raw = node.get("score") or node.get("similarity") or node.get("relevance_score") or 0.0
                 try:
                     score = float(score_raw)
@@ -335,6 +341,25 @@ class BailianApplicationService:
 
     def _normalize_text(self, value: str) -> str:
         return re.sub(r"\s+", " ", str(value or "")).strip().lower()
+
+    def _try_parse_payload_blob(self, value: str) -> Any | None:
+        raw = str(value or "").strip()
+        if not raw:
+            return None
+
+        looks_like_blob = (
+            (raw.startswith("{") and raw.endswith("}"))
+            or (raw.startswith("[") and raw.endswith("]"))
+            or ('"nodes"' in raw and '"metadata"' in raw)
+            or ('"status_code"' in raw and '"code"' in raw)
+        )
+        if not looks_like_blob:
+            return None
+
+        try:
+            return json.loads(raw)
+        except Exception:
+            return None
 
     def _normalize_page_numbers(self, value: Any) -> list[int]:
         if isinstance(value, int):

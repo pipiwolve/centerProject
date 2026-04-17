@@ -4,7 +4,7 @@
 - 运行时检索模式: 本地 LangChain 检索
 - 百炼角色: 云端知识库归档与答辩展示
 - 上传策略: 手动上传独立 Markdown 文件
-- 建议上传数量: 60
+- 建议上传数量: 72
 - 不建议上传的合并包: knowledge/generated/docs_kb_bundle.md
 
 ## 上传步骤
@@ -76,6 +76,18 @@
 - knowledge/raw/58-coach-fabric-cleaner-boundary-card.md | Coach Fabric Cleaner 边界卡：什么能用，什么绝对不能用
 - knowledge/raw/59-louis-vuitton-material-choice-routing.md | Louis Vuitton 材质选择分流卡：同样是钱包或包袋，不同材质怎么先判风险
 - knowledge/raw/60-brand-material-routing-index.md | 品牌材质路由索引卡：生产端问答的第一层入口
+- knowledge/raw/61-dior-material-and-care-service-map.md | Dior 材质与 Care Service 映射卡：从官方 line page 词汇到护理路线
+- knowledge/raw/62-dior-line-name-routing.md | Dior 系列名分流卡：Lady Dior、Saddle、Dior Book Tote 不能直接当成单一材质
+- knowledge/raw/63-saint-laurent-material-and-care-map.md | Saint Laurent 材质与护理边界映射卡：从 grain de poudre 到 lambskin 的正确分流
+- knowledge/raw/64-saint-laurent-line-name-routing.md | Saint Laurent 系列名分流卡：Kate、Sac de Jour、Loulou、Le 5 à 7 先判材质再给方案
+- knowledge/raw/65-prada-material-and-maintenance-map.md | Prada 材质与维护边界映射卡：Saffiano、Re-Nylon、brushed leather 的分流规则
+- knowledge/raw/66-prada-line-name-routing.md | Prada 系列名分流卡：Galleria、Re-Edition、Re-Nylon 先拆材质再处理
+- knowledge/raw/67-goyard-material-and-care-map.md | Goyard 材质与护理边界映射卡：Goyardine、Chevroches、Clamecy、Decize Taurillon
+- knowledge/raw/68-goyard-line-name-routing.md | Goyard 系列名分流卡：Saint Louis、Artois、Anjou、Belvedere、Sénat
+- knowledge/raw/69-card-slot-stretching-and-warp-routing.md | 卡槽松弛、口沿外翻与“只是磨合”分流卡：小皮件过塞还是结构损伤
+- knowledge/raw/70-slg-flap-edge-curling-glazing-lift.md | 小皮件翻盖翘边、口沿卷曲与边油起翘分流卡：变形还是 edge finish 失效
+- knowledge/raw/71-corner-piping-vs-rolled-edge-wear-routing.md | 角位包边、滚边与 piping 外露分流卡：只是磨边还是已经进了结构层
+- knowledge/raw/72-product-line-name-routing-index.md | 产品线名路由索引卡（二）：Dior / Saint Laurent / Prada / Goyard
 
 ## 说明
 

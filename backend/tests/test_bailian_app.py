@@ -1,5 +1,6 @@
 import sys
 from http import HTTPStatus
+import json
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -144,6 +145,51 @@ def test_bailian_application_handles_real_dashscope_objects() -> None:
     assert result.sources[0]["title"] == "植鞣革手柄发黑"
     assert result.sources[0]["doc_name"] == "15-vegetable-tanned-handle-darkening-patina.md"
     assert result.sources[0]["retrieval_chunks"] == ["植鞣革常因手汗和油脂氧化发黑，先干刷除尘再做清洁。"]
+
+
+def test_bailian_application_unwraps_embedded_json_payloads_in_observation() -> None:
+    config = build_config()
+    service = BailianApplicationService(config)
+    embedded_payload = json.dumps(
+        {
+            "rerank": "qwen3-rerank",
+            "status_code": 200,
+            "nodes": [
+                {
+                    "title": "植鞣革手柄发黑",
+                    "doc_name": "01-vegetable-tanned-care",
+                    "doc_url": "https://example.com/doc-veg",
+                    "score": 0.96,
+                    "text": "植鞣革手柄发黑通常与手汗、汗渍或油脂氧化有关，先干刷除尘再小范围清洁。",
+                }
+            ],
+        },
+        ensure_ascii=False,
+    )
+
+    class MockApplication:
+        @staticmethod
+        def call(**_: object) -> MockPayload:
+            return MockPayload(
+                status_code=HTTPStatus.OK,
+                output=MockPayload(
+                    text="植鞣革手柄发黑需要先温和除尘。",
+                    session_id="session-json-payload",
+                    doc_references=[],
+                    thoughts=[MockPayload(observation=[{"content": embedded_payload}])],
+                ),
+            )
+
+    original_application = bailian_module.Application
+    bailian_module.Application = MockApplication
+    try:
+        result = service.call("植鞣革手柄发黑了怎么清理？", "session-json-payload")
+    finally:
+        bailian_module.Application = original_application
+
+    assert result.sources
+    assert result.sources[0]["content"].startswith("植鞣革手柄发黑通常与手汗")
+    assert not result.sources[0]["content"].startswith('{"rerank"')
 
 
 def test_chat_route_returns_friendly_error_when_app_id_missing() -> None:

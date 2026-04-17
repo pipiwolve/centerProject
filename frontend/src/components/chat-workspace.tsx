@@ -213,13 +213,13 @@ function RichText({
   const nodes = parseRichText(content);
 
   return (
-    <div className="space-y-3">
+    <div className="min-w-0 space-y-3">
       {nodes.map((node, index) => {
         if (node.type === "heading") {
           return (
             <p
               key={`heading-${index}`}
-              className="text-sm font-semibold tracking-[-0.01em] text-[color:var(--ink-strong)]"
+              className="break-words [overflow-wrap:anywhere] text-sm font-semibold tracking-[-0.01em] text-[color:var(--ink-strong)]"
             >
               {node.text}
             </p>
@@ -234,7 +234,9 @@ function RichText({
                   <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[rgba(181,122,51,0.12)] text-xs font-semibold text-[color:var(--accent)]">
                     {itemIndex + 1}
                   </span>
-                  <span className={`text-[color:var(--ink-soft)] ${compact ? "text-sm leading-7" : "text-base leading-8"}`}>
+                  <span
+                    className={`min-w-0 break-words [overflow-wrap:anywhere] text-[color:var(--ink-soft)] ${compact ? "text-sm leading-7" : "text-base leading-8"}`}
+                  >
                     {item}
                   </span>
                 </li>
@@ -249,7 +251,9 @@ function RichText({
               {node.items.map((item, itemIndex) => (
                 <li key={`${item}-${itemIndex}`} className="flex gap-3">
                   <span className="mt-2 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                  <span className={`text-[color:var(--ink-soft)] ${compact ? "text-sm leading-7" : "text-base leading-8"}`}>
+                  <span
+                    className={`min-w-0 break-words [overflow-wrap:anywhere] text-[color:var(--ink-soft)] ${compact ? "text-sm leading-7" : "text-base leading-8"}`}
+                  >
                     {item}
                   </span>
                 </li>
@@ -261,7 +265,7 @@ function RichText({
         return (
           <p
             key={`paragraph-${index}`}
-            className={`whitespace-pre-wrap text-[color:var(--ink-soft)] ${compact ? "text-sm leading-7" : "text-base leading-8"}`}
+            className={`whitespace-pre-wrap break-words [overflow-wrap:anywhere] text-[color:var(--ink-soft)] ${compact ? "text-sm leading-7" : "text-base leading-8"}`}
           >
             {node.text}
           </p>
@@ -291,20 +295,24 @@ function SourceCard({
   const panelId = `source-panel-${sourceKey.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 
   return (
-    <article className="rounded-[1.5rem] border border-[color:var(--border-soft)] bg-[color:var(--surface)] p-4 shadow-[0_14px_30px_rgba(17,37,78,0.04)] transition-shadow duration-200 hover:shadow-[0_18px_36px_rgba(17,37,78,0.07)]">
+    <article className="min-w-0 overflow-hidden rounded-[1.5rem] border border-[color:var(--border-soft)] bg-[color:var(--surface)] p-4 shadow-[0_14px_30px_rgba(17,37,78,0.04)] transition-shadow duration-200 hover:shadow-[0_18px_36px_rgba(17,37,78,0.07)]">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-sm font-semibold text-[color:var(--ink-strong)]">{source.title}</p>
+        <div className="min-w-0">
+          <p className="break-words [overflow-wrap:anywhere] text-sm font-semibold text-[color:var(--ink-strong)]">
+            {source.title}
+          </p>
           <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[color:var(--ink-soft)]">
             {(source.citation_label ? `${source.citation_label} · ` : "") + formatSourceType(source.source_type)}
           </p>
         </div>
-        <span className="rounded-full border border-[color:var(--border-soft)] px-2 py-1 text-xs text-[color:var(--ink-soft)]">
+        <span className="max-w-[11rem] shrink-0 break-words [overflow-wrap:anywhere] rounded-full border border-[color:var(--border-soft)] px-2 py-1 text-xs text-[color:var(--ink-soft)]">
           {source.hit_type === "chunk" ? "真实切片" : source.doc_name || source.materials?.[0] || "护理依据"}
         </span>
       </div>
 
-      <p className="mt-3 text-sm leading-7 text-[color:var(--ink-soft)]">{preview}</p>
+      <p className="mt-3 break-words [overflow-wrap:anywhere] text-sm leading-7 text-[color:var(--ink-soft)]">
+        {preview}
+      </p>
 
       {source.source_uri ? (
         <p className="mt-3 break-all text-xs leading-6 text-[color:var(--ink-soft)]">
@@ -365,7 +373,7 @@ function SourceCard({
             className={`overflow-hidden transition-[max-height,opacity,margin] duration-300 ${expanded ? "mt-4 max-h-[28rem] opacity-100" : "mt-0 max-h-0 opacity-0"}`}
           >
             <div className="rounded-[1.2rem] border border-[color:var(--border-soft)] bg-white/65 p-4">
-              <div className="max-h-[22rem] overflow-y-auto pr-2">
+              <div className="max-h-[22rem] overflow-x-hidden overflow-y-auto pr-2">
                 {retrievalChunks.length > 0 ? (
                   <div className="space-y-4">
                     <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--accent)]">
@@ -487,7 +495,7 @@ export function ChatWorkspace() {
 
   return (
     <section className="mx-auto grid w-[min(96%,1280px)] gap-6 lg:grid-cols-[1.34fr_0.82fr]">
-      <div className="space-y-6">
+      <div className="min-w-0 space-y-6">
         <section className="relative overflow-hidden rounded-[2.5rem] border border-[color:var(--border-soft)] bg-[color:var(--surface-elevated)] p-6 shadow-[0_30px_70px_rgba(17,37,78,0.08)] sm:p-8 lg:p-10">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(181,122,51,0.10),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(3,105,161,0.10),_transparent_28%)]" />
 
@@ -720,7 +728,7 @@ export function ChatWorkspace() {
         </section>
       </div>
 
-      <aside className="space-y-6">
+      <aside className="min-w-0 space-y-6">
         <section className="rounded-[2.25rem] border border-[color:var(--border-soft)] bg-[color:var(--surface-elevated)] p-6 shadow-[0_25px_60px_rgba(17,37,78,0.06)]">
           <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--accent)]">问题摘要</p>
           <h2 className="mt-3 font-serif text-3xl tracking-[-0.05em] text-[color:var(--ink-strong)]">

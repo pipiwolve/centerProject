@@ -103,6 +103,97 @@
 - 路由到：翻毛皮 / 绒面革
 - 常见风险：液体、油污、链条压痕
 
+## Dior
+
+### Cannage Lambskin
+
+- 路由到：小羊皮 / 绗缝 delicate leather
+- 典型问题：轻痕、压痕、色迁移
+- 关联知识：
+  - `18-lambskin-surface-marks.md`
+  - `61-dior-material-and-care-service-map.md`
+
+### Grained Calfskin / Ultramatte Calfskin / Macrocannage Calfskin
+
+- 路由到：粒面或有表面效果的成革
+- 典型问题：轻污、边角磨损、错误清洁后的 finish 失衡
+
+### Dior Oblique Embroidery / Jacquard / Denim Embroidery
+
+- 路由到：刺绣 / jacquard / textile
+- 典型问题：起毛、局部污渍、与皮边交界处交叉污染
+- 关联知识：
+  - `47-canvas-trim-cross-contamination.md`
+  - `61-dior-material-and-care-service-map.md`
+
+## Saint Laurent
+
+### Grain de Poudre Embossed Leather
+
+- 路由到：压纹成革 / embossed finished leather
+- 典型问题：纹理高点失衡、边角失光、错误上油
+
+### Smooth Leather / Grained Leather
+
+- 路由到：光面或粒面成革
+- 典型问题：擦痕、色迁移、边角磨损
+
+### Lambskin / Matelasse Lambskin
+
+- 路由到：小羊皮
+- 典型问题：压痕、轻痕、表面敏感
+- 关联知识：
+  - `18-lambskin-surface-marks.md`
+  - `63-saint-laurent-material-and-care-map.md`
+
+### Patent Leather / Crocodile-Embossed Patent Leather
+
+- 路由到：漆皮 / 高光压纹成革
+- 典型问题：色迁移、发黏、表面高光不均
+- 关联知识：
+  - `19-patent-leather-color-transfer.md`
+  - `63-saint-laurent-material-and-care-map.md`
+
+## Prada
+
+### Saffiano Leather
+
+- 路由到：压纹成革 / structured finished leather
+- 典型问题：边角磨亮、压纹区失衡、错误上油
+
+### Brushed Leather
+
+- 路由到：抛光 / brushed finished leather
+- 典型问题：擦痕、高光不均、表面压痕
+
+### Re-Nylon
+
+- 路由到：尼龙 / technical textile
+- 典型问题：纤维污渍、与皮边交界污染、结构性内里脏污
+- 关联知识：
+  - `38-lining-odor-vs-mold-routing.md`
+  - `65-prada-material-and-maintenance-map.md`
+
+## Goyard
+
+### Goyardine Canvas
+
+- 路由到：涂层帆布 / coated cloth
+- 典型问题：Chevron 图案磨花、与皮边交界处交叉污染
+- 关联知识：
+  - `21-coated-canvas-cleaning-near-trim.md`
+  - `67-goyard-material-and-care-map.md`
+
+### Chevroches Calfskin / Decize Taurillon Leather
+
+- 路由到：粒面皮革 / leather trim family
+- 典型问题：提手磨损、角位受力、边油损伤
+
+### Clamecy Calfskin
+
+- 路由到：光面皮 / smooth leather
+- 典型问题：patina、水接触、油基产品接触
+
 ## 使用规则
 
 1. 品牌术语优先映射到“基础材质类别”，再进入场景卡。
@@ -127,3 +218,15 @@
   https://www.loewe.com/usa/en/women/amazona-31-cropped-bag-in-classic-calfskin/A039N31X05-0120.html  
   https://www.loewe.com/usa/en/women/bags/amazona/amazona-23-bag-in-soft-grained-calfskin/A039N07X02-9567.html  
   https://www.loewe.com/usa/en/women/bags/small-puzzle-bag-in-classic-calfskin-and-suede/A510S21XCF-1100.html
+
+- Dior, Lady Dior bags  
+  https://www.dior.com/en_us/fashion/womens-fashion/bags/lady-dior
+
+- Saint Laurent, FAQ  
+  https://www.ysl.com/en-us/displayname-faq
+
+- Prada, Maintenance and Repairs FAQ  
+  https://www.prada.com/us/en/info/faqs/maintenance-and-repairs.html
+
+- Maison Goyard, Taking care of your Goyard  
+  https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/

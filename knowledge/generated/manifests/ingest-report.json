@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-17T06:24:51.339224+00:00",
-  "source_count": 60,
-  "normalized_count": 60,
-  "chunk_count": 164,
-  "faq_count": 38,
+  "generated_at": "2026-04-17T06:32:26.006357+00:00",
+  "source_count": 72,
+  "normalized_count": 72,
+  "chunk_count": 212,
+  "faq_count": 43,
   "eval_count": 12,
   "sources": [
     {
@@ -844,9 +844,9 @@
       "source_id": "39-luxury-brand-material-term-map",
       "source_path": "knowledge/raw/39-luxury-brand-material-term-map.md",
       "title": "奢侈品牌材质术语映射卡：官方命名到基础材质的归类",
-      "content": "# 奢侈品牌材质术语映射卡：官方命名到基础材质的归类\n\n## 资料定位\n\n这是一份为云 RAG 准备的术语映射卡，用来把品牌自己的材质命名路由到更通用的护理类别，减少“看得懂产品页，但接不上护理逻辑”的断层。\n\n## Louis Vuitton\n\n### Natural Leather / Natural Cowhide / Vegetable-Tanned Cowhide\n\n- 路由到：植鞣革 / 本色皮 / vachetta\n- 典型问题：包浆、遇水变深、水痕、易刮伤\n- 关联知识：\n - `15-vegetable-tanned-handle-darkening-patina.md`\n - `16-vegetable-tanned-water-stain-wet-darkening.md`\n\n### Vernis Leather\n\n- 路由到：漆皮 / patent leather\n- 典型问题：染色、黄变、失去镜面感\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Monogram Canvas / Damier Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 典型问题：表层脏污、靠近皮边清洁、印花保护\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n\n## Coach\n\n### Glovetanned / Glovetanned Pebble\n\n- 路由到：柔软光面或压纹成革\n- 典型问题：表面痕、失光、需要正确 cleaner / moisturizer 兼容\n- 说明：Coach 官方把 glovetanned 列入其 leather cleaner 可用范围。\n\n### Natural Calf\n\n- 路由到：浅色天然皮 / natural calf\n- 典型问题：更接近天然浅色成革，需要保守处理\n- 关联知识：\n - `17-smooth-light-leather-color-transfer.md`\n - `41-send-repair-threshold-natural-light-leather.md`\n\n### Signature Coated Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 典型问题：表面脏污与边皮分区清洁\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n\n### Refined Calf / Smooth Calf / Soft Calf / Polished Pebble\n\n- 路由到：光面或轻压纹成革\n- 典型问题：表层染色、轻污、失光、finish 边界\n- 关联知识：\n - `17-smooth-light-leather-color-transfer.md`\n - `32-cleaner-conditioner-compatibility-matrix.md`\n\n## CHANEL\n\n### Lambskin\n\n- 路由到：小羊皮\n- 典型问题：轻痕、链条压痕、色迁移、表面极敏感\n- 关联知识：\n - `18-lambskin-surface-marks.md`\n - `25-chain-pressure-marks-delicate-leather.md`\n\n### Patent Leather\n\n- 路由到：漆皮\n- 典型问题：色迁移、finish 高风险\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Suede / Nubuck\n\n- 路由到：翻毛皮 / nubuck\n- 典型问题：液体敏感、链条压痕敏感、颜色迁移\n- 关联知识：\n - `20-suede-watermark-oil-routing.md`\n - `25-chain-pressure-marks-delicate-leather.md`\n\n## LOEWE\n\n### Classic Calfskin\n\n- 路由到：光面牛皮 / classic calf\n- 常见风险：表层轻污、色迁移、finish 管理\n\n### Soft Grained Calfskin / Supple Grained Calfskin / Fine Grained Calfskin\n\n- 路由到：颗粒或软粒面牛皮\n- 常见风险：形态软化、边角磨损、轻污与失光\n\n### Suede\n\n- 路由到：翻毛皮 / 绒面革\n- 常见风险：液体、油污、链条压痕\n\n## 使用规则\n\n1. 品牌术语优先映射到“基础材质类别”，再进入场景卡。\n2. 一旦映射到 patent / suede / natural leather，就自动提高风险等级。\n3. 如果一个产品同时写了 `canvas + leather trim` 或 `calfskin and suede`，检索时要保留复合材质信息，不能只抓第一项。\n\n## 参考依据\n\n- Louis Vuitton, Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n\n- Coach, Product Care Set\n https://www.coach.com/products/coach-product-care-set/225.html\n\n- Coach, Product Care\n https://www.coach.com/support/product-care\n\n- CHANEL, Bags Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/bags//\n\n- LOEWE official product pages\n https://www.loewe.com/usa/en/women/amazona-31-cropped-bag-in-classic-calfskin/A039N31X05-0120.html\n https://www.loewe.com/usa/en/women/bags/amazona/amazona-23-bag-in-soft-grained-calfskin/A039N07X02-9567.html\n https://www.loewe.com/usa/en/women/bags/small-puzzle-bag-in-classic-calfskin-and-suede/A510S21XCF-1100.html",
+      "content": "# 奢侈品牌材质术语映射卡：官方命名到基础材质的归类\n\n## 资料定位\n\n这是一份为云 RAG 准备的术语映射卡，用来把品牌自己的材质命名路由到更通用的护理类别，减少“看得懂产品页，但接不上护理逻辑”的断层。\n\n## Louis Vuitton\n\n### Natural Leather / Natural Cowhide / Vegetable-Tanned Cowhide\n\n- 路由到：植鞣革 / 本色皮 / vachetta\n- 典型问题：包浆、遇水变深、水痕、易刮伤\n- 关联知识：\n - `15-vegetable-tanned-handle-darkening-patina.md`\n - `16-vegetable-tanned-water-stain-wet-darkening.md`\n\n### Vernis Leather\n\n- 路由到：漆皮 / patent leather\n- 典型问题：染色、黄变、失去镜面感\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Monogram Canvas / Damier Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 典型问题：表层脏污、靠近皮边清洁、印花保护\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n\n## Coach\n\n### Glovetanned / Glovetanned Pebble\n\n- 路由到：柔软光面或压纹成革\n- 典型问题：表面痕、失光、需要正确 cleaner / moisturizer 兼容\n- 说明：Coach 官方把 glovetanned 列入其 leather cleaner 可用范围。\n\n### Natural Calf\n\n- 路由到：浅色天然皮 / natural calf\n- 典型问题：更接近天然浅色成革，需要保守处理\n- 关联知识：\n - `17-smooth-light-leather-color-transfer.md`\n - `41-send-repair-threshold-natural-light-leather.md`\n\n### Signature Coated Canvas\n\n- 路由到：涂层帆布 / coated canvas\n- 典型问题：表面脏污与边皮分区清洁\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n\n### Refined Calf / Smooth Calf / Soft Calf / Polished Pebble\n\n- 路由到：光面或轻压纹成革\n- 典型问题：表层染色、轻污、失光、finish 边界\n- 关联知识：\n - `17-smooth-light-leather-color-transfer.md`\n - `32-cleaner-conditioner-compatibility-matrix.md`\n\n## CHANEL\n\n### Lambskin\n\n- 路由到：小羊皮\n- 典型问题：轻痕、链条压痕、色迁移、表面极敏感\n- 关联知识：\n - `18-lambskin-surface-marks.md`\n - `25-chain-pressure-marks-delicate-leather.md`\n\n### Patent Leather\n\n- 路由到：漆皮\n- 典型问题：色迁移、finish 高风险\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `26-patent-leather-yellowing-aging.md`\n\n### Suede / Nubuck\n\n- 路由到：翻毛皮 / nubuck\n- 典型问题：液体敏感、链条压痕敏感、颜色迁移\n- 关联知识：\n - `20-suede-watermark-oil-routing.md`\n - `25-chain-pressure-marks-delicate-leather.md`\n\n## LOEWE\n\n### Classic Calfskin\n\n- 路由到：光面牛皮 / classic calf\n- 常见风险：表层轻污、色迁移、finish 管理\n\n### Soft Grained Calfskin / Supple Grained Calfskin / Fine Grained Calfskin\n\n- 路由到：颗粒或软粒面牛皮\n- 常见风险：形态软化、边角磨损、轻污与失光\n\n### Suede\n\n- 路由到：翻毛皮 / 绒面革\n- 常见风险：液体、油污、链条压痕\n\n## Dior\n\n### Cannage Lambskin\n\n- 路由到：小羊皮 / 绗缝 delicate leather\n- 典型问题：轻痕、压痕、色迁移\n- 关联知识：\n - `18-lambskin-surface-marks.md`\n - `61-dior-material-and-care-service-map.md`\n\n### Grained Calfskin / Ultramatte Calfskin / Macrocannage Calfskin\n\n- 路由到：粒面或有表面效果的成革\n- 典型问题：轻污、边角磨损、错误清洁后的 finish 失衡\n\n### Dior Oblique Embroidery / Jacquard / Denim Embroidery\n\n- 路由到：刺绣 / jacquard / textile\n- 典型问题：起毛、局部污渍、与皮边交界处交叉污染\n- 关联知识：\n - `47-canvas-trim-cross-contamination.md`\n - `61-dior-material-and-care-service-map.md`\n\n## Saint Laurent\n\n### Grain de Poudre Embossed Leather\n\n- 路由到：压纹成革 / embossed finished leather\n- 典型问题：纹理高点失衡、边角失光、错误上油\n\n### Smooth Leather / Grained Leather\n\n- 路由到：光面或粒面成革\n- 典型问题：擦痕、色迁移、边角磨损\n\n### Lambskin / Matelasse Lambskin\n\n- 路由到：小羊皮\n- 典型问题：压痕、轻痕、表面敏感\n- 关联知识：\n - `18-lambskin-surface-marks.md`\n - `63-saint-laurent-material-and-care-map.md`\n\n### Patent Leather / Crocodile-Embossed Patent Leather\n\n- 路由到：漆皮 / 高光压纹成革\n- 典型问题：色迁移、发黏、表面高光不均\n- 关联知识：\n - `19-patent-leather-color-transfer.md`\n - `63-saint-laurent-material-and-care-map.md`\n\n## Prada\n\n### Saffiano Leather\n\n- 路由到：压纹成革 / structured finished leather\n- 典型问题：边角磨亮、压纹区失衡、错误上油\n\n### Brushed Leather\n\n- 路由到：抛光 / brushed finished leather\n- 典型问题：擦痕、高光不均、表面压痕\n\n### Re-Nylon\n\n- 路由到：尼龙 / technical textile\n- 典型问题：纤维污渍、与皮边交界污染、结构性内里脏污\n- 关联知识：\n - `38-lining-odor-vs-mold-routing.md`\n - `65-prada-material-and-maintenance-map.md`\n\n## Goyard\n\n### Goyardine Canvas\n\n- 路由到：涂层帆布 / coated cloth\n- 典型问题：Chevron 图案磨花、与皮边交界处交叉污染\n- 关联知识：\n - `21-coated-canvas-cleaning-near-trim.md`\n - `67-goyard-material-and-care-map.md`\n\n### Chevroches Calfskin / Decize Taurillon Leather\n\n- 路由到：粒面皮革 / leather trim family\n- 典型问题：提手磨损、角位受力、边油损伤\n\n### Clamecy Calfskin\n\n- 路由到：光面皮 / smooth leather\n- 典型问题：patina、水接触、油基产品接触\n\n## 使用规则\n\n1. 品牌术语优先映射到“基础材质类别”，再进入场景卡。\n2. 一旦映射到 patent / suede / natural leather，就自动提高风险等级。\n3. 如果一个产品同时写了 `canvas + leather trim` 或 `calfskin and suede`，检索时要保留复合材质信息，不能只抓第一项。\n\n## 参考依据\n\n- Louis Vuitton, Leather Goods Product Care\n https://us.louisvuitton.com/eng-us/faq/services/leather-goods-product-care\n\n- Coach, Product Care Set\n https://www.coach.com/products/coach-product-care-set/225.html\n\n- Coach, Product Care\n https://www.coach.com/support/product-care\n\n- CHANEL, Bags Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/bags//\n\n- LOEWE official product pages\n https://www.loewe.com/usa/en/women/amazona-31-cropped-bag-in-classic-calfskin/A039N31X05-0120.html\n https://www.loewe.com/usa/en/women/bags/amazona/amazona-23-bag-in-soft-grained-calfskin/A039N07X02-9567.html\n https://www.loewe.com/usa/en/women/bags/small-puzzle-bag-in-classic-calfskin-and-suede/A510S21XCF-1100.html\n\n- Dior, Lady Dior bags\n https://www.dior.com/en_us/fashion/womens-fashion/bags/lady-dior\n\n- Saint Laurent, FAQ\n https://www.ysl.com/en-us/displayname-faq\n\n- Prada, Maintenance and Repairs FAQ\n https://www.prada.com/us/en/info/faqs/maintenance-and-repairs.html\n\n- Maison Goyard, Taking care of your Goyard\n https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/",
       "kind": "md",
-      "hash_value": "247a52854c3c95f3815232af05c31208",
+      "hash_value": "56b643a0150d5022a2e84413c59ed5ae",
       "metadata": {
         "materials": [
           "植鞣革",
@@ -857,10 +857,12 @@
           "涂层帆布"
         ],
         "damage_types": [
+          "发黑污渍",
           "染色",
-          "磨损破洞"
+          "磨损破洞",
+          "边油开裂"
         ],
-        "risk_level": "low",
+        "risk_level": "medium",
         "source_name": "奢侈品牌材质术语映射卡：官方命名到基础材质的归类",
         "source_file": "39-luxury-brand-material-term-map.md"
       }
@@ -1244,9 +1246,9 @@
       "source_id": "60-brand-material-routing-index",
       "source_path": "knowledge/raw/60-brand-material-routing-index.md",
       "title": "品牌材质路由索引卡：生产端问答的第一层入口",
-      "content": "# 品牌材质路由索引卡：生产端问答的第一层入口\n\n## 资料定位\n\n这是一张总索引卡，不直接提供护理步骤，而是把品牌和材质命名先路由到正确知识族群。适合当云 RAG 的第一层召回桥梁。\n\n## Louis Vuitton\n\n- core material families -> `51-louis-vuitton-core-material-map.md`\n- mens leather families -> `52-louis-vuitton-men-leather-family-map.md`\n- quick routing -> `59-louis-vuitton-material-choice-routing.md`\n\n## Coach\n\n- material + product eligibility -> `53-coach-material-and-product-eligibility-map.md`\n- fabric cleaner boundary -> `58-coach-fabric-cleaner-boundary-card.md`\n\n## CHANEL\n\n- bags + SLG materials -> `54-chanel-material-and-care-map.md`\n- small leather goods routing -> `57-chanel-small-leather-goods-routing.md`\n\n## LOEWE\n\n- material + after-sales map -> `55-loewe-material-and-aftercare-map.md`\n\n## Longchamp\n\n- line + material structure -> `56-longchamp-line-material-map.md`\n\n## 什么时候优先召回这张索引卡\n\n- 用户提到的是品牌官方材质名，而不是通用材质词。\n- 用户只说系列名、产品线名、或混合材质名。\n- 系统需要先判断是 `植鞣革 / 漆皮 / 压纹成革 / coated canvas / 复合材质` 中的哪一类。\n\n## 什么时候不要停在这张卡\n\n- 用户已经描述了清晰症状时，索引卡只做第一层路由。\n- 一旦完成材质映射，应继续进入场景卡、工具矩阵或送修阈值卡。\n\n## 推荐下一跳\n\n- 材质不明 -> `35-query-synonym-map.md`\n- 产品名/材质名已知 -> 本索引卡\n- 症状清晰 -> 对应场景卡\n- 功能件异常 -> `43` `45` `49`\n- 准备送修 -> `50`",
+      "content": "# 品牌材质路由索引卡：生产端问答的第一层入口\n\n## 资料定位\n\n这是一张总索引卡，不直接提供护理步骤，而是把品牌和材质命名先路由到正确知识族群。适合当云 RAG 的第一层召回桥梁。\n\n## Louis Vuitton\n\n- core material families -> `51-louis-vuitton-core-material-map.md`\n- mens leather families -> `52-louis-vuitton-men-leather-family-map.md`\n- quick routing -> `59-louis-vuitton-material-choice-routing.md`\n\n## Coach\n\n- material + product eligibility -> `53-coach-material-and-product-eligibility-map.md`\n- fabric cleaner boundary -> `58-coach-fabric-cleaner-boundary-card.md`\n\n## CHANEL\n\n- bags + SLG materials -> `54-chanel-material-and-care-map.md`\n- small leather goods routing -> `57-chanel-small-leather-goods-routing.md`\n\n## LOEWE\n\n- material + after-sales map -> `55-loewe-material-and-aftercare-map.md`\n\n## Longchamp\n\n- line + material structure -> `56-longchamp-line-material-map.md`\n\n## Dior\n\n- material + care service map -> `61-dior-material-and-care-service-map.md`\n- line-name routing -> `62-dior-line-name-routing.md`\n\n## Saint Laurent\n\n- material + care map -> `63-saint-laurent-material-and-care-map.md`\n- line-name routing -> `64-saint-laurent-line-name-routing.md`\n\n## Prada\n\n- material + maintenance map -> `65-prada-material-and-maintenance-map.md`\n- line-name routing -> `66-prada-line-name-routing.md`\n\n## Goyard\n\n- material + care map -> `67-goyard-material-and-care-map.md`\n- line-name routing -> `68-goyard-line-name-routing.md`\n\n## 产品线名索引\n\n- cross-brand line-name routing -> `72-product-line-name-routing-index.md`\n\n## 什么时候优先召回这张索引卡\n\n- 用户提到的是品牌官方材质名，而不是通用材质词。\n- 用户只说系列名、产品线名、或混合材质名。\n- 系统需要先判断是 `植鞣革 / 漆皮 / 压纹成革 / coated canvas / 复合材质` 中的哪一类。\n\n## 什么时候不要停在这张卡\n\n- 用户已经描述了清晰症状时，索引卡只做第一层路由。\n- 一旦完成材质映射，应继续进入场景卡、工具矩阵或送修阈值卡。\n\n## 推荐下一跳\n\n- 材质不明 -> `35-query-synonym-map.md`\n- 产品名/材质名已知 -> 本索引卡\n- 只给系列名 / line name -> `72-product-line-name-routing-index.md`\n- 症状清晰 -> 对应场景卡\n- 功能件异常 -> `43` `45` `49`\n- 准备送修 -> `50`",
       "kind": "md",
-      "hash_value": "af6b7ad2c89d364d4a2149237a215c67",
+      "hash_value": "dd0d0288dc2e8393f174288d37fee679",
       "metadata": {
         "materials": [
           "植鞣革",
@@ -1257,6 +1259,238 @@
         "source_name": "品牌材质路由索引卡：生产端问答的第一层入口",
         "source_file": "60-brand-material-routing-index.md"
       }
+    },
+    {
+      "source_id": "61-dior-material-and-care-service-map",
+      "source_path": "knowledge/raw/61-dior-material-and-care-service-map.md",
+      "title": "Dior 材质与 Care Service 映射卡：从官方 line page 词汇到护理路线",
+      "content": "# Dior 材质与 Care Service 映射卡：从官方 line page 词汇到护理路线\n\n## 资料定位\n\n这是一张把 Dior 官方产品线页面、产品页与 FAQ 里的材质词汇压缩成 RAG 路由规则的资料卡，适合处理 `Lady Dior`、`Saddle`、`Dior Book Tote` 这类只报系列名或只报官方材质名的问法。\n\n## 一级原则\n\n- Dior 同一产品线常同时覆盖 `lambskin / grained calfskin / suede / embroidery / calfskin + textile`，不要把系列名误判成单一材质。\n- Dior 官方 FAQ 明确提供 repair services，并说明维修由工作坊 artisans 完成。\n- 因此 Dior 问题一旦涉及结构、五金、明显 finish 失衡或深层污渍，应更早切到送修阈值，而不是给宽泛家庭清洁建议。\n\n## 材质映射\n\n### Cannage Lambskin\n\n- 路由到：小羊皮 / 绗缝 delicate leather\n- 常见线名：Lady Dior\n- 高频问题：轻痕、压痕、色迁移、五金接触痕\n\n### Suede Calfskin / Suede Goatskin\n\n- 路由到：翻毛皮 / 绒面革\n- 常见线名：Lady Dior、Saddle\n- 高频问题：水痕、油污、摩擦倒绒、深浅色迁移\n\n### Grained Calfskin\n\n- 路由到：粒面牛皮 / finished leather\n- 常见线名：Saddle\n- 高频问题：轻污、边角磨损、五金邻近处失光\n\n### Ultramatte Calfskin / Macrocannage Calfskin\n\n- 路由到：有表面效果的成革 / matte finished calf\n- 常见线名：Saddle、Dior Book Tote\n- 高频问题：错用 cleaner 后局部发白、表面失衡、压纹区色差\n\n### Dior Oblique Embroidery / Jacquard / Denim Embroidery\n\n- 路由到：刺绣 / jacquard / textile family\n- 常见线名：Dior Book Tote、Saddle\n- 高频问题：纤维起毛、局部污渍、与皮边交界处交叉污染\n\n### Embroidery with Calfskin / technical fabric with calfskin\n\n- 路由到：复合材质\n- 高频问题：主体与边皮必须分区处理，不能整包一个 cleaner 解决\n\n## Care Service / 维修边界\n\n- 用户目标如果是恢复接近专柜外观，或问题已经影响结构、开合、肩带、五金、局部 finish，应优先进入 Dior repair / care service 路由。\n- 如果用户只说 `Lady Dior 脏了`、`Saddle 发黑了`，生产端不应直接生成清洁步骤，应先判定是 lambskin、grained calfskin、suede 还是 embroidery。\n\n## 关联文件\n\n- `17-smooth-light-leather-color-transfer.md`\n- `18-lambskin-surface-marks.md`\n- `20-suede-watermark-oil-routing.md`\n- `27-finish-damage-from-wrong-products.md`\n- `43-send-repair-threshold-structure-hardware.md`\n- `47-canvas-trim-cross-contamination.md`\n\n## 参考依据\n\n- Dior, Lady Dior bags\n https://www.dior.com/en_us/fashion/womens-fashion/bags/lady-dior\n\n- Dior, Designer Saddle Bags\n https://www.dior.com/en_us/womens-fashion/bags/saddle\n\n- Dior, Dior Book Tote\n https://www.dior.com/en_us/fashion/womens-fashion/bags/dior-book-tote\n\n- Dior, Small Lady Dior Bag Black Cannage Lambskin\n https://www.dior.com/en_us/fashion/products/M0618ONGE_M900\n\n- Dior, Saddle Bag Black Grained Calfskin\n https://www.dior.com/en_us/fashion/products/1ADPO093YKK_H00N\n\n- Dior, FAQ Couture\n https://www.dior.com/en_us/fashion/faq-couture",
+      "kind": "md",
+      "hash_value": "fd26e77ec28f16890eceb2f2fa2918cc",
+      "metadata": {
+        "materials": [
+          "小羊皮",
+          "头层牛皮",
+          "翻毛皮",
+          "五金"
+        ],
+        "damage_types": [
+          "发黑污渍",
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "Dior 材质与 Care Service 映射卡：从官方 line page 词汇到护理路线",
+        "source_file": "61-dior-material-and-care-service-map.md"
+      }
+    },
+    {
+      "source_id": "62-dior-line-name-routing",
+      "source_path": "knowledge/raw/62-dior-line-name-routing.md",
+      "title": "Dior 系列名分流卡：Lady Dior、Saddle、Dior Book Tote 不能直接当成单一材质",
+      "content": "# Dior 系列名分流卡：Lady Dior、Saddle、Dior Book Tote 不能直接当成单一材质\n\n## 资料定位\n\n这是一张处理 `只说 Dior 系列名` 的分流卡。目标不是给护理步骤，而是先把 line name 路由到正确材质族群，再进入场景卡。\n\n## 检索标签\n\n- 品牌：Dior、迪奥\n- 系列：Lady Dior、Saddle、Book Tote、Dior Book Tote\n- 典型问法：`Lady Dior 怎么护理`、`Saddle 刮了怎么办`、`Book Tote 脏了`\n\n## 判别要点\n\n1. Dior 的同一经典线会跨多种材质，不能把 `系列名 = 固定材质`。\n2. 若 query 里同时出现 `Cannage`、`grained calfskin`、`suede`、`Oblique embroidery`、`Macrocannage` 等词，材质词优先级高于系列名。\n3. 若症状已经是结构、五金、背带、磁扣或深层污渍，系列名卡只做第一跳，不做最终答复。\n\n## 系列路由\n\n### Lady Dior\n\n- 默认先查：`61-dior-material-and-care-service-map.md`\n- 常见首选路由：小羊皮 / delicate structured leather\n- 二次分流词：\n - `suede` -> 翻毛皮\n - `embroidered` -> 刺绣 / textile\n - `Cannage lambskin` -> 小羊皮\n\n### Saddle\n\n- 默认先查：`61-dior-material-and-care-service-map.md`\n- 不要默认成单一皮革。\n- 官方可见组合包括：\n - `grained calfskin`\n - `Dior Oblique jacquard`\n - `smooth calfskin`\n - `suede goatskin`\n- 因此 `Saddle 脏了` 这类问法必须先补材质判别。\n\n### Dior Book Tote\n\n- 默认先查：`61-dior-material-and-care-service-map.md`\n- 首选路由通常是：刺绣 / jacquard / textile\n- 二次分流词：\n - `Oblique embroidery` -> textile\n - `Plan de Paris embroidery with calfskin` -> 复合材质\n - `Macrocannage calfskin` -> 有表面效果的成革\n\n## 生产端建议\n\n- 用户只说系列名时，先召回本卡和 `61`，不要直接召回单一材质清洁方案。\n- 用户如果同时给出症状，应在完成系列到材质的映射后继续跳转到场景卡、工具矩阵或送修阈值卡。\n\n## 关联文件\n\n- `61-dior-material-and-care-service-map.md`\n- `39-luxury-brand-material-term-map.md`\n- `60-brand-material-routing-index.md`\n\n## 参考依据\n\n- Dior, Lady Dior bags\n https://www.dior.com/en_us/fashion/womens-fashion/bags/lady-dior\n\n- Dior, Small Lady Dior Bag Black Cannage Lambskin\n https://www.dior.com/en_us/fashion/products/M0618ONGE_M900\n\n- Dior, Designer Saddle Bags\n https://www.dior.com/en_us/womens-fashion/bags/saddle\n\n- Dior, Saddle Bag Black Grained Calfskin\n https://www.dior.com/en_us/fashion/products/1ADPO093YKK_H00N\n\n- Dior, Dior Book Tote\n https://www.dior.com/en_us/fashion/womens-fashion/bags/dior-book-tote",
+      "kind": "md",
+      "hash_value": "bc80f496aaef2b3720108fb72ae8f893",
+      "metadata": {
+        "materials": [
+          "小羊皮",
+          "翻毛皮",
+          "五金"
+        ],
+        "damage_types": [
+          "发黑污渍"
+        ],
+        "risk_level": "low",
+        "source_name": "Dior 系列名分流卡：Lady Dior、Saddle、Dior Book Tote 不能直接当成单一材质",
+        "source_file": "62-dior-line-name-routing.md"
+      }
+    },
+    {
+      "source_id": "63-saint-laurent-material-and-care-map",
+      "source_path": "knowledge/raw/63-saint-laurent-material-and-care-map.md",
+      "title": "Saint Laurent 材质与护理边界映射卡：从 grain de poudre 到 lambskin 的正确分流",
+      "content": "# Saint Laurent 材质与护理边界映射卡：从 grain de poudre 到 lambskin 的正确分流\n\n## 资料定位\n\n这是一张把 Saint Laurent 官方 FAQ、Client Service 与产品页里的材质命名接到护理逻辑上的资料卡，适合处理 `Kate`、`Sac de Jour`、`Loulou`、`Le 5 à 7` 相关问法。\n\n## 一级原则\n\n- Saint Laurent 官方 FAQ 明确说明：不同 leather 有不同特性，需要分别维护。\n- 官方同时强调：不要使用 generic products，以免损伤皮革。\n- Saint Laurent 也提供 repair service，但并非所有修复都可行，因此生产端要把高风险问题尽早分流到 repair / boutique 评估。\n\n## 材质映射\n\n### Grain de Poudre Embossed Leather\n\n- 路由到：压纹成革 / embossed finished leather\n- 常见线名：Kate、New Kate\n- 高频问题：表面蹭痕、错误上油后纹理失衡、边角失光\n\n### Grained Leather\n\n- 路由到：粒面牛皮\n- 常见线名：Le 5 a 7、Sac de Jour\n- 高频问题：轻污、边角磨损、受力点失光\n\n### Smooth Leather\n\n- 路由到：光面成革\n- 常见线名：Sac de Jour\n- 高频问题：色迁移、擦痕、表面 finish 管理\n\n### Lambskin / Matelasse Lambskin\n\n- 路由到：小羊皮 / soft delicate leather\n- 常见线名：Loulou\n- 高频问题：轻压痕、链条压痕、表面敏感、色迁移\n\n### Patent Leather\n\n- 路由到：漆皮\n- 常见线名：Kate、Sac de Jour\n- 高频问题：染色、表面发黏、镜面失衡\n\n### Crocodile-Embossed Leather / Crocodile-Embossed Patent Leather\n\n- 路由到：压纹高光成革\n- 常见线名：Kate、Sac de Jour\n- 高频问题：表层刮蹭、错误护理导致高光不均、纹路高点先受损\n\n### Suede / Pony Hair / Raffia\n\n- 路由到：特殊表面材质\n- 常见线名：Loulou、Le 5 a 7、Sac de Jour\n- 高频问题：液体敏感、摩擦敏感、局部清洁边界严格\n\n## 官方护理边界\n\n- 建议保存在 original flannel 中。\n- 避免接触 perfume、makeup、creams、oils、antibacterial hand gel。\n- 避免长时间 sunlight、heat、water。\n- 浅色品应避免与深色衣物长期接触。\n- 有 care / repair 问题时，优先联系 Client Service 或最近 boutique。\n\n## 关联文件\n\n- `17-smooth-light-leather-color-transfer.md`\n- `18-lambskin-surface-marks.md`\n- `19-patent-leather-color-transfer.md`\n- `20-suede-watermark-oil-routing.md`\n- `42-send-repair-threshold-color-transfer-finish.md`\n\n## 参考依据\n\n- Saint Laurent, FAQ\n https://www.ysl.com/en-us/displayname-faq\n\n- Saint Laurent, Client Service\n https://www.ysl.com/en-us/cp/client-service\n\n- Saint Laurent, Kate Medium in Grain de Poudre Embossed Leather\n https://www.ysl.com/en-us/pr/kate-medium-in-grain-de-poudre-embossed-leather-364021BOW0J1000.html\n\n- Saint Laurent, Loulou Mini in Lambskin\n https://www.ysl.com/en-us/pr/loulou-mini-in-lambskin-821749AAEAX9207.html\n\n- Saint Laurent, Sac de Jour in Smooth Leather - Nano\n https://www.ysl.com/en-us/pr/sac-de-jour-in-smooth-leather-nano-39203502G9W2899.html\n\n- Saint Laurent, New Kate Small in Crocodile-Embossed Patent Leather\n https://www.ysl.com/en-us/pr/new-kate-small-in-crocodile-embossed-patent-leather-851504AAGKR6290.html",
+      "kind": "md",
+      "hash_value": "04d62238bcdb6749a84ab73c23ebae12",
+      "metadata": {
+        "materials": [
+          "小羊皮",
+          "头层牛皮",
+          "漆皮"
+        ],
+        "damage_types": [
+          "染色",
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "Saint Laurent 材质与护理边界映射卡：从 grain de poudre 到 lambskin 的正确分流",
+        "source_file": "63-saint-laurent-material-and-care-map.md"
+      }
+    },
+    {
+      "source_id": "64-saint-laurent-line-name-routing",
+      "source_path": "knowledge/raw/64-saint-laurent-line-name-routing.md",
+      "title": "Saint Laurent 系列名分流卡：Kate、Sac de Jour、Loulou、Le 5 à 7 先判材质再给方案",
+      "content": "# Saint Laurent 系列名分流卡：Kate、Sac de Jour、Loulou、Le 5 à 7 先判材质再给方案\n\n## 资料定位\n\n这是一张处理 `只报 Saint Laurent 系列名` 的分流卡。目标是让生产端先把 line name 映射到材质和风险层，而不是直接输出“YSL 包怎么清理”的泛化答案。\n\n## 判别要点\n\n1. Saint Laurent 多个经典线同时覆盖 `grain de poudre / grained leather / smooth leather / patent / crocodile-embossed / suede`。\n2. Saint Laurent FAQ 已明确不同 leather 需要分别维护，因此 line name 不能替代材质判断。\n3. 一旦 query 里同时出现 `lambskin`、`grain de poudre`、`patent`、`crocodile-embossed` 等词，材质词优先。\n\n## 系列路由\n\n### Kate\n\n- 默认先查：`63-saint-laurent-material-and-care-map.md`\n- 官方常见材质：\n - grain de poudre embossed leather\n - patent leather\n - crocodile-embossed leather\n - crocodile-embossed patent leather\n- 路由重点：先分 `压纹成革 / 漆皮 / 高光压纹`，不要把 Kate 默认成单一 grain de poudre。\n\n### Sac de Jour\n\n- 默认先查：`63-saint-laurent-material-and-care-map.md`\n- 官方常见材质：\n - grained leather\n - smooth leather\n - patent leather\n - crocodile-embossed leather\n - suede\n- 路由重点：结构包不代表材质稳定，尤其 patent 与 crocodile-embossed 要单独提高风险等级。\n\n### Loulou\n\n- 默认先查：`63-saint-laurent-material-and-care-map.md`\n- 官方常见材质：\n - lambskin\n - suede\n- 路由重点：若未给材质，先按 delicate leather 高敏感路线保守回答。\n\n### Le 5 a 7\n\n- 默认先查：`63-saint-laurent-material-and-care-map.md`\n- 官方 line page 可见材质筛选包括：\n - grained leather\n - suede\n - patent leather\n - smooth leather\n - crocodile embossed leather\n - pony leather\n - raffia\n- 路由重点：这是一个明显不能按单一材质回答的系列名。\n\n## 生产端建议\n\n- 若用户只报 `Kate` 或 `Sac de Jour`，先召回本卡和 `63`。\n- 若用户同时给出明确症状，再从材质映射进入对应场景卡。\n- 若问题已影响开合、背带、结构或表面 finish，继续跳转到送修阈值卡。\n\n## 关联文件\n\n- `63-saint-laurent-material-and-care-map.md`\n- `39-luxury-brand-material-term-map.md`\n- `60-brand-material-routing-index.md`\n\n## 参考依据\n\n- Saint Laurent, FAQ\n https://www.ysl.com/en-us/displayname-faq\n\n- Saint Laurent, Kate line page\n https://www.ysl.com/en-us/ca/new-arrivals/highlights/kate-women\n\n- Saint Laurent, Sac de Jour line page\n https://www.ysl.com/en-us/ca/new-arrivals/highlights/sac-de-jour-women\n\n- Saint Laurent, Loulou line page\n https://www.ysl.com/en-us/ca/new-arrivals/highlights/loulou-bag-women\n\n- Saint Laurent, Le 5 a 7 line page\n https://www.ysl.com/en-us/ca/new-arrivals/highlights/le-5-a-7-women",
+      "kind": "md",
+      "hash_value": "f962d2666a8dee3b60776fb7ab363722",
+      "metadata": {
+        "materials": [
+          "漆皮"
+        ],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "Saint Laurent 系列名分流卡：Kate、Sac de Jour、Loulou、Le 5 à 7 先判材质再给方案",
+        "source_file": "64-saint-laurent-line-name-routing.md"
+      }
+    },
+    {
+      "source_id": "65-prada-material-and-maintenance-map",
+      "source_path": "knowledge/raw/65-prada-material-and-maintenance-map.md",
+      "title": "Prada 材质与维护边界映射卡：Saffiano、Re-Nylon、brushed leather 的分流规则",
+      "content": "# Prada 材质与维护边界映射卡：Saffiano、Re-Nylon、brushed leather 的分流规则\n\n## 资料定位\n\n这是一张把 Prada 官方 maintenance FAQ、材质专题页与系列页里的高价值规则整理成 RAG 映射卡的资料，适合处理 `Prada Galleria`、`Re-Edition`、`Re-Nylon`、`Saffiano` 相关问法。\n\n## 一级原则\n\n- Prada 官方公开 FAQ 对 leather bag 的护理边界非常保守：仅建议用 dry, soft cloth，并存放于 original dust bag。\n- Prada 官方同时明确：unauthorized third parties 的 cleaning or repairs 可能限制未来官方服务。\n- 因此 Prada 问答不应默认进入“可自由上 cleaner / conditioner”的路线。\n\n## 材质映射\n\n### Saffiano Leather\n\n- 路由到：压纹成革 / structured finished leather\n- 常见线名：Prada Galleria、Prada Re-Edition mini Saffiano\n- 高频问题：边角磨亮、压纹高点失衡、错误上油后表面不均\n\n### Brushed Leather\n\n- 路由到：抛光 / brushed finished leather\n- 常见线名：Re-Edition 2005 mesh and brushed leather\n- 高频问题：擦痕、高光失衡、表面压痕\n\n### Re-Nylon\n\n- 路由到：尼龙 / technical textile\n- 常见线名：Re-Nylon 系列\n- 官方事实：Prada 单独为 Re-Nylon 建立材质与项目页面。\n- 工程性推断：由于 Prada 公开 FAQ 没有给出与 leather 同等级的家庭湿洗流程，生产端应把 Re-Nylon 默认路由到保守 textile 逻辑，而不是鼓励家用溶剂清洁。\n\n### Mesh + Leather / Mixed Media\n\n- 路由到：复合材质\n- 常见线名：Re-Edition 2005 mesh and brushed leather\n- 高频问题：主体与皮革收口必须分区处理\n\n## 维护与送修边界\n\n- Leather bag：只做干式轻拭，不做重湿擦。\n- Lining：官方说明 lining 是 bag 的 integral part，不适合 targeted maintenance。\n- Repair：Prada 提供 case-by-case repair service；若问题已超出表层除尘，应优先 contact store / Client Service。\n\n## 关联文件\n\n- `17-smooth-light-leather-color-transfer.md`\n- `21-coated-canvas-cleaning-near-trim.md`\n- `27-finish-damage-from-wrong-products.md`\n- `38-lining-odor-vs-mold-routing.md`\n- `42-send-repair-threshold-color-transfer-finish.md`\n\n## 参考依据\n\n- Prada, Maintenance and Repairs FAQ\n https://www.prada.com/us/en/info/faqs/maintenance-and-repairs.html\n\n- Prada, Prada Galleria\n https://www.prada.com/us/en/womens/essentials/prada-galleria/c/10102US\n\n- Prada, Prada Re-Edition\n https://www.prada.com/us/en/womens/essentials/prada-re-edition/c/10103US\n\n- Prada, Saffiano: Bags and wallets\n https://www.prada.com/us/en/saffiano_page.html\n\n- Prada, Prada Re-Nylon 2026\n https://www.prada.com/us/en/pradasphere/special-projects/2026/prada-re-nylon.html\n\n- Prada, Prada Re-Edition mini Saffiano leather bag\n https://www.prada.com/us/en/p/prada-re-edition-mini-saffiano-leather-bag/1BC204_NZV_F0632_V_QOM\n\n- Prada, Prada Re-Edition 2005 mesh and brushed leather bag\n https://www.prada.com/us/en/p/prada-re-edition-2005-mesh-and-brushed-leather-bag/1BH204_2DZ8_F0PG7_V_V2P",
+      "kind": "md",
+      "hash_value": "b4f339e37932203cc92cec7085fd5fd3",
+      "metadata": {
+        "materials": [],
+        "damage_types": [],
+        "risk_level": "low",
+        "source_name": "Prada 材质与维护边界映射卡：Saffiano、Re-Nylon、brushed leather 的分流规则",
+        "source_file": "65-prada-material-and-maintenance-map.md"
+      }
+    },
+    {
+      "source_id": "66-prada-line-name-routing",
+      "source_path": "knowledge/raw/66-prada-line-name-routing.md",
+      "title": "Prada 系列名分流卡：Galleria、Re-Edition、Re-Nylon 先拆材质再处理",
+      "content": "# Prada 系列名分流卡：Galleria、Re-Edition、Re-Nylon 先拆材质再处理\n\n## 资料定位\n\n这是一张专门服务 `只说 Prada 系列名` 的分流卡，适合把 `Galleria`、`Re-Edition`、`Re-Nylon` 这类问法快速接到正确材质逻辑。\n\n## 判别要点\n\n1. `Galleria` 更接近稳定的 Saffiano 路线。\n2. `Re-Edition` 不是单一材质线，官方同线可见 `mini Saffiano leather` 与 `mesh and brushed leather`。\n3. `Re-Nylon` 是材质与项目名高度绑定的线，不应按普通 leather bag 回答。\n\n## 系列路由\n\n### Prada Galleria\n\n- 默认路由到：Saffiano leather\n- 召回文件：\n - `65-prada-material-and-maintenance-map.md`\n - `32-cleaner-conditioner-compatibility-matrix.md`\n- 风险重点：结构感强不代表能湿洗；仍以 dry soft cloth 为边界\n\n### Prada Re-Edition\n\n- 默认先查：`65-prada-material-and-maintenance-map.md`\n- 二次分流词：\n - `mini Saffiano leather` -> 压纹成革\n - `mesh and brushed leather` -> 复合材质\n - `Re-Nylon` -> technical textile\n- 路由重点：同样叫 Re-Edition，材料差异很大\n\n### Re-Nylon\n\n- 默认路由到：尼龙 / textile\n- 召回文件：\n - `65-prada-material-and-maintenance-map.md`\n - `08-coated-canvas-cleaning.md`\n - `47-canvas-trim-cross-contamination.md`\n- 路由重点：若有 leather trim，再加一道复合材质分流\n\n## 什么时候升级送修\n\n- 表面问题已牵涉 lining、结构、五金、肩带或深层污渍。\n- 用户已经尝试第三方 cleaning / repairs。\n- 用户目标是恢复原有 finish、硬挺度或品牌外观一致性。\n\n## 关联文件\n\n- `65-prada-material-and-maintenance-map.md`\n- `39-luxury-brand-material-term-map.md`\n- `60-brand-material-routing-index.md`\n\n## 参考依据\n\n- Prada, Maintenance and Repairs FAQ\n https://www.prada.com/us/en/info/faqs/maintenance-and-repairs.html\n\n- Prada, Prada Galleria\n https://www.prada.com/us/en/womens/essentials/prada-galleria/c/10102US\n\n- Prada, Prada Re-Edition\n https://www.prada.com/us/en/womens/essentials/prada-re-edition/c/10103US\n\n- Prada, Prada Re-Nylon 2026\n https://www.prada.com/us/en/pradasphere/special-projects/2026/prada-re-nylon.html",
+      "kind": "md",
+      "hash_value": "d8933a3e8276738910e32b41d4060555",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "发黑污渍"
+        ],
+        "risk_level": "low",
+        "source_name": "Prada 系列名分流卡：Galleria、Re-Edition、Re-Nylon 先拆材质再处理",
+        "source_file": "66-prada-line-name-routing.md"
+      }
+    },
+    {
+      "source_id": "67-goyard-material-and-care-map",
+      "source_path": "knowledge/raw/67-goyard-material-and-care-map.md",
+      "title": "Goyard 材质与护理边界映射卡：Goyardine、Chevroches、Clamecy、Decize Taurillon",
+      "content": "# Goyard 材质与护理边界映射卡：Goyardine、Chevroches、Clamecy、Decize Taurillon\n\n## 资料定位\n\n这是一张优先级很高的品牌规则卡。Goyard 官方对家庭护理边界写得非常明确，尤其适合做生产端的安全兜底。\n\n## 一级原则\n\n- Goyard 官方明确表示：commercially available cleaning products or treatments 应避免使用。\n- Goyard 官方同时建议把 regular cleaning or renovation 交给 crafts people。\n- 因此 Goyard 相关问答应明显比一般皮具更保守，尤其不能默认推荐家用 cleaner。\n\n## 材质映射\n\n### Goyardine Canvas\n\n- 路由到：涂层帆布 / coated cloth\n- 官方要点：源自 linen and cotton 的 natural coated cloth，兼具 hard-wearing、flexible、waterproof 特征\n- 高频问题：表面摩擦磨花、Chevron 图案磨损、与皮边交界处交叉污染\n\n### Chevroches Calfskin\n\n- 路由到：粒面小牛皮 / leather trim family\n- 常见线名：Saint Louis、Artois、Sénat\n- 高频问题：提手和边角磨损、包口受力、边油与折边损伤\n\n### Clamecy Calfskin\n\n- 路由到：光面皮 / smooth leather\n- 官方要点：属于会形成 patina 的 living material\n- 高频问题：水接触、油基产品接触、局部发暗与表面痕迹\n\n### Decize Taurillon Leather\n\n- 路由到：粒面厚实皮革 / taurillon family\n- 常见线名：Belvedere\n- 高频问题：高频受力处失光、肩带受力、闭合件邻近磨损\n\n### Goyardine + Leather Composite / Leather Lined with Goyardine\n\n- 路由到：复合材质\n- 常见线名：Anjou、Saint Louis、Artois、Sénat、Belvedere\n- 路由重点：主体和皮革收口必须分区处理\n\n## 官方护理边界\n\n- Goyardine canvas：soft, lint-free fabric 大面积轻拭，内里用 soft brush dusting\n- Smooth leather：避免 water、oil-based products、make-up、perfumes；若沾水，立即吸干\n- 全系共用：避免 overloading 或不当用途，避免 sharp objects、abrasive surfaces、humidity、extreme temperatures\n- 若需要 cleaning / renovation，官方建议联系 Comptoirs 或 crafts people\n\n## 关联文件\n\n- `08-coated-canvas-cleaning.md`\n- `15-vegetable-tanned-handle-darkening-patina.md`\n- `21-coated-canvas-cleaning-near-trim.md`\n- `36-hardware-contact-darkening-routing.md`\n- `47-canvas-trim-cross-contamination.md`\n\n## 参考依据\n\n- Maison Goyard, Taking care of your Goyard\n https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/\n\n- Maison Goyard, Goyardine an emblematic canvas\n https://www.goyard.com/us_en/goyardine-an-emblematic-canvas\n\n- Maison Goyard, Saint Louis PM Bag\n https://www.goyard.com/us_en/sac-saint-louis-croc-pm.html\n\n- Maison Goyard, Artois PM Bag\n https://www.goyard.com/us_en/sac-artois-pm.html\n\n- Maison Goyard, Anjou Mini Bag\n https://www.goyard.com/us_en/sac-anjou-croc-mini.html\n\n- Maison Goyard, Belvedere PM Bag\n https://www.goyard.com/us_en/sac-belvedere-3-pm.html\n\n- Maison Goyard, Sénat MM Pouch\n https://www.goyard.com/us_en/pochette-senat-mm.html",
+      "kind": "md",
+      "hash_value": "db67fe3a433bf2f5f7420134804dd191",
+      "metadata": {
+        "materials": [
+          "头层牛皮",
+          "涂层帆布"
+        ],
+        "damage_types": [
+          "磨损破洞",
+          "边油开裂"
+        ],
+        "risk_level": "medium",
+        "source_name": "Goyard 材质与护理边界映射卡：Goyardine、Chevroches、Clamecy、Decize Taurillon",
+        "source_file": "67-goyard-material-and-care-map.md"
+      }
+    },
+    {
+      "source_id": "68-goyard-line-name-routing",
+      "source_path": "knowledge/raw/68-goyard-line-name-routing.md",
+      "title": "Goyard 系列名分流卡：Saint Louis、Artois、Anjou、Belvedere、Sénat",
+      "content": "# Goyard 系列名分流卡：Saint Louis、Artois、Anjou、Belvedere、Sénat\n\n## 资料定位\n\n这是一张处理 `只说 Goyard 产品线名` 的分流卡。Goyard 的系列名往往同时携带材质结构、使用方式和高频损伤点，适合先做品牌内路由。\n\n## 判别要点\n\n1. Goyard 官方护理边界极保守，line name 一旦识别成功，应优先拉起品牌规则。\n2. 同属 Goyardine 家族，不同线的结构差异也很大，不能只按“涂层帆布包”统一回答。\n3. 若 query 已明确症状，如 `角磨损`、`拉链问题`、`包口变形`，需在 line routing 后继续进入场景卡。\n\n## 系列路由\n\n### Saint Louis\n\n- 官方材质：Goyardine Canvas & Chevroches Calfskin\n- 结构特征：open-top soft tote\n- 高频路由：\n - coated canvas + leather trim\n - overload / shape management\n - handle / edge wear\n\n### Artois\n\n- 官方材质：Goyardine Canvas & Chevroches Calfskin\n- 结构特征：structured and secure version，带 leather corners 与 zip closure\n- 高频路由：\n - corner wear\n - zipper symptom routing\n - leather corner panel stress\n\n### Anjou\n\n- 官方材质：Chevroches Calfskin & Goyardine Canvas\n- 结构特征：leather version lined with Goyardine canvas，reversible\n- 高频路由：\n - leather-dominant composite\n - reversible surface management\n - handle and fold-line care\n\n### Belvedere\n\n- 官方材质：Goyardine Canvas & Decize Taurillon Leather\n- 结构特征：crossbody strap + accessible secure closure\n- 高频路由：\n - strap / closure routing\n - coated canvas + taurillon trim\n - front pocket and flap-area wear\n\n### Sénat\n\n- 官方材质：Goyardine Canvas & Chevroches Calfskin\n- 结构特征：zip closure + inside card pocket\n- 高频路由：\n - zipper routing\n - flat pouch edge wear\n - card-slot / pocket mouth deformation\n\n## 生产端建议\n\n- 用户只说 `Saint Louis` 或 `Artois` 时，先召回本卡和 `67-goyard-material-and-care-map.md`。\n- 只要问题牵涉清洁剂选择，优先回忆 Goyard 官方 `avoid commercially available products` 规则。\n- 一旦用户目标从“止损”变成“恢复品牌原样”，优先送修或联系 Comptoir。\n\n## 关联文件\n\n- `24-longchamp-le-pliage-corner-zipper-handle-repair.md`\n- `49-zipper-symptom-routing.md`\n- `67-goyard-material-and-care-map.md`\n\n## 参考依据\n\n- Maison Goyard, Taking care of your Goyard\n https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/\n\n- Maison Goyard, Saint Louis PM Bag\n https://www.goyard.com/us_en/sac-saint-louis-croc-pm.html\n\n- Maison Goyard, Artois PM Bag\n https://www.goyard.com/us_en/sac-artois-pm.html\n\n- Maison Goyard, Anjou Mini Bag\n https://www.goyard.com/us_en/sac-anjou-croc-mini.html\n\n- Maison Goyard, Belvedere PM Bag\n https://www.goyard.com/us_en/sac-belvedere-3-pm.html\n\n- Maison Goyard, Sénat MM Pouch\n https://www.goyard.com/us_en/pochette-senat-mm.html",
+      "kind": "md",
+      "hash_value": "688ee8644bb9f6518dc88edbb7329357",
+      "metadata": {
+        "materials": [
+          "涂层帆布",
+          "五金"
+        ],
+        "damage_types": [
+          "变形塌陷",
+          "磨损破洞"
+        ],
+        "risk_level": "low",
+        "source_name": "Goyard 系列名分流卡：Saint Louis、Artois、Anjou、Belvedere、Sénat",
+        "source_file": "68-goyard-line-name-routing.md"
+      }
+    },
+    {
+      "source_id": "69-card-slot-stretching-and-warp-routing",
+      "source_path": "knowledge/raw/69-card-slot-stretching-and-warp-routing.md",
+      "title": "卡槽松弛、口沿外翻与“只是磨合”分流卡：小皮件过塞还是结构损伤",
+      "content": "# 卡槽松弛、口沿外翻与“只是磨合”分流卡：小皮件过塞还是结构损伤\n\n## 资料定位\n\n这是一张针对 `card slot / card holder / wallet slot / inside card pocket` 的部位级场景卡，适合处理 `卡槽松了`、`卡包越用越松`、`口沿外翻了` 这类问法。\n\n## 检索标签\n\n- 品类：card holder、wallet、small leather goods、pouch、钱包、卡包、小皮件\n- 部位：卡槽、slot mouth、inside card pocket、插卡位、口沿\n- 症状：松了、外翻、变形、卡会掉、卡槽撑大、口沿卷\n- 风险等级：中高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题发生在卡槽、证件位、pouch 内部 card pocket。\n- 用户不确定是正常磨合、装太满后的暂时变化，还是已经进入结构性松弛。\n\n## 判别要点\n\n1. 新卡包轻微松紧变化，不等于卡槽失去保持力。\n2. CHANEL 官方对 small leather goods 明确要求不要 overfill；Goyard 官方也明确要求避免 overloading 或不当用途。\n3. 因此卡槽问题应先看 `retention` 与 `口沿几何形态`，而不是急于找“缩回去”的家庭偏方。\n\n## 路由规则\n\n### 可观察层\n\n- 卡片抽拉仍有阻尼，不会自行滑出。\n- 口沿基本平直，没有明显 waves、flare 或 curl。\n- 相邻边油、缝线、折边没有同步异常。\n- 只是短期过塞，尚未影响正常收纳。\n\n### 升级层\n\n- 卡片会自行滑出，保持力明显下降。\n- 口沿外翻、波浪化、局部塌陷或左右不对称。\n- 相邻边油、缝线、折边、翻盖也开始异常。\n- 用户目标是恢复原本更紧、更直、更规整的状态。\n\n## 推荐工具\n\n- 干布\n- 空槽静置\n- 拍照记录\n\n## 操作步骤\n\n1. 立即减载：把卡片数量降回正常使用量，不再继续超塞。\n2. 干式静置：让小皮件在干燥环境下空载放置 12 至 24 小时。\n3. 复测保持力：观察卡片是否仍会自行滑出，口沿是否恢复基本平直。\n4. 升级判断：若保持力未恢复，或口沿已伴随边油、缝线变化，转入维修分流。\n\n## 不建议的做法\n\n- 不要喷水、蒸汽、重压或加热来“缩回”卡槽。\n- 不要继续用超量卡片硬撑。\n- 不要把 generic leather products 直接抹在 slot mouth 或卡槽内部。\n\n## 直接送修 / 升级处理\n\n- 卡片会自行脱落。\n- 口沿外翻明显，且静置后不恢复。\n- 卡槽变形已连带边油、折边或缝线异常。\n- 用户要求恢复原有收纳手感与边缘外观。\n\n## 参考依据\n\n- CHANEL, Small Leather Goods Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/small-leather-goods/\n\n- Saint Laurent, FAQ\n https://www.ysl.com/en-us/displayname-faq\n\n- Maison Goyard, Taking care of your Goyard\n https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/\n\n- Maison Goyard, Sénat MM Pouch\n https://www.goyard.com/us_en/pochette-senat-mm.html",
+      "kind": "md",
+      "hash_value": "92226f728549916d52fd34bb4273a33e",
+      "metadata": {
+        "materials": [],
+        "damage_types": [
+          "变形塌陷",
+          "边油开裂"
+        ],
+        "risk_level": "medium",
+        "source_name": "卡槽松弛、口沿外翻与“只是磨合”分流卡：小皮件过塞还是结构损伤",
+        "source_file": "69-card-slot-stretching-and-warp-routing.md"
+      }
+    },
+    {
+      "source_id": "70-slg-flap-edge-curling-glazing-lift",
+      "source_path": "knowledge/raw/70-slg-flap-edge-curling-glazing-lift.md",
+      "title": "小皮件翻盖翘边、口沿卷曲与边油起翘分流卡：变形还是 edge finish 失效",
+      "content": "# 小皮件翻盖翘边、口沿卷曲与边油起翘分流卡：变形还是 edge finish 失效\n\n## 资料定位\n\n这是一张针对 `wallet flap / card holder edge / glazing lift / edge curl` 的细颗粒场景卡，适合处理 `翻盖翘起来了`、`边油起皮了`、`卡包口沿卷了` 这类问法。\n\n## 检索标签\n\n- 品类：wallet、card holder、small leather goods、coin purse、SLG\n- 部位：flap、edge、glazing、口沿、翻盖边、折边\n- 症状：翘边、卷边、边油起翘、边缘发黏、开胶、翻盖不贴合\n- 风险等级：中高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题发生在翻盖、卡槽口、包口折边等高频弯折部位。\n- 用户不确定这是储存形变，还是已经进入 edge finish / adhesive failure。\n\n## 判别要点\n\n1. CHANEL 官方对 small leather goods 强调不要 overfill，并避免 humidity、light 与会改变 finish 的 care products。\n2. Goyard 官方明确警告：过载和不当用途可能损伤材料并 alter edge finishes。\n3. LOEWE ReCraft 官方维修菜单单列 edge painting 与 re-stitching，说明边缘问题达到一定程度后应进入维修路径。\n\n## 路由规则\n\n### 可观察层\n\n- 只是轻微翘起，边油仍连续，没有裂口、发黏或脱层。\n- 翻盖仍能正常贴合，开合手感基本稳定。\n- 问题更像长期压放、装太满或暂时受潮后的形变。\n\n### 维修层\n\n- 边油起翘、裂开、发黏、泛白或开始粘手。\n- 翻盖边缘已经分层，或折边开始张口。\n- 翘边同时影响开合贴合度、卡片保持力或整体外观对称性。\n\n## 推荐工具\n\n- 干布\n- 空载静置\n- 拍照记录\n\n## 操作步骤\n\n1. 先减载：把内部卡片和票据恢复到正常容量。\n2. 干燥静置：避免继续受压、受热或潮湿环境。\n3. 观察边缘层级：区分是单纯卷曲，还是已经连带边油、胶层、缝线变化。\n4. 进入维修：若边油已起翘或翻盖贴合受影响，转 edge painting / re-stitching 路由。\n\n## 不建议的做法\n\n- 不要用胶水、热风、熨压或重物夹压强行压平。\n- 不要用酒精、溶剂或强清洁剂擦边油。\n- 不要把边油问题继续当成单纯储存变形拖延。\n\n## 直接送修 / 升级处理\n\n- 边油已经裂、翘、黏或脱层。\n- 翻盖无法平整贴合，影响开合和外观。\n- 边缘问题已扩展到折边、缝线或卡槽口。\n- 用户追求恢复原有边缘厚度、线条和平直度。\n\n## 参考依据\n\n- CHANEL, Small Leather Goods Care Instructions\n https://www.chanel.com/us/fashion/care-instructions/small-leather-goods/\n\n- Maison Goyard, Taking care of your Goyard\n https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html\n\n- Saint Laurent, FAQ\n https://www.ysl.com/en-us/displayname-faq",
+      "kind": "md",
+      "hash_value": "01019934c8613959f24244c81a413954",
+      "metadata": {
+        "materials": [],
+        "damage_types": [
+          "变形塌陷",
+          "边油开裂"
+        ],
+        "risk_level": "high",
+        "source_name": "小皮件翻盖翘边、口沿卷曲与边油起翘分流卡：变形还是 edge finish 失效",
+        "source_file": "70-slg-flap-edge-curling-glazing-lift.md"
+      }
+    },
+    {
+      "source_id": "71-corner-piping-vs-rolled-edge-wear-routing",
+      "source_path": "knowledge/raw/71-corner-piping-vs-rolled-edge-wear-routing.md",
+      "title": "角位包边、滚边与 piping 外露分流卡：只是磨边还是已经进了结构层",
+      "content": "# 角位包边、滚边与 piping 外露分流卡：只是磨边还是已经进了结构层\n\n## 资料定位\n\n这是一张用于区分 `rolled edge wear / corner piping exposure / leather corner panel damage` 的部位级资料卡，适合处理 `角位磨破了`、`包边露芯了`、`角角裂开了` 这类问法。\n\n## 检索标签\n\n- 部位：corner、piping、rolled edge、leather corner、包边、滚边、角位\n- 症状：磨破、露芯、裂开、磨穿、边油掉了、角位开口\n- 品类：tote、small leather goods、top handle bag、zip tote\n- 风险等级：高\n\n## 适用判断\n\n适用于以下情况：\n\n- 问题发生在高摩擦角位、滚边、外包角或带芯包边结构。\n- 用户不确定是 cosmetic 级边缘磨耗，还是已经进到结构层。\n\n## 判别要点\n\n1. Longchamp 官方明确把 Le Pliage 小面积角磨损列为 repair center 可处理项目，说明角位不是普通清洁问题。\n2. Goyard 官方写明过载和不当用途会损伤材料并 alter edge finishes；Artois 官方产品页还单列 leather corners on the bag。\n3. LOEWE ReCraft 将 edge painting 与 re-stitching 拆开列示，说明“边缘磨损”和“结构层开口”并不是同一层级。\n\n## 路由规则\n\n### Cosmetic edge wear\n\n- 只是边油变薄、失光或轻微磨平。\n- 没有看到芯材、包边绳芯或结构层。\n- 缝线仍稳定，角位没有张口。\n\n### Structural corner / piping damage\n\n- 已看到内芯、绳芯、里层或角位开口。\n- 角位同时出现缝线受力、变薄、穿孔或快速扩大。\n- 问题位于 leather corner panel、包边根部或承重转角。\n\n## 推荐工具\n\n- 干布\n- 减载使用\n- 拍照记录\n\n## 操作步骤\n\n1. 先停高负载：减少继续拖拽、满载和角位摩擦。\n2. 观察层级：确认只是边油磨耗，还是已能看到芯层或开口。\n3. 分流处理：单纯边油磨耗可进入 edge painting 判断；一旦露芯或开口，直接进入 repair routing。\n4. 记录扩散速度：若短期内明显扩大，应按高优先级送修。\n\n## 不建议的做法\n\n- 不要用胶水、补土、热熔片或家用皮补贴处理角位。\n- 不要打磨到更深层试图“磨平”边缘。\n- 不要在露芯后继续满载使用。\n\n## 直接送修 / 升级处理\n\n- 已露出芯材、绳芯或结构层。\n- 角位出现穿孔、张口、缝线受力异常。\n- 问题发生在 leather corners、包边根部或承重点。\n- 用户要求尽量维持原有角位比例与边缘线条。\n\n## 参考依据\n\n- Longchamp, Repairs\n https://www.longchamp.com/us/en/after-sales-repairs-and-services/repairs/\n\n- Maison Goyard, Taking care of your Goyard\n https://www.goyard.com/us_en/how-to-take-care-of-your-goyard/\n\n- Maison Goyard, Artois PM Bag\n https://www.goyard.com/us_en/sac-artois-pm.html\n\n- LOEWE ReCraft\n https://www.loewe.com/int/zh_CN/stories-projects/loewe-recraft.html",
+      "kind": "md",
+      "hash_value": "e37b88c3a62ec391cb3dd63e3df67bcf",
+      "metadata": {
+        "materials": [],
+        "damage_types": [
+          "磨损破洞",
+          "边油开裂"
+        ],
+        "risk_level": "medium",
+        "source_name": "角位包边、滚边与 piping 外露分流卡：只是磨边还是已经进了结构层",
+        "source_file": "71-corner-piping-vs-rolled-edge-wear-routing.md"
+      }
+    },
+    {
+      "source_id": "72-product-line-name-routing-index",
+      "source_path": "knowledge/raw/72-product-line-name-routing-index.md",
+      "title": "产品线名路由索引卡（二）：Dior / Saint Laurent / Prada / Goyard",
+      "content": "# 产品线名路由索引卡（二）：Dior / Saint Laurent / Prada / Goyard\n\n## 资料定位\n\n这是一张跨品牌的 `line name first` 路由索引卡，专门服务“用户只说产品线、不说材质”的场景。它不直接给护理步骤，而是把产品线名先接到正确品牌规则和材质映射卡。\n\n## Dior\n\n- `Lady Dior` -> `61-dior-material-and-care-service-map.md` + `62-dior-line-name-routing.md`\n- `Saddle` -> `61-dior-material-and-care-service-map.md` + `62-dior-line-name-routing.md`\n- `Dior Book Tote` -> `61-dior-material-and-care-service-map.md` + `62-dior-line-name-routing.md`\n\n## Saint Laurent\n\n- `Kate` -> `63-saint-laurent-material-and-care-map.md` + `64-saint-laurent-line-name-routing.md`\n- `Sac de Jour` -> `63-saint-laurent-material-and-care-map.md` + `64-saint-laurent-line-name-routing.md`\n- `Loulou` -> `63-saint-laurent-material-and-care-map.md` + `64-saint-laurent-line-name-routing.md`\n- `Le 5 a 7 / Le 5 à 7` -> `63-saint-laurent-material-and-care-map.md` + `64-saint-laurent-line-name-routing.md`\n\n## Prada\n\n- `Prada Galleria` -> `65-prada-material-and-maintenance-map.md` + `66-prada-line-name-routing.md`\n- `Prada Re-Edition` -> `65-prada-material-and-maintenance-map.md` + `66-prada-line-name-routing.md`\n- `Re-Nylon` -> `65-prada-material-and-maintenance-map.md` + `66-prada-line-name-routing.md`\n\n## Goyard\n\n- `Saint Louis` -> `67-goyard-material-and-care-map.md` + `68-goyard-line-name-routing.md`\n- `Artois` -> `67-goyard-material-and-care-map.md` + `68-goyard-line-name-routing.md`\n- `Anjou` -> `67-goyard-material-and-care-map.md` + `68-goyard-line-name-routing.md`\n- `Belvedere` -> `67-goyard-material-and-care-map.md` + `68-goyard-line-name-routing.md`\n- `Sénat / Senat` -> `67-goyard-material-and-care-map.md` + `68-goyard-line-name-routing.md`\n\n## 使用规则\n\n1. 用户只说 line name 时，先召回本卡。\n2. 再跳到对应品牌的 `材质映射卡 + 系列分流卡`。\n3. 完成材质判别后，才进入场景卡、工具矩阵或送修阈值卡。\n\n## 不要停在这张卡\n\n- 用户已经描述了明确症状时，本卡只做第一跳。\n- 用户已经给出具体材质名时，应优先进品牌材质卡。\n- 问题已经是五金、开合、角位、边油、受潮或霉味时，应继续进入部位卡或送修阈值卡。\n\n## 推荐下一跳\n\n- 材质词模糊 -> `39-luxury-brand-material-term-map.md`\n- 只给 line name -> 本卡\n- 需要品牌总入口 -> `60-brand-material-routing-index.md`\n- 症状清晰 -> 对应场景卡\n\n## 参考依据\n\n- Dior, Lady Dior bags\n https://www.dior.com/en_us/fashion/womens-fashion/bags/lady-dior\n\n- Saint Laurent, Kate line page\n https://www.ysl.com/en-us/ca/new-arrivals/highlights/kate-women\n\n- Prada, Prada Galleria\n https://www.prada.com/us/en/womens/essentials/prada-galleria/c/10102US\n\n- Maison Goyard, Saint Louis PM Bag\n https://www.goyard.com/us_en/sac-saint-louis-croc-pm.html",
+      "kind": "md",
+      "hash_value": "55c635daaa5b4f52a2a7c2cd838aab08",
+      "metadata": {
+        "materials": [
+          "五金"
+        ],
+        "damage_types": [
+          "边油开裂"
+        ],
+        "risk_level": "medium",
+        "source_name": "产品线名路由索引卡（二）：Dior / Saint Laurent / Prada / Goyard",
+        "source_file": "72-product-line-name-routing-index.md"
+      }
     }
   ],
   "sync": {
@@ -1266,7 +1500,7 @@
   "manual_import": {
     "strategy": "manual_upload",
     "target_docs_kb_id": "zwb68dlfs9",
-    "recommended_file_count": 60,
+    "recommended_file_count": 72,
     "recommended_files": [
       "knowledge/raw/01-vegetable-tanned-care.md",
       "knowledge/raw/02-suede-and-patent.md",
@@ -1327,7 +1561,19 @@
       "knowledge/raw/57-chanel-small-leather-goods-routing.md",
       "knowledge/raw/58-coach-fabric-cleaner-boundary-card.md",
       "knowledge/raw/59-louis-vuitton-material-choice-routing.md",
-      "knowledge/raw/60-brand-material-routing-index.md"
+      "knowledge/raw/60-brand-material-routing-index.md",
+      "knowledge/raw/61-dior-material-and-care-service-map.md",
+      "knowledge/raw/62-dior-line-name-routing.md",
+      "knowledge/raw/63-saint-laurent-material-and-care-map.md",
+      "knowledge/raw/64-saint-laurent-line-name-routing.md",
+      "knowledge/raw/65-prada-material-and-maintenance-map.md",
+      "knowledge/raw/66-prada-line-name-routing.md",
+      "knowledge/raw/67-goyard-material-and-care-map.md",
+      "knowledge/raw/68-goyard-line-name-routing.md",
+      "knowledge/raw/69-card-slot-stretching-and-warp-routing.md",
+      "knowledge/raw/70-slg-flap-edge-curling-glazing-lift.md",
+      "knowledge/raw/71-corner-piping-vs-rolled-edge-wear-routing.md",
+      "knowledge/raw/72-product-line-name-routing-index.md"
     ],
     "checklist_path": "knowledge/generated/manifests/bailian-import-checklist.md",
     "avoid_bundle_path": "knowledge/generated/docs_kb_bundle.md",

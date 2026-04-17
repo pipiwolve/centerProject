@@ -12,6 +12,15 @@ export type ChatSource = {
   preview: string;
   content: string;
   excerpt: string;
+  reference_id?: string;
+  citation_label?: string;
+  source_uri?: string;
+  hit_type?: "reference" | "chunk";
+  snippet?: string;
+  doc_id?: string;
+  doc_name?: string;
+  page_numbers?: number[];
+  retrieval_chunks?: string[];
   materials?: string[];
   damage_types?: string[];
 };
@@ -36,39 +45,25 @@ export type ChatResponse = {
 };
 
 export type SourceSummary = {
+  retrieval_mode: string;
+  source_backend: string;
+  bailian_app_id?: string;
+  target_docs_kb_id?: string;
+  target_faq_kb_id?: string;
+  deployment_target?: string;
+  read_only_runtime?: boolean;
+  app_configured?: boolean;
+  workspace_configured?: boolean;
+  cloud_model_enabled?: boolean;
+  cloud_sync_enabled?: boolean;
   report?: {
-    generated_at?: string;
-    source_count?: number;
-    chunk_count?: number;
-    faq_count?: number;
-    eval_count?: number;
-    sources?: Array<{
-      source_id: string;
-      source_path: string;
-      title: string;
-      metadata: {
-        materials?: string[];
-        damage_types?: string[];
-        risk_level?: string;
-      };
-    }>;
-    sync?: {
-      status?: string;
-      detail?: string;
-    };
-    manual_import?: {
-      strategy?: string;
-      target_docs_kb_id?: string;
-      recommended_file_count?: number;
-      recommended_files?: string[];
-      checklist_path?: string;
-      avoid_bundle_path?: string;
-      runtime_retrieval_mode?: string;
-    };
+    summary?: string;
+    mode_label?: string;
+    source_backend?: string;
+    last_sync_status?: string;
+    sync_detail?: string;
+    disabled_operations?: string[];
   };
-  faq_count: number;
-  chunk_count: number;
-  source_count: number;
 };
 
 export type EvalReport = {
@@ -95,12 +90,15 @@ export type HealthResponse = {
   cloud_model_enabled: boolean;
   cloud_sync_enabled: boolean;
   retrieval_mode: string;
+  source_backend: string;
+  bailian_app_id?: string;
   target_docs_kb_id?: string;
   target_faq_kb_id?: string;
   deployment_target: string;
   read_only_runtime: boolean;
   ingest_enabled: boolean;
   ingest_artifacts_ready: boolean;
+  bailian_app_configured: boolean;
 };
 
 function buildApiUrl(path: string) {

@@ -31,6 +31,7 @@ class AppConfig:
     dashscope_api_key: str
     dashscope_model_name: str
     dashscope_base_url: str
+    bailian_app_id: str
     backend_host: str
     backend_port: int
     enable_cloud_sync: bool
@@ -86,6 +87,10 @@ class AppConfig:
         return self.deployment_target == "vercel"
 
     @property
+    def bailian_app_configured(self) -> bool:
+        return bool(self.dashscope_api_key and self.bailian_app_id)
+
+    @property
     def ingest_enabled(self) -> bool:
         return not self.read_only_runtime
 
@@ -129,6 +134,7 @@ class AppConfig:
                 "DASHSCOPE_BASE_URL",
                 "https://dashscope.aliyuncs.com/compatible-mode/v1",
             ),
+            bailian_app_id=os.getenv("BAILIAN_APP_ID", ""),
             backend_host=os.getenv("BACKEND_HOST", "127.0.0.1"),
             backend_port=int(os.getenv("BACKEND_PORT", "8000")),
             enable_cloud_sync=_env_flag("ENABLE_CLOUD_SYNC", False),

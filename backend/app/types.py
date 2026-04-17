@@ -71,6 +71,31 @@ class SyncResult:
 
 
 @dataclass(slots=True)
+class ChatSourceHit:
+    title: str
+    source_type: str
+    source_path: str
+    score: float = 0.0
+    preview: str = ""
+    content: str = ""
+    excerpt: str = ""
+    materials: list[str] = field(default_factory=list)
+    damage_types: list[str] = field(default_factory=list)
+    reference_id: str = ""
+    citation_label: str = ""
+    source_uri: str = ""
+    hit_type: str = "reference"
+    snippet: str = ""
+    doc_id: str = ""
+    doc_name: str = ""
+    page_numbers: list[int] = field(default_factory=list)
+    retrieval_chunks: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
 class IngestReport:
     generated_at: str
     source_count: int

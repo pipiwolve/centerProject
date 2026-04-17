@@ -1,8 +1,10 @@
 import sys
+from http import HTTPStatus
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+import app.bailian_application as bailian_module
 from app.config import AppConfig
 from app.knowledge_pipeline import KnowledgePipeline
 from app.server import create_app
@@ -72,12 +74,69 @@ def test_pipeline_generates_manifests() -> None:
 def test_backend_routes_support_local_and_vercel_service_prefixes() -> None:
     config = AppConfig.load(Path(__file__).resolve().parents[1])
     KnowledgePipeline(config).ingest(sync_cloud=False)
+    config.dashscope_api_key = "test-key"
+    config.bailian_app_id = "app-test"
+
+    class MockPayload:
+        def __init__(self, **kwargs) -> None:
+            self.__dict__.update(kwargs)
+
+    class MockApplication:
+        @staticmethod
+        def call(**_: object) -> MockPayload:
+            return MockPayload(
+                status_code=HTTPStatus.OK,
+                output=MockPayload(
+                    text=(
+                        "### 适用判断\n适合先做局部测试。\n\n"
+                        "### 所需工具\n软布、麂皮刷。\n\n"
+                        "### 操作步骤\n1. 先吸附浮油。\n2. 再用专用清洁剂轻刷。\n\n"
+                        "### 注意事项\n避免大面积浸湿。\n\n"
+                        "### 何时送修\n若油圈扩大请送修。"
+                    ),
+                    session_id="route-test",
+                    doc_references=[
+                        MockPayload(
+                            title="翻毛皮油渍处理",
+                            doc_id="doc-1",
+                            doc_name="20-suede-watermark-oil-routing.md",
+                            doc_url="https://example.com/doc-1",
+                            text="翻毛皮遇到油渍时，应先吸附表面油分。",
+                            page_number=[2],
+                            index_id="kb-1",
+                        )
+                    ],
+                    thoughts=[
+                        MockPayload(
+                            observation=[
+                                {
+                                    "doc_name": "20-suede-watermark-oil-routing.md",
+                                    "title": "翻毛皮油渍处理",
+                                    "text": "先用纸巾吸附油分，再用麂皮刷顺毛轻刷。",
+                                    "score": 0.93,
+                                    "doc_url": "https://example.com/doc-1",
+                                }
+                            ]
+                        )
+                    ],
+                ),
+            )
+
+    original_application = bailian_module.Application
+    bailian_module.Application = MockApplication
     client = create_app(config).test_client()
+    try:
+        for path in ("/health", "/api/health", "/sources", "/api/sources"):
+            response = client.get(path)
+            assert response.status_code == 200
 
-    for path in ("/health", "/api/health", "/sources", "/api/sources"):
-        response = client.get(path)
-        assert response.status_code == 200
-
-    for path in ("/chat", "/api/chat"):
-        response = client.post(path, json={"query": "植鞣革手柄发黑了怎么清理？", "session_id": "route-test"})
-        assert response.status_code == 200
+        for path in ("/chat", "/api/chat"):
+            response = client.post(path, json={"query": "翻毛皮蹭到油渍还能自己处理吗？", "session_id": "route-test"})
+            assert response.status_code == 200
+            payload = response.get_json()
+            assert payload["session_id"] == "route-test"
+            assert payload["sources"]
+            assert payload["sources"][0]["citation_label"] == "引用 1"
+            assert payload["sources"][0]["retrieval_chunks"]
+    finally:
+        bailian_module.Application = original_application

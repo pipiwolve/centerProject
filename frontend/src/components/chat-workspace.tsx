@@ -54,6 +54,14 @@ function createId() {
 function formatSourceType(sourceType: string) {
   const normalized = sourceType.toLowerCase();
 
+  if (normalized.includes("bailian_reference")) {
+    return "百炼引用";
+  }
+
+  if (normalized.includes("bailian_chunk")) {
+    return "召回切片";
+  }
+
   if (normalized.includes("faq")) {
     return "常见问题";
   }
@@ -276,8 +284,10 @@ function SourceCard({
 }) {
   const preview = source.preview || source.excerpt;
   const content = source.content || preview;
+  const retrievalChunks = (source.retrieval_chunks || []).filter(Boolean);
   const hasExpandableContent =
-    content.length > preview.length + 24 && normalizeComparableText(content) !== normalizeComparableText(preview);
+    retrievalChunks.length > 0 ||
+    (content.length > preview.length + 24 && normalizeComparableText(content) !== normalizeComparableText(preview));
   const panelId = `source-panel-${sourceKey.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 
   return (
@@ -286,15 +296,27 @@ function SourceCard({
         <div>
           <p className="text-sm font-semibold text-[color:var(--ink-strong)]">{source.title}</p>
           <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[color:var(--ink-soft)]">
-            {formatSourceType(source.source_type)}
+            {(source.citation_label ? `${source.citation_label} · ` : "") + formatSourceType(source.source_type)}
           </p>
         </div>
         <span className="rounded-full border border-[color:var(--border-soft)] px-2 py-1 text-xs text-[color:var(--ink-soft)]">
-          {source.materials?.[0] || "护理依据"}
+          {source.hit_type === "chunk" ? "真实切片" : source.doc_name || source.materials?.[0] || "护理依据"}
         </span>
       </div>
 
       <p className="mt-3 text-sm leading-7 text-[color:var(--ink-soft)]">{preview}</p>
+
+      {source.source_uri ? (
+        <p className="mt-3 break-all text-xs leading-6 text-[color:var(--ink-soft)]">
+          来源标识 · {source.source_uri}
+        </p>
+      ) : null}
+
+      {source.page_numbers?.length ? (
+        <p className="mt-2 text-xs leading-6 text-[color:var(--ink-soft)]">
+          页码 · {source.page_numbers.join(", ")}
+        </p>
+      ) : null}
 
       {source.damage_types?.length || source.materials?.length ? (
         <div className="mt-4 flex flex-wrap gap-2">
@@ -344,7 +366,28 @@ function SourceCard({
           >
             <div className="rounded-[1.2rem] border border-[color:var(--border-soft)] bg-white/65 p-4">
               <div className="max-h-[22rem] overflow-y-auto pr-2">
-                <RichText content={content} compact />
+                {retrievalChunks.length > 0 ? (
+                  <div className="space-y-4">
+                    <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--accent)]">
+                      百炼召回切片
+                    </p>
+                    {retrievalChunks.map((chunk, index) => (
+                      <div
+                        key={`${sourceKey}-chunk-${index}`}
+                        className="rounded-[1rem] border border-[color:var(--border-soft)] bg-white/70 p-3"
+                      >
+                        <p className="text-xs uppercase tracking-[0.22em] text-[color:var(--ink-soft)]">
+                          切片 {index + 1}
+                        </p>
+                        <div className="mt-2">
+                          <RichText content={chunk} compact />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <RichText content={content} compact />
+                )}
               </div>
             </div>
           </div>
@@ -385,7 +428,6 @@ export function ChatWorkspace() {
     const userId = createId();
     const assistantId = createId();
     const nextSessionId = sessionId || createId();
-    const requestFailedMessage = "暂时无法连接护理服务，请稍后再试。";
 
     setBusy(true);
     setError("");
@@ -420,7 +462,9 @@ export function ChatWorkspace() {
           ),
         );
       });
-    } catch {
+    } catch (caughtError) {
+      const requestFailedMessage =
+        caughtError instanceof Error ? caughtError.message : "暂时无法连接护理服务，请稍后再试。";
       startTransition(() => {
         setError(requestFailedMessage);
         setMessages((current) =>
@@ -731,18 +775,18 @@ export function ChatWorkspace() {
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--accent)]">参考依据</p>
               <h2 className="mt-3 font-serif text-3xl tracking-[-0.05em] text-[color:var(--ink-strong)]">
-                建议依据
+                百炼命中来源
               </h2>
             </div>
             <div className="rounded-full border border-[color:var(--border-soft)] px-3 py-1 text-xs text-[color:var(--ink-soft)]">
-              {activeSources.length} 条参考
+              {activeSources.length} 条命中
             </div>
           </div>
 
           <div className="mt-5 space-y-3">
             {activeSources.length === 0 ? (
               <div className="rounded-[1.5rem] border border-dashed border-[color:var(--border-soft)] bg-[color:var(--surface)] p-5 text-sm leading-7 text-[color:var(--ink-soft)]">
-                完成一次问答后，这里会展示与建议相关的护理资料，方便你核对处理思路是否适合当前情况。
+                本次回答还没有返回可展示的百炼引用或召回切片。完成一次问答后，这里会展示百炼应用真实命中的引用与片段。
               </div>
             ) : (
               activeSources.map((source, index) => {

@@ -3,32 +3,34 @@
 一套为毕业设计准备的皮具养护 RAG 系统，当前已经收敛为：
 
 - `frontend/`: Next.js App Router 前端，作为 Vercel 主站点
-- `backend/`: Flask + LangChain 后端，作为同一个 Vercel 项目里的 `/api` 服务
-- `knowledge/`: 原始资料、处理中间产物、FAQ/评测生成产物
+- `backend/`: Flask 后端，作为同一个 Vercel 项目里的 `/api` 服务
+- `knowledge/`: 原始资料、离线处理产物、FAQ/评测生成产物
 - `.codex/skills/ui-ux-pro-max/`: 保留的 UI/UX 设计 skill
 
 ## 技术路线
 
 - 前端：Next.js 16 + Tailwind 4
 - 后端：Flask 3
-- RAG 编排：LangChain Runnable 路线
-- 模型：阿里云百炼 `ChatTongyi`
-- 检索：本地 FAQ + 文档切片双层检索
-- 云端知识库：百炼知识库 `zwb68dlfs9`，用于归档展示和答辩证明
+- 在线问答：`Next.js -> Flask -> 百炼应用(AppId)`
+- 模型与检索：阿里云百炼应用 `dashscope.Application.call`
+- 来源抽屉：展示百炼返回的 `doc_references` 与 `thoughts/observation`
+- 云端知识库：百炼知识库 `zwb68dlfs9`
 - 部署：Vercel Services，一次部署前后端
 
 ## 已实现功能
 
-- 对话工作台：固定 6 段式输出，展示来源与检索分析
-- 知识库工作台：查看 ingest 结果、百炼知识库目标和运行时状态
+- 对话工作台：固定 6 段式输出，展示百炼真实命中来源
+- 知识库工作台：展示 App ID、知识库 ID、云端模式与运行时状态
 - 评测工作台：批量运行测试集并输出评分
-- 自动知识库流水线：
+- 离线知识库流水线：
   - 读取 `knowledge/raw/` 下的 `md/txt/docx/pdf`
   - 清洗与切分
   - 元数据标注
   - FAQ 自动补全
   - 评测集自动生成
-  - 导出本地 manifests 与百炼导入清单
+  - 导出离线 manifests 与百炼导入清单
+
+说明：离线 `ingest` 仍然保留给资料整理和论文材料使用，但线上问答的唯一检索真相已经切到百炼应用。
 
 ## 本地开发
 
@@ -48,6 +50,7 @@ cp .env.example .env
 
 - `NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000`
 - `DASHSCOPE_API_KEY=<你的新 Key>`
+- `BAILIAN_APP_ID=<你的百炼应用 AppId>`
 - `BAILIAN_DOCS_KB_ID=zwb68dlfs9`
 
 如果你之前暴露过 DashScope API Key，请先在阿里云控制台作废并重新生成。
@@ -79,14 +82,15 @@ cd frontend
 npm run dev
 ```
 
-## 百炼知识库导入
+## 百炼知识库与应用
 
 - 目标知识库 ID：`zwb68dlfs9`
-- 上传目录：`knowledge/raw/`
-- 上传方式：逐个上传 `01-14` 的 14 个独立 Markdown 文件
-- 不要上传：`knowledge/generated/docs_kb_bundle.md`
+- 在线运行必须提供 `BAILIAN_APP_ID`
+- 该 App 需要提前绑定当前皮具知识库
+- 来源抽屉依赖百炼应用返回的 `doc_references` 与召回切片
+- `knowledge/raw/` 下的 Markdown 仍建议逐个上传到百炼控制台，方便论文展示文档数量与命中来源
 
-原因：当前在线问答使用本地 LangChain 检索，百炼侧主要承担云端知识库归档与答辩展示。如果上传合并包，控制台里只会显示 1 个大文档，不利于展示资料规模。
+不建议把 `knowledge/generated/docs_kb_bundle.md` 当成主上传文件，因为那会把展示效果压缩成单一大文档。
 
 ## Vercel 全栈部署
 
@@ -100,7 +104,7 @@ npm run dev
 1. 先在本地执行 `./scripts/ingest.sh`
 2. 把 `knowledge/generated/manifests/` 一并提交并推送到 GitHub
 
-原因：Vercel 运行时是只读的，部署后的 `/api/ingest/run` 会被自动关闭，线上只负责读取已经生成好的 manifests。
+原因：Vercel 运行时是只读的，部署后的 `/api/ingest/run` 会被自动关闭；离线产物仍保留给资料准备和评测使用。
 
 ### Vercel 操作步骤
 
@@ -110,6 +114,7 @@ npm run dev
 
 ```bash
 DASHSCOPE_API_KEY=<你的新 Key>
+BAILIAN_APP_ID=<你的百炼应用 AppId>
 DASHSCOPE_MODEL_NAME=qwen-plus
 DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 BAILIAN_DOCS_KB_ID=zwb68dlfs9
@@ -125,9 +130,10 @@ ENABLE_CLOUD_SYNC=false
 ### 部署后行为
 
 - 前端会自动通过同域 `/api` 访问 Flask 后端
-- `/api/health` 会返回当前运行环境、是否只读、知识库产物是否齐全
-- `/api/ingest/run` 在 Vercel 上会返回只读提示
-- 本地运行时仍可正常 ingest、chat、eval
+- `/api/health` 会返回 `retrieval_mode=bailian_app`、`source_backend=bailian`、`bailian_app_id`
+- `/api/chat` 会直接请求百炼应用，并把来源抽屉映射成“引用 + 切片”
+- `/api/sources` 会返回云端状态摘要，而不是本地 chunk/faq 统计
+- `/api/ingest/run` 与 `/api/ingest/status` 在 Vercel 上会返回停用说明
 
 ### 如果 Vercel 后台没有 Services 选项
 
@@ -152,10 +158,10 @@ ENABLE_CLOUD_SYNC=false
 
 - `backend`: `pytest -q` 通过
 - `backend`: `python manage.py ingest` 可生成 chunk / FAQ / eval manifests
-- `backend`: `/api/health`、`/api/sources`、`/api/chat` 冒烟测试通过
+- `backend`: `/api/health`、`/api/sources`、`/api/chat` 云端模式测试通过
 - `frontend`: `npm run build` 通过
 
 ## 备注
 
 - `ui-ux-pro-max-skill` 原仓库不是标准 Codex `SKILL.md` 安装结构，本项目改为使用其官方 CLI 安装方式保留到 `.codex/skills/ui-ux-pro-max/`
-- 当前运行链路是“本地 LangChain 检索 + 百炼模型生成”，不是 `dashscope.Application.call`
+- 当前运行链路已经切换为“百炼应用直连”，不再以本地 manifests 作为线上来源抽屉真相

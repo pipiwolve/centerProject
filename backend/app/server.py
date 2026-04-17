@@ -11,7 +11,7 @@ from .chat_service import LeatherChatService
 from .config import AppConfig
 from .eval_service import EvalService
 from .knowledge_pipeline import KnowledgePipeline
-from .retriever import LocalKnowledgeIndex
+from .utils import read_json
 
 
 def create_app(config: AppConfig | None = None) -> Flask:
@@ -22,9 +22,7 @@ def create_app(config: AppConfig | None = None) -> Flask:
         resources={r"/api/*": {"origins": ["http://127.0.0.1:3000", "http://localhost:3000", "*"]}},
     )
 
-    index = LocalKnowledgeIndex(app_config)
-    pipeline = KnowledgePipeline(app_config)
-    chat_service = LeatherChatService(app_config, index)
+    chat_service = LeatherChatService(app_config)
     eval_service = EvalService(app_config, chat_service)
 
     def json_error(message: str, status_code: int = 500, exc: Exception | None = None) -> tuple[Any, int]:
@@ -32,6 +30,30 @@ def create_app(config: AppConfig | None = None) -> Flask:
         if exc is not None and not app_config.read_only_runtime:
             payload["detail"] = str(exc)
         return jsonify(payload), status_code
+
+    def build_cloud_summary() -> dict[str, Any]:
+        sync_report = read_json(app_config.sync_report_path, {})
+        return {
+            "retrieval_mode": "bailian_app",
+            "source_backend": "bailian",
+            "bailian_app_id": app_config.bailian_app_id,
+            "target_docs_kb_id": app_config.docs_kb_id,
+            "target_faq_kb_id": app_config.faq_kb_id,
+            "deployment_target": app_config.deployment_target,
+            "read_only_runtime": app_config.read_only_runtime,
+            "app_configured": app_config.bailian_app_configured,
+            "workspace_configured": bool(app_config.workspace_id),
+            "cloud_model_enabled": bool(app_config.dashscope_api_key),
+            "cloud_sync_enabled": app_config.enable_cloud_sync,
+            "report": {
+                "summary": "线上问答来源已切换为百炼应用真实命中结果，来源抽屉展示 doc_references 与召回切片。",
+                "mode_label": "百炼应用直连",
+                "source_backend": "bailian",
+                "last_sync_status": sync_report.get("status", "idle"),
+                "sync_detail": sync_report.get("detail", "当前未执行自动同步，知识库以百炼应用绑定结果为准。"),
+                "disabled_operations": ["ingest_api"],
+            },
+        }
 
     @app.get("/health")
     @app.get("/api/health")
@@ -44,43 +66,39 @@ def create_app(config: AppConfig | None = None) -> Flask:
                 "port": app_config.backend_port,
                 "cloud_model_enabled": bool(app_config.dashscope_api_key),
                 "cloud_sync_enabled": app_config.enable_cloud_sync,
-                "retrieval_mode": "local_langchain",
+                "retrieval_mode": "bailian_app",
+                "source_backend": "bailian",
+                "bailian_app_id": app_config.bailian_app_id,
                 "target_docs_kb_id": app_config.docs_kb_id,
                 "target_faq_kb_id": app_config.faq_kb_id,
                 "deployment_target": app_config.deployment_target,
                 "read_only_runtime": app_config.read_only_runtime,
                 "ingest_enabled": app_config.ingest_enabled,
                 "ingest_artifacts_ready": app_config.ingest_artifacts_ready,
+                "bailian_app_configured": app_config.bailian_app_configured,
             }
         )
 
     @app.get("/sources")
     @app.get("/api/sources")
     def sources() -> Any:
-        summary = index.sources_summary()
-        return jsonify(summary)
+        return jsonify(build_cloud_summary())
 
     @app.post("/ingest/run")
     @app.post("/api/ingest/run")
     def ingest_run() -> Any:
-        if not app_config.ingest_enabled:
-            return json_error(
-                "当前 Vercel 运行时为只读模式，请先在本地执行 ./scripts/ingest.sh 并提交 knowledge/generated/manifests 后再重新部署。",
-                status_code=409,
-            )
-        payload = request.get_json(silent=True) or {}
-        sync_cloud = bool(payload.get("sync_cloud", False))
-        try:
-            report = pipeline.ingest(sync_cloud=sync_cloud)
-        except Exception as exc:
-            return json_error("重新 ingest 失败，请检查资料格式或后端日志。", exc=exc)
-        return jsonify(report)
+        return json_error(
+            "线上运行已切换为百炼应用直连，/api/ingest/run 不再提供运行时重建。请使用本地脚本准备资料，并在百炼应用中维护知识库绑定。",
+            status_code=409,
+        )
 
     @app.get("/ingest/status")
     @app.get("/api/ingest/status")
     def ingest_status() -> Any:
-        summary = index.sources_summary()
-        return jsonify(summary.get("report", {}))
+        return json_error(
+            "线上运行已切换为百炼应用直连，/api/ingest/status 不再返回本地 manifests 状态。",
+            status_code=409,
+        )
 
     @app.post("/chat")
     @app.post("/api/chat")
@@ -120,8 +138,7 @@ def main() -> None:
     config = AppConfig.load()
     app = create_app(config)
     pipeline = KnowledgePipeline(config)
-    index = LocalKnowledgeIndex(config)
-    chat_service = LeatherChatService(config, index)
+    chat_service = LeatherChatService(config)
     eval_service = EvalService(config, chat_service)
 
     if args.command == "ingest":

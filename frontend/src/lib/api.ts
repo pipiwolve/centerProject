@@ -71,19 +71,64 @@ export type SourceSummary = {
   };
 };
 
+export type RagKnowledgeSummary = {
+  generated_at?: string;
+  source_count: number;
+  chunk_count: number;
+  faq_count: number;
+  eval_count: number;
+  material_count: number;
+  damage_type_count: number;
+  high_risk_count: number;
+  top_materials: Array<{
+    name: string;
+    count: number;
+  }>;
+  top_damage_types: Array<{
+    name: string;
+    count: number;
+  }>;
+  documents: Array<{
+    source_id: string;
+    title: string;
+    source_path: string;
+    materials: string[];
+    damage_types: string[];
+    risk_level: string;
+    excerpt: string;
+  }>;
+  faq_examples: Array<{
+    faq_id: string;
+    question: string;
+    title: string;
+    materials: string[];
+    damage_types: string[];
+  }>;
+  eval_cases: Array<{
+    case_id: string;
+    question: string;
+    title: string;
+    expected_keywords: string[];
+  }>;
+};
+
 export type EvalReport = {
   generated_at: string;
   case_count: number;
-  average_score: number;
+  average_score: number | null;
+  mode: "live" | "preview";
+  live_run_enabled: boolean;
+  note: string;
   cases: Array<{
     case_id: string;
     question: string;
     title: string;
     expected_keywords: string[];
-    latency_ms: number;
+    latency_ms: number | null;
     rewritten_query: string;
-    score: Record<string, number>;
+    score: Record<string, number> | null;
     sources: ChatSource[];
+    status: "completed" | "preview";
   }>;
 };
 
@@ -151,6 +196,10 @@ export function getHealth() {
 
 export function getSources() {
   return requestJson<SourceSummary>("/api/sources");
+}
+
+export function getKnowledgeSummary() {
+  return requestJson<RagKnowledgeSummary>("/api/knowledge/summary");
 }
 
 export function runIngest(syncCloud = false) {

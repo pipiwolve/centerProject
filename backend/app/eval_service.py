@@ -5,7 +5,7 @@ from typing import Any
 
 from .chat_service import LeatherChatService
 from .config import AppConfig
-from .utils import read_jsonl
+from .utils import read_json, read_jsonl
 
 
 class EvalService:
@@ -31,15 +31,65 @@ class EvalService:
                     "latency_ms": response["latency_ms"],
                     "rewritten_query": response["rewritten_query"],
                     "sources": response["sources"],
+                    "status": "completed",
                 }
             )
 
         average = round(total_score / len(results), 2) if results else 0.0
-        return {
+        report = {
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "case_count": len(results),
             "average_score": average,
+            "mode": "live",
+            "live_run_enabled": True,
+            "note": "当前结果为实时批量评测，逐题调用的是当前问答服务。",
             "cases": results,
+        }
+        return report
+
+    def load_cached_report(self) -> dict[str, Any] | None:
+        cached = read_json(self.config.eval_report_path, {})
+        if not isinstance(cached, dict) or not cached:
+            return None
+
+        cases = cached.get("cases")
+        if not isinstance(cases, list):
+            return None
+
+        return {
+            "generated_at": cached.get("generated_at") or datetime.now(timezone.utc).isoformat(),
+            "case_count": cached.get("case_count", len(cases)),
+            "average_score": cached.get("average_score"),
+            "mode": "preview",
+            "live_run_enabled": False,
+            "note": cached.get("note") or "当前展示的是最近一次离线生成的评测快照。",
+            "cases": cases,
+        }
+
+    def build_preview_report(self, note: str) -> dict[str, Any]:
+        cases = read_jsonl(self.config.eval_manifest_path)
+        preview_cases = [
+            {
+                "case_id": case["case_id"],
+                "question": case["question"],
+                "title": case["title"],
+                "expected_keywords": case.get("expected_keywords", []),
+                "score": None,
+                "latency_ms": None,
+                "rewritten_query": case["question"],
+                "sources": [],
+                "status": "preview",
+            }
+            for case in cases
+        ]
+        return {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "case_count": len(preview_cases),
+            "average_score": None,
+            "mode": "preview",
+            "live_run_enabled": False,
+            "note": note,
+            "cases": preview_cases,
         }
 
     def _score_case(

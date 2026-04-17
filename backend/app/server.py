@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import uuid
+from collections import Counter
 from typing import Any
 
 from flask import Flask, jsonify, request
@@ -11,7 +12,7 @@ from .chat_service import LeatherChatService
 from .config import AppConfig
 from .eval_service import EvalService
 from .knowledge_pipeline import KnowledgePipeline
-from .utils import read_json
+from .utils import excerpt_text, read_json, read_jsonl
 
 
 def create_app(config: AppConfig | None = None) -> Flask:
@@ -55,6 +56,92 @@ def create_app(config: AppConfig | None = None) -> Flask:
             },
         }
 
+    def build_rag_summary() -> dict[str, Any]:
+        ingest_report = read_json(app_config.ingest_report_path, {})
+        chunk_items = read_jsonl(app_config.chunk_manifest_path)
+        faq_items = read_jsonl(app_config.faq_manifest_path)
+        eval_items = read_jsonl(app_config.eval_manifest_path)
+        source_items = ingest_report.get("sources", []) if isinstance(ingest_report, dict) else []
+
+        material_counter: Counter[str] = Counter()
+        damage_counter: Counter[str] = Counter()
+        document_cards: list[dict[str, Any]] = []
+        high_risk_count = 0
+
+        for source in source_items:
+            metadata = source.get("metadata") or {}
+            materials = [str(item) for item in metadata.get("materials", []) if item]
+            damage_types = [str(item) for item in metadata.get("damage_types", []) if item]
+            risk_level = str(metadata.get("risk_level") or "unknown")
+
+            material_counter.update(materials)
+            damage_counter.update(damage_types)
+            if risk_level.lower() == "high" or "高" in risk_level:
+                high_risk_count += 1
+
+            if len(document_cards) >= 10:
+                continue
+
+            document_cards.append(
+                {
+                    "source_id": source.get("source_id", ""),
+                    "title": source.get("title") or metadata.get("source_name") or "未命名资料",
+                    "source_path": source.get("source_path", ""),
+                    "materials": materials,
+                    "damage_types": damage_types,
+                    "risk_level": risk_level,
+                    "excerpt": excerpt_text(
+                        source.get("content", ""),
+                        limit=200,
+                        title=source.get("title"),
+                        strip_title=True,
+                    ),
+                }
+            )
+
+        faq_examples = []
+        for item in faq_items[:6]:
+            metadata = item.get("metadata") or {}
+            faq_examples.append(
+                {
+                    "faq_id": item.get("faq_id", ""),
+                    "question": item.get("question", ""),
+                    "title": item.get("title", ""),
+                    "materials": [str(value) for value in metadata.get("materials", []) if value],
+                    "damage_types": [str(value) for value in metadata.get("damage_types", []) if value],
+                }
+            )
+
+        eval_cases = []
+        for item in eval_items[:6]:
+            eval_cases.append(
+                {
+                    "case_id": item.get("case_id", ""),
+                    "question": item.get("question", ""),
+                    "title": item.get("title", ""),
+                    "expected_keywords": item.get("expected_keywords", []),
+                }
+            )
+
+        top_materials = [{"name": name, "count": count} for name, count in material_counter.most_common(8)]
+        top_damage_types = [{"name": name, "count": count} for name, count in damage_counter.most_common(8)]
+
+        return {
+            "generated_at": ingest_report.get("generated_at"),
+            "source_count": ingest_report.get("source_count", len(source_items)),
+            "chunk_count": ingest_report.get("chunk_count", len(chunk_items)),
+            "faq_count": ingest_report.get("faq_count", len(faq_items)),
+            "eval_count": ingest_report.get("eval_count", len(eval_items)),
+            "material_count": len(material_counter),
+            "damage_type_count": len(damage_counter),
+            "high_risk_count": high_risk_count,
+            "top_materials": top_materials,
+            "top_damage_types": top_damage_types,
+            "documents": document_cards,
+            "faq_examples": faq_examples,
+            "eval_cases": eval_cases,
+        }
+
     @app.get("/health")
     @app.get("/api/health")
     def health() -> Any:
@@ -83,6 +170,11 @@ def create_app(config: AppConfig | None = None) -> Flask:
     @app.get("/api/sources")
     def sources() -> Any:
         return jsonify(build_cloud_summary())
+
+    @app.get("/knowledge/summary")
+    @app.get("/api/knowledge/summary")
+    def knowledge_summary() -> Any:
+        return jsonify(build_rag_summary())
 
     @app.post("/ingest/run")
     @app.post("/api/ingest/run")
@@ -121,6 +213,15 @@ def create_app(config: AppConfig | None = None) -> Flask:
     @app.post("/eval/run")
     @app.post("/api/eval/run")
     def eval_run() -> Any:
+        if app_config.read_only_runtime:
+            cached_report = eval_service.load_cached_report()
+            if cached_report is not None:
+                return jsonify(cached_report)
+            return jsonify(
+                eval_service.build_preview_report(
+                    "当前是云端只读运行时。为了避免批量调用 12 次问答接口导致超时或失效，这里改为展示离线评测集；如需重新跑分，请在本地执行 `python manage.py eval`。"
+                )
+            )
         try:
             return jsonify(eval_service.run())
         except Exception as exc:

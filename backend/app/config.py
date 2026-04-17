@@ -71,6 +71,10 @@ class AppConfig:
         return self.manifest_dir / "ingest-report.json"
 
     @property
+    def eval_report_path(self) -> Path:
+        return self.manifest_dir / "eval-report.json"
+
+    @property
     def sync_report_path(self) -> Path:
         return self.manifest_dir / "bailian-sync.json"
 
@@ -142,6 +146,6 @@ class AppConfig:
             cloud_access_key_secret=os.getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET", ""),
             workspace_id=os.getenv("DASHSCOPE_WORKSPACE_ID", ""),
             bailian_endpoint=os.getenv("BAILIAN_ENDPOINT", "bailian.cn-beijing.aliyuncs.com"),
-            docs_kb_id=os.getenv("BAILIAN_DOCS_KB_ID") or "zwb68dlfs9",
+            docs_kb_id=os.getenv("BAILIAN_DOCS_KB_ID", ""),
             faq_kb_id=os.getenv("BAILIAN_FAQ_KB_ID") or "",
         )

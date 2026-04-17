@@ -1,3 +1,4 @@
+import os
 import sys
 from http import HTTPStatus
 from pathlib import Path
@@ -138,5 +139,46 @@ def test_backend_routes_support_local_and_vercel_service_prefixes() -> None:
             assert payload["sources"]
             assert payload["sources"][0]["citation_label"] == "引用 1"
             assert payload["sources"][0]["retrieval_chunks"]
+
+        for path in ("/eval/run", "/api/eval/run"):
+            response = client.post(path, json={})
+            assert response.status_code == 200
+            payload = response.get_json()
+            assert payload["mode"] == "live"
+            assert payload["live_run_enabled"] is True
+            assert payload["case_count"] >= 1
+            assert payload["cases"][0]["status"] == "completed"
     finally:
         bailian_module.Application = original_application
+
+
+def test_backend_knowledge_summary_and_cloud_eval_preview() -> None:
+    config = AppConfig.load(Path(__file__).resolve().parents[1])
+    KnowledgePipeline(config).ingest(sync_cloud=False)
+
+    original_vercel_env = os.environ.get("VERCEL_ENV")
+    os.environ["VERCEL_ENV"] = "production"
+    try:
+        client = create_app(config).test_client()
+
+        response = client.get("/api/knowledge/summary")
+        assert response.status_code == 200
+        payload = response.get_json()
+        assert payload["source_count"] >= 1
+        assert payload["chunk_count"] >= 1
+        assert payload["documents"]
+        assert payload["faq_examples"]
+        assert payload["eval_cases"]
+
+        eval_response = client.post("/api/eval/run", json={})
+        assert eval_response.status_code == 200
+        report = eval_response.get_json()
+        assert report["mode"] == "preview"
+        assert report["live_run_enabled"] is False
+        assert report["average_score"] is None
+        assert report["cases"][0]["status"] == "preview"
+    finally:
+        if original_vercel_env is None:
+            os.environ.pop("VERCEL_ENV", None)
+        else:
+            os.environ["VERCEL_ENV"] = original_vercel_env

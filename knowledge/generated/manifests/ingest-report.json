@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-17T06:44:35.031915+00:00",
+  "generated_at": "2026-04-17T10:44:03.470651+00:00",
   "source_count": 72,
   "normalized_count": 72,
   "chunk_count": 212,
@@ -1499,7 +1499,7 @@
   },
   "manual_import": {
     "strategy": "manual_upload",
-    "target_docs_kb_id": "zwb68dlfs9",
+    "target_docs_kb_id": "",
     "recommended_file_count": 72,
     "recommended_files": [
       "knowledge/raw/01-vegetable-tanned-care.md",

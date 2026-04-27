@@ -1,5 +1,5 @@
-import { EvalDashboard } from "@/components/eval-dashboard";
+import { EvalLab } from "@/components/eval-lab";
 
 export default function EvalPage() {
-  return <EvalDashboard />;
+  return <EvalLab />;
 }

@@ -109,3 +109,139 @@ class IngestReport:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+@dataclass(slots=True)
+class CaseImage:
+    id: str
+    case_id: str
+    file_path: str
+    url_path: str
+    mime_type: str
+    original_name: str
+    created_at: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class VisionAnalysis:
+    id: str
+    case_id: str
+    materials: list[str] = field(default_factory=list)
+    damage_types: list[str] = field(default_factory=list)
+    affected_parts: list[str] = field(default_factory=list)
+    photo_quality: str = "insufficient"
+    risk_level: str = "low"
+    missing_views: list[str] = field(default_factory=list)
+    summary: str = ""
+    created_at: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CaseMessage:
+    id: str
+    case_id: str
+    role: str
+    content: str
+    answer: str = ""
+    sections: dict[str, str] = field(default_factory=dict)
+    sources: list[dict[str, Any]] = field(default_factory=list)
+    retrieval_trace: dict[str, Any] = field(default_factory=dict)
+    created_at: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CarePlanItem:
+    id: str
+    case_id: str
+    step_type: str
+    title: str
+    instruction: str
+    caution: str = ""
+    status: str = "pending"
+    sort_order: int = 0
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CaseFeedback:
+    id: str
+    case_id: str
+    message_id: str
+    helpful: bool = False
+    resolved: bool = False
+    needs_repair: bool = False
+    unclear_step: str = ""
+    note: str = ""
+    created_at: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CaseFeedbackSummary:
+    count: int = 0
+    helpful_count: int = 0
+    resolved_count: int = 0
+    needs_repair_count: int = 0
+    latest_note: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CaseSummary:
+    id: str
+    title: str
+    status: str
+    description: str
+    cover_image_path: str
+    cover_image_url: str
+    risk_level: str
+    source_mode: str
+    created_at: str
+    updated_at: str
+    image_count: int = 0
+    completed_plan_count: int = 0
+    total_plan_count: int = 0
+    latest_message_at: str = ""
+    latest_user_message: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(slots=True)
+class CaseDetail:
+    id: str
+    title: str
+    status: str
+    description: str
+    cover_image_path: str
+    cover_image_url: str
+    risk_level: str
+    source_mode: str
+    created_at: str
+    updated_at: str
+    images: list[CaseImage] = field(default_factory=list)
+    vision_analysis: VisionAnalysis | None = None
+    messages: list[CaseMessage] = field(default_factory=list)
+    care_plan: list[CarePlanItem] = field(default_factory=list)
+    feedback: list[CaseFeedback] = field(default_factory=list)
+    feedback_summary: CaseFeedbackSummary = field(default_factory=CaseFeedbackSummary)
+
+    def to_dict(self) -> dict[str, Any]:
+        payload = asdict(self)
+        return payload

@@ -4,6 +4,9 @@ const defaultApiBase = process.env.NODE_ENV === "development" ? "http://127.0.0.
 
 export const API_BASE_URL = explicitApiBase || serviceApiBase || defaultApiBase;
 
+export type CaseStatus = "draft" | "in_progress" | "monitoring" | "send_repair" | "closed";
+export type CarePlanStatus = "pending" | "completed" | "skipped";
+
 export type ChatSource = {
   title: string;
   source_type: string;
@@ -46,7 +49,123 @@ export type ChatResponse = {
     workflow_message_present?: boolean;
     source_status?: string;
     source_hint?: string;
+    vision_analysis?: {
+      materials: string[];
+      damage_types: string[];
+      affected_parts: string[];
+      photo_quality: string;
+      risk_level: string;
+      missing_views: string[];
+      summary: string;
+    };
   };
+};
+
+export type CaseImage = {
+  id: string;
+  case_id: string;
+  file_path: string;
+  url_path: string;
+  mime_type: string;
+  original_name: string;
+  created_at: string;
+};
+
+export type VisionAnalysis = {
+  id: string;
+  case_id: string;
+  materials: string[];
+  damage_types: string[];
+  affected_parts: string[];
+  photo_quality: "good" | "usable" | "insufficient";
+  risk_level: "low" | "medium" | "high";
+  missing_views: string[];
+  summary: string;
+  created_at: string;
+};
+
+export type CaseMessage = {
+  id: string;
+  case_id: string;
+  role: "user" | "assistant";
+  content: string;
+  answer: string;
+  sections: Record<string, string>;
+  sources: ChatSource[];
+  retrieval_trace: ChatResponse["retrieval_trace"];
+  created_at: string;
+};
+
+export type CarePlanItem = {
+  id: string;
+  case_id: string;
+  step_type: string;
+  title: string;
+  instruction: string;
+  caution: string;
+  status: CarePlanStatus;
+  sort_order: number;
+};
+
+export type CaseFeedback = {
+  id: string;
+  case_id: string;
+  message_id: string;
+  helpful: boolean;
+  resolved: boolean;
+  needs_repair: boolean;
+  unclear_step: string;
+  note: string;
+  created_at: string;
+};
+
+export type CaseFeedbackSummary = {
+  count: number;
+  helpful_count: number;
+  resolved_count: number;
+  needs_repair_count: number;
+  latest_note: string;
+};
+
+export type CaseSummary = {
+  id: string;
+  title: string;
+  status: CaseStatus;
+  description: string;
+  cover_image_path: string;
+  cover_image_url: string;
+  risk_level: "low" | "medium" | "high";
+  source_mode: string;
+  created_at: string;
+  updated_at: string;
+  image_count: number;
+  completed_plan_count: number;
+  total_plan_count: number;
+  latest_message_at: string;
+  latest_user_message: string;
+};
+
+export type CaseDetail = {
+  id: string;
+  title: string;
+  status: CaseStatus;
+  description: string;
+  cover_image_path: string;
+  cover_image_url: string;
+  risk_level: "low" | "medium" | "high";
+  source_mode: string;
+  created_at: string;
+  updated_at: string;
+  images: CaseImage[];
+  vision_analysis: VisionAnalysis | null;
+  messages: CaseMessage[];
+  care_plan: CarePlanItem[];
+  feedback: CaseFeedback[];
+  feedback_summary: CaseFeedbackSummary;
+};
+
+export type CasesResponse = {
+  cases: CaseSummary[];
 };
 
 export type SourceSummary = {
@@ -61,6 +180,9 @@ export type SourceSummary = {
   workspace_configured?: boolean;
   cloud_model_enabled?: boolean;
   cloud_sync_enabled?: boolean;
+  vision_model_configured?: boolean;
+  case_workflow_enabled?: boolean;
+  case_workflow_reason?: string;
   report?: {
     summary?: string;
     mode_label?: string;
@@ -110,26 +232,50 @@ export type RagKnowledgeSummary = {
     title: string;
     expected_keywords: string[];
   }>;
+  runtime_stats: {
+    total_case_count: number;
+    high_risk_case_count: number;
+    no_source_answer_count: number;
+    insufficient_photo_case_count: number;
+    insufficient_photo_ratio: number;
+    top_damage_types: Array<{ name: string; count: number }>;
+    top_repair_triggers: Array<{ name: string; count: number }>;
+  };
+};
+
+export type EvalCaseResult = {
+  suite: "text" | "vision";
+  case_id: string;
+  question: string;
+  title: string;
+  expected_keywords: string[];
+  latency_ms: number | null;
+  rewritten_query: string;
+  score: Record<string, number> | null;
+  sources: ChatSource[];
+  status: "completed" | "preview";
+  vision_analysis?: VisionAnalysis | null;
+};
+
+export type EvalSuiteReport = {
+  suite: "text" | "vision";
+  label: string;
+  case_count: number;
+  average_score: number | null;
+  note: string;
+  cases: EvalCaseResult[];
 };
 
 export type EvalReport = {
   generated_at: string;
+  selected_suite: "text" | "vision" | "all";
   case_count: number;
   average_score: number | null;
   mode: "live" | "preview";
   live_run_enabled: boolean;
   note: string;
-  cases: Array<{
-    case_id: string;
-    question: string;
-    title: string;
-    expected_keywords: string[];
-    latency_ms: number | null;
-    rewritten_query: string;
-    score: Record<string, number> | null;
-    sources: ChatSource[];
-    status: "completed" | "preview";
-  }>;
+  cases: EvalCaseResult[];
+  suites: EvalSuiteReport[];
 };
 
 export type HealthResponse = {
@@ -149,9 +295,13 @@ export type HealthResponse = {
   ingest_enabled: boolean;
   ingest_artifacts_ready: boolean;
   bailian_app_configured: boolean;
+  vision_model_configured: boolean;
+  case_workflow_enabled: boolean;
+  case_workflow_reason: string;
+  vision_model_name?: string;
 };
 
-function buildApiUrl(path: string) {
+export function buildApiUrl(path: string) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   if (!API_BASE_URL) {
     return normalizedPath;
@@ -166,10 +316,11 @@ function buildApiUrl(path: string) {
 }
 
 async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
+  const isFormData = typeof FormData !== "undefined" && init?.body instanceof FormData;
   const response = await fetch(buildApiUrl(path), {
     ...init,
     headers: {
-      "Content-Type": "application/json",
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
       ...(init?.headers || {}),
     },
     cache: "no-store",
@@ -202,13 +353,6 @@ export function getKnowledgeSummary() {
   return requestJson<RagKnowledgeSummary>("/api/knowledge/summary");
 }
 
-export function runIngest(syncCloud = false) {
-  return requestJson<SourceSummary["report"]>("/api/ingest/run", {
-    method: "POST",
-    body: JSON.stringify({ sync_cloud: syncCloud }),
-  });
-}
-
 export function sendChat(query: string, sessionId: string, debug = true) {
   return requestJson<ChatResponse>("/api/chat", {
     method: "POST",
@@ -220,9 +364,78 @@ export function sendChat(query: string, sessionId: string, debug = true) {
   });
 }
 
-export function runEval() {
+export function listCases(params?: { status?: string; riskLevel?: string }) {
+  const query = new URLSearchParams();
+  if (params?.status) {
+    query.set("status", params.status);
+  }
+  if (params?.riskLevel) {
+    query.set("risk_level", params.riskLevel);
+  }
+  const suffix = query.toString() ? `?${query.toString()}` : "";
+  return requestJson<CasesResponse>(`/api/cases${suffix}`);
+}
+
+export function createCase(payload: { description: string; title?: string; images: File[] }) {
+  const formData = new FormData();
+  formData.append("description", payload.description);
+  if (payload.title?.trim()) {
+    formData.append("title", payload.title.trim());
+  }
+  for (const file of payload.images) {
+    formData.append("images", file);
+  }
+  return requestJson<CaseDetail>("/api/cases", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+export function getCaseDetail(caseId: string) {
+  return requestJson<CaseDetail>(`/api/cases/${caseId}`);
+}
+
+export function sendCaseMessage(caseId: string, content: string) {
+  return requestJson<CaseDetail>(`/api/cases/${caseId}/messages`, {
+    method: "POST",
+    body: JSON.stringify({ content }),
+  });
+}
+
+export function updateCase(caseId: string, payload: { title?: string; status?: CaseStatus }) {
+  return requestJson<CaseDetail>(`/api/cases/${caseId}`, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function updateCarePlanItem(caseId: string, itemId: string, status: CarePlanStatus) {
+  return requestJson<CaseDetail>(`/api/cases/${caseId}/plan-items/${itemId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status }),
+  });
+}
+
+export function submitCaseFeedback(
+  caseId: string,
+  payload: {
+    message_id: string;
+    helpful: boolean;
+    resolved: boolean;
+    needs_repair: boolean;
+    unclear_step?: string;
+    note?: string;
+  },
+) {
+  return requestJson<CaseDetail>(`/api/cases/${caseId}/feedback`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function runEval(suite: "text" | "vision" | "all" = "all") {
   return requestJson<EvalReport>("/api/eval/run", {
     method: "POST",
-    body: JSON.stringify({}),
+    body: JSON.stringify({ suite }),
   });
 }

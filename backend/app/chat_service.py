@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 
 from .bailian_application import BailianApplicationResult, BailianApplicationService
 from .config import AppConfig
-from .utils import build_step_markdown, clean_runtime_markdown
+from .utils import build_step_markdown, clean_runtime_markdown, excerpt_text
 
 
 SECTION_ORDER = [
@@ -84,6 +84,64 @@ class LeatherChatService:
                 },
                 **source_diagnostics,
             },
+            "debug": debug,
+        }
+
+    def chat_with_context(
+        self,
+        query: str,
+        session_id: str | None = None,
+        debug: bool = False,
+        vision_analysis: dict[str, Any] | None = None,
+        case_history: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        started_at = time.perf_counter()
+        analysis = self._analyze_query(query)
+        requested_session_id = session_id or str(uuid.uuid4())
+        contextual_query = self._build_contextual_query(query, vision_analysis, case_history or [])
+        app_result = self.bailian_app.call(query=contextual_query, session_id=requested_session_id)
+        source_diagnostics = self._build_source_diagnostics(app_result)
+        answer_text = self._normalize_answer_block(
+            app_result.text,
+            app_result.sources,
+            source_hint=source_diagnostics["source_hint"],
+        )
+        sections = self._extract_sections(
+            answer_text,
+            app_result.sources,
+            source_hint=source_diagnostics["source_hint"],
+        )
+        latency_ms = round((time.perf_counter() - started_at) * 1000, 2)
+
+        retrieval_trace = {
+            "analysis": {
+                "materials": analysis.materials,
+                "damage_types": analysis.damage_types,
+                "risk_level": analysis.risk_level,
+                "notes": analysis.notes,
+            },
+            **source_diagnostics,
+        }
+        if vision_analysis:
+            retrieval_trace["vision_analysis"] = {
+                "materials": vision_analysis.get("materials", []),
+                "damage_types": vision_analysis.get("damage_types", []),
+                "affected_parts": vision_analysis.get("affected_parts", []),
+                "photo_quality": vision_analysis.get("photo_quality", ""),
+                "risk_level": vision_analysis.get("risk_level", ""),
+                "missing_views": vision_analysis.get("missing_views", []),
+                "summary": vision_analysis.get("summary", ""),
+            }
+
+        return {
+            "session_id": app_result.session_id or requested_session_id,
+            "rewritten_query": analysis.rewritten_query,
+            "risk_level": self._merge_risk_levels(analysis.risk_level, vision_analysis),
+            "answer": answer_text,
+            "sections": sections,
+            "sources": app_result.sources,
+            "latency_ms": latency_ms,
+            "retrieval_trace": retrieval_trace,
             "debug": debug,
         }
 
@@ -187,6 +245,55 @@ class LeatherChatService:
             risk_level=risk_level,
             notes="；".join(note_parts),
         )
+
+    def _build_contextual_query(
+        self,
+        query: str,
+        vision_analysis: dict[str, Any] | None,
+        case_history: list[dict[str, Any]],
+    ) -> str:
+        context_parts = [
+            "你是面向皮具护理场景的专业助手，请输出六段式结果：适用判断、所需工具、操作步骤、注意事项、何时送修、参考来源。",
+            "请优先给出保守、安全、可执行的家庭级建议；若风险较高，请明确提示送修。",
+        ]
+
+        if vision_analysis:
+            context_parts.append(
+                "图像初判："
+                + json.dumps(
+                    {
+                        "materials": vision_analysis.get("materials", []),
+                        "damage_types": vision_analysis.get("damage_types", []),
+                        "affected_parts": vision_analysis.get("affected_parts", []),
+                        "photo_quality": vision_analysis.get("photo_quality", ""),
+                        "risk_level": vision_analysis.get("risk_level", ""),
+                        "missing_views": vision_analysis.get("missing_views", []),
+                        "summary": vision_analysis.get("summary", ""),
+                    },
+                    ensure_ascii=False,
+                )
+            )
+
+        if case_history:
+            history_lines = []
+            for item in case_history[-6:]:
+                role = "用户" if item.get("role") == "user" else "助手"
+                content = item.get("content") or item.get("answer") or ""
+                if not content:
+                    continue
+                history_lines.append(f"{role}：{excerpt_text(content, 120)}")
+            if history_lines:
+                context_parts.append("最近对话：\n" + "\n".join(history_lines))
+
+        context_parts.append(f"当前问题：{query.strip()}")
+        return "\n\n".join(part for part in context_parts if part).strip()
+
+    def _merge_risk_levels(self, text_risk: str, vision_analysis: dict[str, Any] | None) -> str:
+        levels = {"low": 1, "medium": 2, "high": 3}
+        if not vision_analysis:
+            return text_risk
+        vision_risk = str(vision_analysis.get("risk_level") or "").strip().lower()
+        return vision_risk if levels.get(vision_risk, 0) >= levels.get(text_risk, 0) else text_risk
 
     def _normalize_answer_block(
         self,

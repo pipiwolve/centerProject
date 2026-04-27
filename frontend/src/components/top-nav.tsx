@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "护理问答" },
+  { href: "/cases", label: "护理档案" },
   { href: "/knowledge", label: "护理资料" },
   { href: "/eval", label: "案例评估" },
 ];
@@ -41,7 +42,8 @@ export function TopNav() {
 
         <nav className="flex flex-wrap items-center gap-2">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
 
             return (
               <Link

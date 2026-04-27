@@ -81,16 +81,19 @@ class AppConfig:
     backend_root: Path
     frontend_root: Path
     knowledge_root: Path
+    runtime_root: Path
     raw_dir: Path
     normalized_dir: Path
     chunks_dir: Path
     faq_dir: Path
     eval_dir: Path
     manifest_dir: Path
+    vision_eval_root: Path
     qa_seed_path: Path
     design_system_path: Path
     dashscope_api_key: str
     dashscope_model_name: str
+    dashscope_vision_model: str
     dashscope_base_url: str
     bailian_app_id: str
     backend_host: str
@@ -110,6 +113,18 @@ class AppConfig:
     @property
     def generated_docs_bundle(self) -> Path:
         return self.faq_dir.parent / "docs_kb_bundle.md"
+
+    @property
+    def runtime_db_path(self) -> Path:
+        return self.runtime_root / "app.db"
+
+    @property
+    def runtime_upload_root(self) -> Path:
+        return self.runtime_root / "uploads"
+
+    @property
+    def runtime_case_upload_root(self) -> Path:
+        return self.runtime_upload_root / "cases"
 
     @property
     def generated_faq_bundle(self) -> Path:
@@ -140,6 +155,10 @@ class AppConfig:
         return self.manifest_dir / "bailian-sync.json"
 
     @property
+    def vision_eval_manifest_path(self) -> Path:
+        return self.vision_eval_root / "manifest.jsonl"
+
+    @property
     def bailian_import_checklist_path(self) -> Path:
         return self.manifest_dir / "bailian-import-checklist.md"
 
@@ -156,6 +175,10 @@ class AppConfig:
         return bool(self.dashscope_api_key and self.bailian_app_id)
 
     @property
+    def vision_model_configured(self) -> bool:
+        return bool(self.dashscope_api_key and self.dashscope_vision_model)
+
+    @property
     def ingest_enabled(self) -> bool:
         return not self.read_only_runtime
 
@@ -169,6 +192,20 @@ class AppConfig:
         ]
         return all(path.exists() for path in tracked_paths)
 
+    @property
+    def case_workflow_enabled(self) -> bool:
+        return not self.read_only_runtime and self.vision_model_configured
+
+    @property
+    def case_workflow_reason(self) -> str:
+        if self.read_only_runtime:
+            return "当前是云端只读运行时，图片诊断与案例档案仅在本地演示环境启用。"
+        if not self.dashscope_api_key:
+            return "缺少 DASHSCOPE_API_KEY，当前无法启用图片诊断。"
+        if not self.dashscope_vision_model:
+            return "缺少 DASHSCOPE_VISION_MODEL，当前无法启用图片诊断。"
+        return "图片诊断与案例档案已启用。"
+
     @classmethod
     def load(cls, backend_root: Path | None = None) -> "AppConfig":
         resolved_backend_root = backend_root or Path(__file__).resolve().parents[1]
@@ -176,25 +213,30 @@ class AppConfig:
         load_dotenv(project_root / ".env")
 
         knowledge_root = _resolve_knowledge_root(project_root, resolved_backend_root)
+        runtime_root = project_root / "runtime"
         generated_root = knowledge_root / "generated"
         processed_root = knowledge_root / "processed"
         manifest_root = generated_root / "manifests"
+        vision_eval_root = project_root / "QA_dataset" / "vision_eval"
 
         return cls(
             project_root=project_root,
             backend_root=resolved_backend_root,
             frontend_root=project_root / "frontend",
             knowledge_root=knowledge_root,
+            runtime_root=runtime_root,
             raw_dir=knowledge_root / "raw",
             normalized_dir=processed_root / "normalized",
             chunks_dir=processed_root / "chunks",
             faq_dir=generated_root / "faq",
             eval_dir=generated_root / "eval",
             manifest_dir=manifest_root,
+            vision_eval_root=vision_eval_root,
             qa_seed_path=project_root / "QA_dataset" / "leather_repair_qa.md",
             design_system_path=project_root / "design-system" / "leather-care-rag-assistant" / "MASTER.md",
             dashscope_api_key=os.getenv("DASHSCOPE_API_KEY", ""),
             dashscope_model_name=os.getenv("DASHSCOPE_MODEL_NAME", "qwen-plus"),
+            dashscope_vision_model=os.getenv("DASHSCOPE_VISION_MODEL", "").strip(),
             dashscope_base_url=os.getenv(
                 "DASHSCOPE_BASE_URL",
                 "https://dashscope.aliyuncs.com/compatible-mode/v1",

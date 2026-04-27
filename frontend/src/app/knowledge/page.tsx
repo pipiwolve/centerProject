@@ -1,5 +1,5 @@
-import { KnowledgeDashboard } from "@/components/knowledge-dashboard";
+import { KnowledgeCenter } from "@/components/knowledge-center";
 
 export default function KnowledgePage() {
-  return <KnowledgeDashboard />;
+  return <KnowledgeCenter />;
 }

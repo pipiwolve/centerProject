@@ -18,7 +18,7 @@ const bodyFont = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "皮具护理助手 | Leather Care Assistant",
+  title: "皮具护理问答系统",
   description: "描述皮具问题，获取更清晰的清洁、养护与送修建议。",
 };
 

@@ -91,6 +91,24 @@ function getRiskToneClasses(riskLevel: string) {
   return "border-[color:var(--border-soft)] bg-[color:var(--surface)] text-[color:var(--ink-soft)]";
 }
 
+function formatRiskLabel(riskLevel: string) {
+  const normalized = riskLevel.toLowerCase();
+
+  if (/高|严重|high|stop|送修/.test(normalized)) {
+    return "高风险";
+  }
+
+  if (/中|moderate|medium|谨慎/.test(normalized)) {
+    return "中风险";
+  }
+
+  if (/低|轻|low/.test(normalized)) {
+    return "低风险";
+  }
+
+  return riskLevel || "待识别";
+}
+
 function renderTags(tags: string[] | undefined, fallback: string) {
   const values = tags && tags.length > 0 ? tags : [fallback];
 
@@ -121,44 +139,6 @@ function truncateMiddle(value: string, limit = 40) {
   }
   const keep = Math.max(Math.floor((limit - 1) / 2), 8);
   return `${value.slice(0, keep)}…${value.slice(-keep)}`;
-}
-
-function getCompactLocator(source: ChatSource) {
-  if (source.doc_name) {
-    return truncateMiddle(source.doc_name, 40);
-  }
-
-  if (source.source_path && source.source_path !== source.title) {
-    const file = source.source_path.split("/").filter(Boolean).pop() || source.source_path;
-    return truncateMiddle(file, 40);
-  }
-
-  if (!source.source_uri) {
-    return "";
-  }
-
-  try {
-    const url = new URL(source.source_uri);
-    const file = url.pathname.split("/").filter(Boolean).pop();
-    if (file) {
-      return truncateMiddle(file, 40);
-    }
-    return truncateMiddle(url.hostname, 32);
-  } catch {
-    return truncateMiddle(source.source_uri.split("?")[0], 40);
-  }
-}
-
-function getCompactHost(sourceUri?: string) {
-  if (!sourceUri) {
-    return "";
-  }
-
-  try {
-    return new URL(sourceUri).hostname;
-  } catch {
-    return "";
-  }
 }
 
 function getBadgeLabel(source: ChatSource) {
@@ -343,8 +323,6 @@ function SourceCard({
   const preview = source.preview || source.excerpt;
   const content = source.content || preview;
   const retrievalChunks = (source.retrieval_chunks || []).filter(Boolean);
-  const compactLocator = getCompactLocator(source);
-  const compactHost = getCompactHost(source.source_uri);
   const hasExpandableContent =
     retrievalChunks.length > 0 ||
     (content.length > preview.length + 24 && normalizeComparableText(content) !== normalizeComparableText(preview));
@@ -373,21 +351,11 @@ function SourceCard({
         {preview}
       </p>
 
-      {compactLocator || compactHost ? (
+      {source.page_numbers?.length || source.source_uri || source.source_path || source.doc_name ? (
         <div className="mt-4 rounded-[1rem] border border-[color:var(--border-soft)] bg-white/60 px-3 py-2">
-          {compactLocator ? (
-            <p
-              className="break-words [overflow-wrap:anywhere] text-xs leading-6 text-[color:var(--ink-soft)]"
-              title={source.source_uri || source.source_path || source.doc_name || ""}
-            >
-              来源文件 · {compactLocator}
-            </p>
-          ) : null}
-          {compactHost && compactHost !== compactLocator ? (
-            <p className="break-words [overflow-wrap:anywhere] text-xs leading-6 text-[color:var(--ink-soft)]">
-              来源域名 · {compactHost}
-            </p>
-          ) : null}
+          <p className="text-xs leading-6 text-[color:var(--ink-soft)]">
+            来源信息已解析，可展开查看引用内容与召回切片。
+          </p>
         </div>
       ) : null}
 
@@ -826,7 +794,7 @@ export function ChatWorkspace() {
                   <span
                     className={`inline-flex rounded-full border px-3 py-1 text-sm font-medium ${getRiskToneClasses(riskLevel)}`}
                   >
-                    {riskLevel}
+                    {formatRiskLabel(riskLevel)}
                   </span>
                 </div>
               </div>

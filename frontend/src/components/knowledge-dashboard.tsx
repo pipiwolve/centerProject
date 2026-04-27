@@ -61,6 +61,56 @@ function getRiskToneClasses(riskLevel: string) {
   return "border-[color:var(--border-soft)] bg-[color:var(--surface)] text-[color:var(--ink-soft)]";
 }
 
+function formatRiskLevel(riskLevel?: string) {
+  const normalized = (riskLevel || "").toLowerCase();
+
+  if (/high|高/.test(normalized)) {
+    return "高风险";
+  }
+
+  if (/medium|中/.test(normalized)) {
+    return "中风险";
+  }
+
+  if (/low|低/.test(normalized)) {
+    return "低风险";
+  }
+
+  return "未标注";
+}
+
+function formatDeploymentTarget(value?: string) {
+  const normalized = (value || "").toLowerCase();
+
+  if (!normalized || normalized === "unknown") {
+    return "未识别";
+  }
+
+  if (normalized.includes("vercel")) {
+    return "Vercel 云端";
+  }
+
+  if (normalized.includes("local")) {
+    return "本地环境";
+  }
+
+  return value || "未识别";
+}
+
+function formatSourceBackend(value?: string) {
+  const normalized = (value || "").toLowerCase();
+
+  if (!normalized) {
+    return "未配置";
+  }
+
+  if (normalized.includes("bailian")) {
+    return "百炼应用";
+  }
+
+  return value || "未配置";
+}
+
 export function KnowledgeDashboard() {
   const [summary, setSummary] = useState<SourceSummary | null>(null);
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -104,7 +154,7 @@ export function KnowledgeDashboard() {
     <section className="mx-auto grid w-[min(96%,1280px)] gap-6 lg:grid-cols-[0.92fr_1.08fr]">
       <div className="space-y-6">
         <section className="rounded-[2.25rem] border border-[color:var(--border-soft)] bg-[color:var(--surface-elevated)] p-7 shadow-[0_25px_60px_rgba(17,37,78,0.06)]">
-          <p className="text-xs uppercase tracking-[0.32em] text-[color:var(--accent)]">RAG Knowledge Base</p>
+          <p className="text-xs uppercase tracking-[0.32em] text-[color:var(--accent)]">知识资料总览</p>
           <h1 className="mt-4 font-serif text-5xl leading-none tracking-[-0.06em] text-[color:var(--ink-strong)]">
             护理资料页现在直接展示
             <br />
@@ -128,7 +178,7 @@ export function KnowledgeDashboard() {
         <section className="rounded-[2.25rem] border border-[color:var(--border-soft)] bg-[color:var(--surface-elevated)] p-6 shadow-[0_25px_60px_rgba(17,37,78,0.06)]">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--accent)]">Knowledge Snapshot</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--accent)]">知识库快照</p>
               <h2 className="mt-2 font-serif text-3xl tracking-[-0.05em] text-[color:var(--ink-strong)]">
                 知识库规模
               </h2>
@@ -228,9 +278,9 @@ export function KnowledgeDashboard() {
             <div className="rounded-[1.5rem] border border-[color:var(--border-soft)] bg-[color:var(--surface)] p-4">
               <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--ink-soft)]">工作区 / 部署环境</p>
               <p className="mt-2 text-sm leading-7 text-[color:var(--ink-soft)]">
-                workspace {workspaceConfigured ? "已配置" : "未配置"} · deployment{" "}
-                {health?.deployment_target || summary?.deployment_target || "unknown"} · source backend{" "}
-                {summary?.source_backend || health?.source_backend || "bailian"}
+                工作区 {workspaceConfigured ? "已配置" : "未配置"} · 部署环境{" "}
+                {formatDeploymentTarget(health?.deployment_target || summary?.deployment_target)} · 来源后端{" "}
+                {formatSourceBackend(summary?.source_backend || health?.source_backend)}
               </p>
             </div>
           </div>
@@ -254,12 +304,12 @@ export function KnowledgeDashboard() {
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <p className="text-sm font-semibold text-[color:var(--ink-strong)]">{item.title}</p>
-                      <p className="mt-1 break-all text-xs text-[color:var(--ink-soft)]">{item.source_path}</p>
+                      <p className="mt-1 text-xs text-[color:var(--ink-soft)]">资料来源：离线护理知识资产</p>
                     </div>
                     <div
                       className={`rounded-full border px-3 py-1 text-xs ${getRiskToneClasses(item.risk_level)}`}
                     >
-                      风险 {item.risk_level || "unknown"}
+                      风险 {formatRiskLevel(item.risk_level)}
                     </div>
                   </div>
                   <p className="mt-4 text-sm leading-7 text-[color:var(--ink-soft)]">{item.excerpt}</p>

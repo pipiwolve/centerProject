@@ -11,6 +11,30 @@ function formatNumber(value: number | null | undefined) {
   return value;
 }
 
+function formatRuntimeLabel(readOnlyRuntime: boolean) {
+  return readOnlyRuntime ? "云端环境" : "本地环境";
+}
+
+function formatStatusBadge(status: string, overall?: number) {
+  if (status === "completed" && typeof overall === "number") {
+    return `总分 ${overall}`;
+  }
+  return "预览模式";
+}
+
+function formatScoreLabel(label: string) {
+  const mappings: Record<string, string> = {
+    relevance: "相关性",
+    completeness: "完整性",
+    sources: "来源可用性",
+    safety: "风险提示",
+    operability: "可操作性",
+    overall: "综合得分",
+  };
+
+  return mappings[label] || label;
+}
+
 export function EvalDashboard() {
   const [report, setReport] = useState<EvalReport | null>(null);
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -91,7 +115,7 @@ export function EvalDashboard() {
     <section className="mx-auto grid w-[min(96%,1280px)] gap-6 lg:grid-cols-[0.82fr_1.18fr]">
       <div className="space-y-6">
         <section className="rounded-[2.25rem] border border-[color:var(--border-soft)] bg-[color:var(--surface-elevated)] p-7 shadow-[0_25px_60px_rgba(17,37,78,0.06)]">
-          <p className="text-xs uppercase tracking-[0.32em] text-[color:var(--accent)]">Evaluation Studio</p>
+          <p className="text-xs uppercase tracking-[0.32em] text-[color:var(--accent)]">评测工作台</p>
           <h1 className="mt-4 font-serif text-5xl leading-none tracking-[-0.06em] text-[color:var(--ink-strong)]">
             案例评估现在区分
             <br />
@@ -120,7 +144,7 @@ export function EvalDashboard() {
               ["模式", report?.mode === "live" ? "实时评测" : readOnlyRuntime ? "云端预览" : "待运行"],
               ["案例数量", report?.case_count ?? 0],
               ["平均得分", formatNumber(report?.average_score)],
-              ["运行环境", readOnlyRuntime ? "cloud" : "local"],
+              ["运行环境", formatRuntimeLabel(readOnlyRuntime)],
             ].map(([label, value]) => (
               <div
                 key={label}
@@ -165,7 +189,7 @@ export function EvalDashboard() {
                     </p>
                   </div>
                   <div className="rounded-full border border-[color:var(--border-soft)] px-3 py-1 text-xs text-[color:var(--ink-soft)]">
-                    {item.status === "completed" && item.score ? `overall ${item.score.overall}` : "preview"}
+                    {formatStatusBadge(item.status, item.score?.overall)}
                   </div>
                 </div>
 
@@ -173,7 +197,7 @@ export function EvalDashboard() {
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {Object.entries(item.score).map(([label, value]) => (
                       <div key={label} className="rounded-[1.25rem] bg-[color:var(--surface-elevated)] px-3 py-2">
-                        <p className="text-xs uppercase tracking-[0.2em] text-[color:var(--ink-soft)]">{label}</p>
+                        <p className="text-xs tracking-[0.2em] text-[color:var(--ink-soft)]">{formatScoreLabel(label)}</p>
                         <p className="mt-1 text-sm font-medium text-[color:var(--ink-strong)]">{value}</p>
                       </div>
                     ))}
